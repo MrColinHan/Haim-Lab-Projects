@@ -17,7 +17,7 @@ Created on Wed Dec 19 21:21:14 2018
 import os
 
 inputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/12.18/16-17 USA/GroupedOutput/"
-separatorDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/CombineFiles/separator.fas"
+separatorDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/Haim Lab Projects/Flu/CombineFastaFiles/separator.fas"
 
 ############################################################
 
@@ -70,6 +70,7 @@ def createOutput():
 
 listFiles()
 createOutput()
+
 
 
 

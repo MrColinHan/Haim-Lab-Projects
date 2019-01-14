@@ -6,6 +6,8 @@ Created on Wed Jan  9 12:32:48 2019
 @author: Han
 """
 
+# This script remove 
+
 f=open("/Users/Han/Documents/Haim Lab(2018 summer)/1.11/USA 16-17 newick.txt", "r")
 outputName = "output.txt"
 out= open("/Users/Han/Documents/Haim Lab(2018 summer)/1.11/"+outputName,"w+")

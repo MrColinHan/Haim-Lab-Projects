@@ -12,6 +12,7 @@ HIV project:
 Flu project:
 
 - Combine Fasta Files.
-- Assign Hydropathy Value.
+- Assign Hydropathy Value and also Remove rows with “X” or “?” in CSV format.
+- Remove rows with “X” or “?” in Fasta format.
 - Remove 8 Characters Before Dash.
-- Remove rows with “X” or “?” from fasta format files.
+
