@@ -6,6 +6,13 @@ Created on Mon Jan 14 15:05:31 2019
 @author: Han
 """
 
+# Since the original nucleotide sequence file doesnt contain 'X' or '?' 
+# so we have to use the leftoverDir which was generated from the PNGS AA sequence
+# because AA sequence contains 'X' or '?' 
+
+
+'''NEED TO UPDATE: INPUT leftover also need to be fasta format '''
+
 import os
 import csv 
 
@@ -63,7 +70,7 @@ def AccessInFas(x):
         i = i + NumRowsPerAccessionNum
 
 AccessInFas(fasContent)
-print("before removing, fasta has " + str(len(AccessFasList))+ " samples.")
+print("before removing, input fasta has " + str(len(AccessFasList))+ " samples.")
 
 AccessCSVList = []
 def AccessInCSV():
@@ -99,7 +106,7 @@ readFasta(outputDir+outputName,outputFasContent)
 
 AccessFasList = []
 AccessInFas(outputFasContent)
-print("after removing, fasta has " + str(len(AccessFasList))+ " samples.")
+print("after removing, output fasta has " + str(len(AccessFasList))+ " samples.")
 
 
 

@@ -10,6 +10,8 @@ Created on Thu Jan  3 17:09:00 2019
 # 1. assigns each amino acid a hydropathy value 
 # 2. remove rows with "x" or "?" to a new tab 
 
+'''NEED TO UPDATE: remove x and ? in AA.fas, so this code only need to translate hydropathy value'''
+
 
 ###################################################################
 
