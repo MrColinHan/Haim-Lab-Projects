@@ -91,7 +91,12 @@ def AssignHydropathy():
     for j in fileContent:
         for k in j:
             if k in list(HYDROPATHY_SCORE_TABLE.keys()):
+                
                 fileContent[fileContent.index(j)][j.index(k)] = HYDROPATHY_SCORE_TABLE[k]
+    
+    
+    
+    
     '''for j in fileContent:
         for k in j:
             if k == "M":
