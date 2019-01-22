@@ -6,15 +6,22 @@ Created on Wed Jan  9 12:32:48 2019
 @author: Han
 """
 
-'''NEED TO UPDATE: make it work in all situations like a line with multiple dash'''
+'''NEED TO be UPDATED: make it work in all situations like a line with multiple dash'''
+'''
+    This script removed all "8 characters + '-' " in a newick file
+    INPUT: 
+            f = open("......", "r") : directory of the newick file
+            outputName: name of the output file
+            out = open("......"+outputName,"w+"): directory of the output file
+'''
 
-# This script remove 
+
+
 
 f=open("/Users/Han/Documents/Haim Lab(2018 summer)/1.11/USA 16-17 newick.txt", "r")
 outputName = "output.txt"
 out= open("/Users/Han/Documents/Haim Lab(2018 summer)/1.11/"+outputName,"w+")
 contents =f.readlines()
-#contents = f.read()
 
 output = []
 
