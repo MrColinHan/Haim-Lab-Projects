@@ -6,60 +6,64 @@ Created on Wed Jan 16 15:12:13 2019
 @author: Han
 """
 
+''' 
+    This script finds all Accession numers that contain 'X' or '?' in a AA Sequence fasta file. 
+    
+    INPUTS: 
+            AADir: the directory  AA sequence
+            outputDir: directory for the ourput file
+            outputName: the name for the output file. 
+'''
 
-# this code find Accession numbers which contain 'X' or '?'
-# and then put those numbers in a new text file
-import csv
 
+# Inputs ###############################################################################################
 AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/AA2640.fas"
-
 outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/"
 outputName = "2640AccessionWithXandQuestionMark.txt"
+########################################################################################################
 
 
 
-AAContent = []
+AAContent = [] # a list for all AA sequence
 
-def readFasta(x,y):
+def readFasta(x,y):  # read the AA Sequence fasta file and then store them in list AAContent
     file = open(x,"r")
     for line in file:
         y.append(line)
 
-readFasta(AADir,AAContent)
+readFasta(AADir,AAContent) # execute the function
 
-AccessionList = [] ################
-def findX():
+
+AccessionList = [] # a list for all Accession Numbers that contains 'X' or '?'
+def findX(): # find 'X' or '?' in the AA sequence and then store the accession number in a list
     count = 0
     i = 0
     while (i < len(AAContent)):
-        if ('?' in AAContent[i]) or ('X' in AAContent[i]):
+        if ('?' in AAContent[i]) or ('X' in AAContent[i]):# check 'X' and '?'
             count += 1
-            if (AAContent[i-1][1:9] not in AccessionList):
-                AccessionList.append(AAContent[i-1][1:9])
+            if (AAContent[i-1][1:9] not in AccessionList):# make sure there's no duplicate in the list
+                AccessionList.append(AAContent[i-1][1:9]) # if not in list, add to list
         i += 1
-    print(count)
+    print(count) # print the amount of accession numbers that are stored
     
-findX()
-print(AccessionList)
-print(len(AccessionList))
+findX() # execute the function 
+print(AccessionList) # print all the accession numbers that contains 'X' or '?'
+print(len(AccessionList)) # print the length of AccessionList to double check the number
 
 
-def writeTxt():
-
+def writeTxt(): # write the AccessionList into a new text file 
     output= open(outputDir+outputName,"w+") 
     for i in AccessionList:
-        output.write(i+"\n")
-
+        output.write(i+"\n") # one number one line 
     output.close
+writeTxt() # execute the function 
 
-writeTxt()
-
-def checkDup():
+def checkDup(): # check the duplicate again in the AccessionList
     i = 0
     while (i<len(AccessionList)):
         for j in AccessionList[i+1:]:
             if AccessionList[i] == j:
-                print("find duplicate")
+                print("find duplicate")  # if there is a duplicate, print it 
                 print(j)
         i = i+1
 checkDup()
@@ -97,8 +101,7 @@ def special(x):
     for i in AAContent:
         count += 1
         if x in i:
-            print(count-1)
-            
+            print(count-1)         
 '''
 
 
