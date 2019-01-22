@@ -11,10 +11,10 @@ Created on Wed Jan 16 15:12:13 2019
 # and then put those numbers in a new text file
 import csv
 
-AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/16-17 USA AA sequence.fas"
-#AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/AATest.fas"
+AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/AA2640.fas"
+
 outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/"
-outputName = "output.txt"
+outputName = "2640AccessionWithXandQuestionMark.txt"
 
 
 
@@ -30,20 +30,43 @@ readFasta(AADir,AAContent)
 AccessionList = [] ################
 def findX():
     count = 0
-    for i in AAContent: 
-        if ('?' in i) or ('X' in i):
-            
-            if (AAContent[AAContent.index(i)-1][1:9] not in AccessionList):
-                count = count + 1 
-                AccessionList.append(AAContent[AAContent.index(i)-1][1:9])
-            
-            
-    print (count)
+    i = 0
+    while (i < len(AAContent)):
+        if ('?' in AAContent[i]) or ('X' in AAContent[i]):
+            count += 1
+            if (AAContent[i-1][1:9] not in AccessionList):
+                AccessionList.append(AAContent[i-1][1:9])
+        i += 1
+    print(count)
     
 findX()
 print(AccessionList)
 print(len(AccessionList))
 
+
+def writeTxt():
+
+    output= open(outputDir+outputName,"w+") 
+    for i in AccessionList:
+        output.write(i+"\n")
+
+    output.close
+
+writeTxt()
+
+def checkDup():
+    i = 0
+    while (i<len(AccessionList)):
+        for j in AccessionList[i+1:]:
+            if AccessionList[i] == j:
+                print("find duplicate")
+                print(j)
+        i = i+1
+checkDup()
+           
+
+
+'''
 leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.14/leftover (question mark and X).csv"
 csvContent = []
 def readCSV():
@@ -69,30 +92,16 @@ def debug():
 print("debug: ")
 debug()
 
-
-
-
-
-
-def checkDup():
-    i = 0
-    while (i<len(AccessionList)):
-        for j in AccessionList[i+1:]:
-            if AccessionList[i] == j:
-                print("find duplicate")
-                print(j)
-        i = i+1
-checkDup()
+def special(x):
+    count = 0
+    for i in AAContent:
+        count += 1
+        if x in i:
+            print(count-1)
             
+'''
 
 
-def writeTxt():
 
-    output= open(outputDir+outputName,"w+") 
-    output.write(AAContent[0])
-    output.write(AAContent[1])
-    output.write(AAContent[2])
 
-    output.close
 
-writeTxt()

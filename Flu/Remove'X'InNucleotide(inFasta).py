@@ -6,29 +6,19 @@ Created on Mon Jan 14 15:05:31 2019
 @author: Han
 """
 
-# Since the original nucleotide sequence file doesnt contain 'X' or '?' 
-# so we have to use the leftoverDir which was generated from the PNGS AA sequence
-# because AA sequence contains 'X' or '?' 
 
 
-'''NEED TO UPDATE: INPUT leftover also need to be fasta format '''
-
-import os
-import csv 
-
-
-leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.14/leftover (question mark and X).csv"
-NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.14/2016-2017 USA H3N2 nucleotide.fasta"
-#NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.14/codeTest.fasta"
-
-
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.14/"
-outputName = "Nucleotide (no X or question mark).fas"
+#input##########################
+leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/2640AccessionWithXandQuestionMark.txt"
+NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/2016-2017 USA H3N2 nucleotide(2640 samples).fasta"
+#output##########################
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/"
+outputName = "2640Nucleotide (without XandQuestionMark).fas"
 
 
 
 fasContent = []
-csvContent = []
+TXTContent = []
 
 def readFasta(x,y):
     file = open(x,"r")
@@ -36,16 +26,20 @@ def readFasta(x,y):
         y.append(line)
         
 readFasta(NucleotideDir,fasContent)
+print("TXT file (accession numbers with ? or X): ")
+def readTXT():
+    file = open(leftoverDir,'r+')
+    rows = file.readlines()
+    for i in rows:
+        TXTContent.append(i[0:8])
+    file.close()
 
-def readCSV():
-    file = open(leftoverDir)
-    reader = csv.reader(file)
-    for row in reader:
-        csvContent.append(row)   
+readTXT()
+print(TXTContent)
+print('There are '+ str(len(TXTContent))+ ' accession numbers need to be removed.')
 
-readCSV()
-
-
+print("\n")
+print("Fasta File: ")
 def NumRowsEachAccession():
     rowCounts = 1
     if fasContent[0][0] == '>':  
@@ -59,7 +53,7 @@ def NumRowsEachAccession():
         print("this file doesnt start with '>'")
 
 NumRowsPerAccessionNum = NumRowsEachAccession()
-print("Each Accession number has "+ str(NumRowsPerAccessionNum)+ " rows")
+print("Each Accession number has "+ str(NumRowsPerAccessionNum)+ " rows(for debugging)")
 
 
 AccessFasList = []
@@ -71,7 +65,7 @@ def AccessInFas(x):
 
 AccessInFas(fasContent)
 print("before removing, input fasta has " + str(len(AccessFasList))+ " samples.")
-
+'''
 AccessCSVList = []
 def AccessInCSV():
     for i in csvContent[1:]:
@@ -82,13 +76,13 @@ print("leftover CSV has "+str(len(AccessCSVList)))
 
 
 
-
+'''
 def remove():
     i = 0
     output= open(outputDir+outputName,"w+") 
     while i < len(fasContent):
-        if fasContent[i][1:9] in AccessCSVList:
-            i = i+30
+        if fasContent[i][1:9] in TXTContent:
+            i = i+NumRowsPerAccessionNum
         else:
             output.write(fasContent[i])
             i = i+1
@@ -107,8 +101,6 @@ readFasta(outputDir+outputName,outputFasContent)
 AccessFasList = []
 AccessInFas(outputFasContent)
 print("after removing, output fasta has " + str(len(AccessFasList))+ " samples.")
-
-
 
 
 
