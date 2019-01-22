@@ -6,7 +6,7 @@ Created on Wed Dec 19 21:21:14 2018
 @author: Han
 """
 
-'''NEED TO UPDATE: define a cutoff, if the size of the group is less than 10, then throw it away'''
+'''This script is merged into the Volatility.py.'''
 
 # This script can combine multiple fasta files into one fasta file and use a 
 # couple blank rows to separate each file's content
