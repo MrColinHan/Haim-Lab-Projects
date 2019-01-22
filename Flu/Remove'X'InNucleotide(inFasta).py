@@ -6,44 +6,60 @@ Created on Mon Jan 14 15:05:31 2019
 @author: Han
 """
 
+'''
+    This script removes Accession groups in a Nucleotide sequence fasta file based 
+    on the Accession numbers I found in the AA Sequence. Since 'X' and '?' only appear
+    in AA Sequence which is converted from a Nucleotide sequence, i can only find them in 
+    AA sequence first then remove the same accession numbers in a nucleotide sequence
+    
+    INPUTS: 
+            lefroverDir: directory of the Accession numbers that contain 'X' or '?'
+                         ( output of the "Find'X'inAAsequence.py" )
+            NucleotideDir: directory of the nucleotide sequence fasta file
+            outputDir: directory of the output file
+            outputName: directory of the output file
+'''
 
 
-#input##########################
+
+# Inputs ###############################################################################################
 leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/2640AccessionWithXandQuestionMark.txt"
 NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/2016-2017 USA H3N2 nucleotide(2640 samples).fasta"
-#output##########################
 outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/"
 outputName = "2640Nucleotide (without XandQuestionMark).fas"
+########################################################################################################
 
 
 
-fasContent = []
-TXTContent = []
+fasContent = [] # a list for all nucleotide sequence 
+TXTContent = [] # a list for all accession numbers that contain 'X' or '?'
 
-def readFasta(x,y):
+def readFasta(x,y): # read a fasta file x and store into a list y
     file = open(x,"r")
     for line in file:
         y.append(line)
-        
-readFasta(NucleotideDir,fasContent)
+readFasta(NucleotideDir,fasContent) # read the nucleotide sequence into fasContent list
+
+
 print("TXT file (accession numbers with ? or X): ")
-def readTXT():
+def readTXT(): # read a text file into a list
     file = open(leftoverDir,'r+')
     rows = file.readlines()
     for i in rows:
         TXTContent.append(i[0:8])
     file.close()
-
 readTXT()
-print(TXTContent)
+print(TXTContent) # print out the text file
 print('There are '+ str(len(TXTContent))+ ' accession numbers need to be removed.')
 
 print("\n")
 print("Fasta File: ")
-def NumRowsEachAccession():
+def NumRowsEachAccession(): # check how many rows does a accession number have in the nucleotide
+                            # sequence fasta file. The fasta format might be different for different
+                            # files, so we need to check the number of rows. With this number, I 
+                            # will know how many rows I need to skip when I want to remove a accession number 
     rowCounts = 1
-    if fasContent[0][0] == '>':  
-        
+    if fasContent[0][0] == '>':  # make sure the fasta format is correct (starts with a '>')
         for i in fasContent[1:]:
             if i[0] != '>':
                 rowCounts = rowCounts+1
@@ -52,12 +68,13 @@ def NumRowsEachAccession():
     else:
         print("this file doesnt start with '>'")
 
-NumRowsPerAccessionNum = NumRowsEachAccession()
+NumRowsPerAccessionNum = NumRowsEachAccession() # store the number of rows 
 print("Each Accession number has "+ str(NumRowsPerAccessionNum)+ " rows(for debugging)")
 
 
-AccessFasList = []
-def AccessInFas(x):
+AccessFasList = [] # a list for all accession numbers of the nucleotide sequence
+def AccessInFas(x): # store all accession numbers of fasta file x into a list
+                    # (for debugging)
     i = 0
     while i < len(x):
         AccessFasList.append(x[i][1:9])
@@ -73,11 +90,9 @@ def AccessInCSV():
 
 AccessInCSV()
 print("leftover CSV has "+str(len(AccessCSVList)))
-
-
-
 '''
-def remove():
+def remove(): # Remove the accession numbers contain 'X' or '?'
+              # and then write the remaining into a new fasta file 
     i = 0
     output= open(outputDir+outputName,"w+") 
     while i < len(fasContent):
@@ -86,20 +101,16 @@ def remove():
         else:
             output.write(fasContent[i])
             i = i+1
-
     output.close
-
 remove()
 
-# check the length of fasta file contents again 
+# check the length of output fasta file contents again 
+# if the len(leftover)+len(outputFas) == len(inputFas), then it's correct
+outputFasContent = [] # a list for all sequence of output nucleotide fasta file
+readFasta(outputDir+outputName,outputFasContent) # read the output fasta file into a list  
 
-
-outputFasContent = []
-readFasta(outputDir+outputName,outputFasContent)
-
-
-AccessFasList = []
-AccessInFas(outputFasContent)
+AccessFasList = [] # set the list to empty again
+AccessInFas(outputFasContent) # read the accession numbers of output fasta into a list 
 print("after removing, output fasta has " + str(len(AccessFasList))+ " samples.")
 
 
