@@ -11,8 +11,8 @@ HIV project:
 
 Flu project:
 
-- Combine Fasta Files.
-- Assign Hydropathy Value and also Remove rows with “X” or “?” in CSV format.
-- Remove rows with “X” or “?” in Fasta format.
-- Remove 8 Characters Before Dash.
-
+- Find Accession Numbers that contain 'X' or '?' in a AA sequence fasta file. 
+- Remove Accession Numbers that contain 'X' or '?' in a Nucleotide sequence fasta file. 
+- Remove 8 Characters & dash  Before each Dash in a newick format file.
+- Assign Hydropathy Value.
+- Combine several fasta format files into one fasta file.
