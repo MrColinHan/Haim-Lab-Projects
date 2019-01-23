@@ -5,7 +5,7 @@ Created on Wed Jan 16 15:12:13 2019
 
 @author: Han
 """
-
+'''NEED TO UPDATE: cannot check 'X' if the accession number contains 'X' '''
 ''' 
     This script finds all Accession numers that contain 'X' or '?' in a AA Sequence fasta file. 
     
@@ -17,9 +17,9 @@ Created on Wed Jan 16 15:12:13 2019
 
 
 # Inputs ###############################################################################################
-AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/AA2640.fas"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/"
-outputName = "2640AccessionWithXandQuestionMark.txt"
+AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/B-17-18 AA Sequence(with X).fas"
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/testPC/"
+outputName = "C-17-18 AccessionNumbers(withX).txt"
 ########################################################################################################
 
 
@@ -37,13 +37,13 @@ readFasta(AADir,AAContent) # execute the function
 AccessionList = [] # a list for all Accession Numbers that contains 'X' or '?'
 def findX(): # find 'X' or '?' in the AA sequence and then store the accession number in a list
     count = 0
-    i = 0
+    i = 1
     while (i < len(AAContent)):
         if ('?' in AAContent[i]) or ('X' in AAContent[i]):# check 'X' and '?'
-            count += 1
+            count = count + 1
             if (AAContent[i-1][1:9] not in AccessionList):# make sure there's no duplicate in the list
                 AccessionList.append(AAContent[i-1][1:9]) # if not in list, add to list
-        i += 1
+        i += 2
     print(count) # print the amount of accession numbers that are stored
     
 findX() # execute the function 
