@@ -18,9 +18,9 @@ Created on Wed Jan  9 12:32:48 2019
 
 
 
-f=open("/Users/Han/Documents/Haim Lab(2018 summer)/1.11/USA 16-17 newick.txt", "r")
-outputName = "output.txt"
-out= open("/Users/Han/Documents/Haim Lab(2018 summer)/1.11/"+outputName,"w+")
+f=open("/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/I-15-16 Newick(with dash).txt", "r")
+outputName = "J-15-16 Newick(without dash).txt"
+out= open("/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/"+outputName,"w+")
 contents =f.readlines()
 
 output = []

@@ -23,10 +23,10 @@ Created on Mon Jan 14 15:05:31 2019
 
 
 # Inputs ###############################################################################################
-leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/2640AccessionWithXandQuestionMark.txt"
-NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/2016-2017 USA H3N2 nucleotide(2640 samples).fasta"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.16.19/"
-outputName = "2640Nucleotide (without XandQuestionMark).fas"
+leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/C-17-18 AccessionNumbers(withX).txt"
+NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/A-2017-2018 USA H3N2 nucleotide(2375samples).fasta"
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/"
+outputName = "D-17-18 Nucleotide(withoutX).fas"
 ########################################################################################################
 
 
@@ -112,7 +112,7 @@ readFasta(outputDir+outputName,outputFasContent) # read the output fasta file in
 AccessFasList = [] # set the list to empty again
 AccessInFas(outputFasContent) # read the accession numbers of output fasta into a list 
 print("after removing, output fasta has " + str(len(AccessFasList))+ " samples.")
-
+print(str(len(TXTContent))+ "+" +str(len(AccessFasList))+" = "+ str(len(TXTContent)+len(AccessFasList)))
 
 
 
