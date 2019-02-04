@@ -16,3 +16,4 @@ Flu project:
 - Remove 8 Characters & dash  Before each Dash in a newick format file.
 - Assign Hydropathy Value.
 - Combine several fasta format files into one fasta file.
+- Group Amino Acids
