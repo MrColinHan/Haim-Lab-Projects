@@ -23,10 +23,10 @@ Created on Mon Jan 14 15:05:31 2019
 
 
 # Inputs ###############################################################################################
-leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/C-17-18 AccessionNumbers(withX).txt"
-NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/A-2017-2018 USA H3N2 nucleotide(2375samples).fasta"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/"
-outputName = "D-17-18 Nucleotide(withoutX).fas"
+leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/C-14-15 AccessionNumbers(withX).txt"
+NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/A-2014-2015 USA H3N2 nucleotide(1929samples).fasta"
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/"
+outputName = "D-14-15 Nucleotide(withoutX).fas"
 ########################################################################################################
 
 

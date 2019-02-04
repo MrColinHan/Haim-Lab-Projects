@@ -17,9 +17,9 @@ Created on Wed Jan 16 15:12:13 2019
 
 
 # Inputs ###############################################################################################
-AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.22.19/B-17-18 AA Sequence(with X).fas"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/testPC/"
-outputName = "C-17-18 AccessionNumbers(withX).txt"
+AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/B-14-15 AA Sequence(with X).fas"
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/"
+outputName = "C-14-15 AccessionNumbers(withX).txt"
 ########################################################################################################
 
 

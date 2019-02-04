@@ -25,17 +25,17 @@ import openpyxl
 #                                 mix:[[1979,2014],[1985,2006],[1994,2000],[2008,2008]]
 #6. Ignore the output file named 'ignore.xlsx', feel free to delete it
 #7. run Forest run!
-Input = r"/Users/Han/Documents/Haim Lab(2018 summer)/12.3/12.3 AS-CN,KR INPUT.xlsx" 
-Output = r"/Users/Han/Documents/Haim Lab(2018 summer)/12.3/"
-OutputName = "12.3 b_as-cnkr 5-15.xlsx" 
-TabNumber = 0 # tab naber in Excel file
-PositionRange = [[662,662],[663,663],[664,664],[665,665],[667,667]]
+Input = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.28.19 BCAE Full Sequence/PNGS_AE_Full_Sequence.xlsx" 
+Output = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/"
+OutputName = "2.1.19 Clade_AE_FullPos(07-15).xlsx" 
+TabNumber = 0 # tab number in Excel file
+PositionRange = [[1,856]]
 #pngs:[[88,88],[156,156],[160,160],[197,197],[230,230],[234,234],[241,141],[262,262],
 ######[276,276],[289,289],[295,295],[301,301],[332,332],[339,339],[356,356],[362,362],[386,386],
 ######[392,392],[448,448],[133,133],[137,137],[185,185],[355,355],[398,398],[406,406],[411,411],[462,462]]
 #2g12: [[295,295],[332,332],[339,339],[392,392],[448,448]]
 #2F5: [[662,662],[663,663],[664,664],[665,665],[667,667]]
-YearRange = [[2007,2015],[2005,2015]]
+YearRange = [[2007,2015]]
 # Clade B: [[1979,1986],[1987,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]] 
 # Clade C: [[1986,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]] 
 # B_Korea: [[1991,1996],[1997,2000],[2001,2004],[2005,2009]]
