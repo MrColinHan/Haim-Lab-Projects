@@ -14,16 +14,16 @@ Created on Fri Feb  1 10:25:29 2019
 import csv
 import math
 
-# Inputs ###############################################################################################
+# Inputs ================================================================================================
 
-Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/2.1.19 Clade_B_FullPos_LogConverted.csv"
-Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/2.1.19 Clade_C_FullPos_LogConverted.csv"
-AEdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/2.1.19 Clade_AE_FullPos_LogConverted.csv"
+Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/B_(no15,16,17,310,311).csv"
+Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/C_(no15,16,17,310,311).csv"
+AEdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/AE_(no15,16,17,310,311).csv"
 OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/"
 OutputName = "C_AE_Distance.csv"
 '''Also need to change the arguments in main()'''
 
-########################################################################################################
+# ========================================================================================================
 
 
 
@@ -66,6 +66,7 @@ def main(clade1,clade2):
     result.append(distances)
     return result
 
+'''CHANGE THE ARGUMENTS HERE'''
 BCdistance = main(C,AE) #########################################################
 
 def writeCsv(distancelist):

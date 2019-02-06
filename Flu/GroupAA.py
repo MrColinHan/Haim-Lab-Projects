@@ -13,14 +13,14 @@ Created on Tue Jan 29 15:04:00 2019
 import ast
 import csv
 
-# Inputs ###############################################################################################
+# Inputs ================================================================================================
 
 txtDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.29.19 Ans Pos(BCAE)/Flu_grouped_AA/17-18Groups.txt"
 PNGSDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.29.19 Ans Pos(BCAE)/Flu_grouped_AA/I-17-18 PNGS AA CSV(without X).csv"
 OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.29.19 Ans Pos(BCAE)/Flu_grouped_AA/"
 OutputName = "17-18GroupedAA.csv"
 
-########################################################################################################
+#========================================================================================================
 
 
 def readTXT(): # read a text file into a list

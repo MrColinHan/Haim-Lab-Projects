@@ -27,4 +27,5 @@ for i in strToIntlist:
     FinalList.append(innerList)
 
 print(FinalList)
-    
+
+
