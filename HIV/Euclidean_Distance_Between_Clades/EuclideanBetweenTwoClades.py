@@ -15,13 +15,14 @@ import csv
 import math
 
 # Inputs ================================================================================================
-
+#CSV input format needs to be | Clade | Position | Year | Z | N | ......
 Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/B_(no15,16,17,310,311).csv"
 Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/C_(no15,16,17,310,311).csv"
 AEdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/AE_(no15,16,17,310,311).csv"
 OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/"
 OutputName = "C_AE_Distance.csv"
-'''Also need to change the arguments in main()'''
+
+'''ALSO NEED TO CHANGE THE ARGUMENTS IN main()'''
 
 # ========================================================================================================
 
@@ -65,9 +66,11 @@ def main(clade1,clade2):
     result.append(positions)
     result.append(distances)
     return result
-
+# ========================================================================================================
 '''CHANGE THE ARGUMENTS HERE'''
-BCdistance = main(C,AE) #########################################################
+BCdistance = main(C,AE) 
+# ========================================================================================================
+
 
 def writeCsv(distancelist):
     with open(OutputDir+OutputName,'w+') as file:
