@@ -43,22 +43,29 @@ readCSV(Bdir,B)
 readCSV(Cdir,C)
 readCSV(AEdir,AE)
 
-testB = B[:3]
-testC = C[:3]
+testB = [["x"],[1,0.1,0,0,0,0,6,0,3,0,0,0,0,0,98,  0,0,0,0,0,0,0]]
+testC = [["x"],[2,0,  5,0,0,0,7,0,4,0,0,0,0,0,98.5,0,0,0,0,0,0,0]]
 
 def difference(x,y):
     i = 1
     while i < len(x):
-        a = 0
-        while a<21:
-            if ((abs(float(x[i][a])) - abs(float(y[i][a]))) < cutoff): 
+        
+        a = 1
+        while a<len(x[i]):
+            if ((abs(float(x[i][a]) - float(y[i][a]))) < cutoff): 
                 '''CONSIDER! IF BOTH PERCENTAGE ARE (100,100) OR (99,99.5), THE IT GOES TO 0???'''
                 '''SHOULD WE CHECK THAT THE PERCENTAGE SHOULD BE OVER SOME VALUE FIRST THEN CHECK THE CUROFF'''
+                '''OR , ONLY WHEN ONE percentage is 0 and the other is less than 1'''
                 x[i][a] = 0
                 y[i][a] = 0
+                
+                
             a += 1
         i += 1
-difference(testB,testC)
+    return
+difference(B,C)
+#difference(B,AE)
+#difference(AE,C)
 
 
 def writeCsv(x,y):
@@ -66,10 +73,12 @@ def writeCsv(x,y):
         wr = csv.writer(file, dialect='excel')
         wr.writerows(x)
     file.close()
-            
+
+
 writeCsv(B,B_OutputName)
 writeCsv(C,C_OutputName)
-writeCsv(AE,AE_OutputName)
+#writeCsv(AE,AE_OutputName)
+
 
 
 
