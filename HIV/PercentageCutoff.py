@@ -51,7 +51,9 @@ def difference(x,y):
     while i < len(x):
         a = 0
         while a<21:
-            if ((abs(float(x[i][a])) - abs(float(y[i][a]))) < cutoff):
+            if ((abs(float(x[i][a])) - abs(float(y[i][a]))) < cutoff): 
+                '''CONSIDER! IF BOTH PERCENTAGE ARE (100,100) OR (99,99.5), THE IT GOES TO 0???'''
+                '''SHOULD WE CHECK THAT THE PERCENTAGE SHOULD BE OVER SOME VALUE FIRST THEN CHECK THE CUROFF'''
                 x[i][a] = 0
                 y[i][a] = 0
             a += 1
