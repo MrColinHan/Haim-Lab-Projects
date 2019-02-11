@@ -16,11 +16,11 @@ import math
 
 # Inputs ================================================================================================
 #CSV input format needs to be | Clade | Position | Year | Z | N | ......
-Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/B_(no15,16,17,310,311).csv"
-Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/C_(no15,16,17,310,311).csv"
-AEdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/AE_(no15,16,17,310,311).csv"
-OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.1.19 HIV Euclidean(B,C,AE)/"
-OutputName = "C_AE_Distance.csv"
+Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/(BvsAE_cutoff1)B_Log.csv"
+Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/(CvsAE_cutoff1)C_Log.csv"
+AEdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/(CvsAE_cutoff1)AE_Log.csv"
+OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/"
+OutputName = "(cutoff1)C_AE_Distance.csv"
 
 '''ALSO NEED TO CHANGE THE ARGUMENTS IN main()'''
 

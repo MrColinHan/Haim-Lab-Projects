@@ -20,14 +20,13 @@ import math
 
 # Inputs ================================================================================================
 
-inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/B_distribution.csv"
+inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/(CvsAE)C_cutoffed.csv"
 OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/"
-OutputName = "B_LogConversion.csv"
-clade = "B"
-year = "[2007,2015]"
+OutputName = "(CvsAE_cutoff1)C_Log.csv"
+clade = "C"   
 changeZeroTo = 0.1  # can be 0.1, or 0.001
 add = 1             # if changed 0 to 0.1, then add 1. If changed to 0.01, then add 2
-
+year = "[2007,2015]"
 # ========================================================================================================
 
 csvList = []

@@ -17,15 +17,15 @@ import csv
 
 # Inputs ================================================================================================
 
-Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/B_distribution.csv"
-Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/C_distribution.csv"
+Bdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/B(no15,16,17,310,311).csv"
+Cdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/C(no15,16,17,310,311).csv"
 AEdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/AE_distribution.csv"
 OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/"
-B_OutputName = "B_filtered.csv"
-C_OutputName = "C_filtered.csv"
-AE_OutputName = "AE_filtered.csv"
+B_OutputName = "(BvsAE)B_cutoffed.csv"
+C_OutputName = "(CvsAE)C_cutoffed.csv"
+AE_OutputName = "(CvsAE)AE_cutoffed.csv"
 cutoff = 1 
-
+'''ALSO NEED TO CHANGE THE ARGUMENTS IN FUNCTIONS AT THE END'''
 # ========================================================================================================
 
 
@@ -53,9 +53,7 @@ def difference(x,y):
         a = 1
         while a<len(x[i]):
             if ((abs(float(x[i][a]) - float(y[i][a]))) < cutoff): 
-                '''CONSIDER! IF BOTH PERCENTAGE ARE (100,100) OR (99,99.5), THE IT GOES TO 0???'''
-                '''SHOULD WE CHECK THAT THE PERCENTAGE SHOULD BE OVER SOME VALUE FIRST THEN CHECK THE CUROFF'''
-                '''OR , ONLY WHEN ONE percentage is 0 and the other is less than 1'''
+
                 x[i][a] = 0
                 y[i][a] = 0
                 
@@ -63,10 +61,12 @@ def difference(x,y):
             a += 1
         i += 1
     return
-difference(B,C)
-#difference(B,AE)
-#difference(AE,C)
 
+'''=====================CHANGE ARGUMENTS HERE========================================'''
+#difference(B,C)
+#difference(B,AE)
+difference(AE,C)
+'''============================================================='''
 
 def writeCsv(x,y):
     with open(OutputDir+y,'w+') as file:
@@ -74,11 +74,11 @@ def writeCsv(x,y):
         wr.writerows(x)
     file.close()
 
-
-writeCsv(B,B_OutputName)
+'''=====================CHANGE ARGUMENTS HERE========================================'''
+#writeCsv(B,B_OutputName)
 writeCsv(C,C_OutputName)
-#writeCsv(AE,AE_OutputName)
-
+writeCsv(AE,AE_OutputName)
+'''============================================================='''
 
 
 
