@@ -6,6 +6,9 @@ HIV project:
 - In-host Amino Acids Distribution.
 - Delta of Amino Acids Distribution.
 - Euclidean Distance.
+- Log Conversion
+- Percentage Cutoff
+- ChimeraInputFormat
 
 
 
