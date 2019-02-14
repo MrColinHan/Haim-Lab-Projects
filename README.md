@@ -1,3 +1,4 @@
+
 ## Codes for Haim Lab Projects
 
 HIV project:
@@ -6,9 +7,9 @@ HIV project:
 - In-host Amino Acids Distribution.
 - Delta of Amino Acids Distribution.
 - Euclidean Distance.
-- Log Conversion
-- Percentage Cutoff
-- ChimeraInputFormat
+- Automate Log Conversion Process
+- Distribution Percentage Cutoff
+- Translate positions into ChimeraInputFormat
 
 
 
