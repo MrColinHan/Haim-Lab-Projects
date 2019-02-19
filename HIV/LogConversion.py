@@ -20,13 +20,18 @@ import math
 
 # Inputs ================================================================================================
 
-inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/(CvsAE)C_cutoffed.csv"
-OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.6.19 new Euclidean/"
-OutputName = "(CvsAE_cutoff1)C_Log.csv"
+inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.18.19 distribution/164167CSV.csv"
+OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.18.19 distribution/"
+OutputName = "2.18.19 MDSInput.csv"
 clade = "C"   
 changeZeroTo = 0.1  # can be 0.1, or 0.001
 add = 1             # if changed 0 to 0.1, then add 1. If changed to 0.01, then add 2
 year = "[2007,2015]"
+'''
+addProperties is for input data who only has Position property column
+If the the input data format is [Clade][Position][Year][Z]...
+Then comment out addProperties part
+'''
 # ========================================================================================================
 
 csvList = []
@@ -40,8 +45,8 @@ def readCSV(filedir,listname):
 readCSV(inputdir,csvList)
 
 debugList = csvList[:] # preserve an original csv list for debugging
-
-def addProperties():  # add two properties so that the output can be used in Euclidean.py
+'''
+def addProperties():  # add three properties so that the output can be used in Euclidean.py
     csvList[0].insert(0,"Clade")
     csvList[0].insert(2,"Year")
     csvList[0][1] = "Position"
@@ -50,7 +55,7 @@ def addProperties():  # add two properties so that the output can be used in Euc
         i.insert(2,year)
 
 addProperties()
-
+'''
 def logConversion():
     i = 1
     while i < len(csvList):
