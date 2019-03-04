@@ -21,20 +21,22 @@ import math
 # Inputs ================================================================================================
 
 inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.19.19(164,167 KR,NA,EU)/needlog.csv"
-OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.19.19(164,167 KR,NA,EU)/"
+OutputDir = r"/Users/Han/Documents/"
 OutputName = "2.19.19 MDSInput(164,167,KR,NA,EU).csv"
-clade = "C"   
-
-InputContainsProperties = False  # True 
 changeZeroTo = 0.1  # can be 0.1, or 0.001
-add = 1             # if changed 0 to 0.1, then add 1. If changed to 0.01, then add 2
+          
+InputContainsProperties = False  # True : if input format is [Position][Z]...
+clade = "C"                      # False: if input format is [Clade][Position][Year][Z]...
 year = "[2007,2015]"
-'''
-addProperties is for input data who only has Position property column
-If the the input data format is [Clade][Position][Year][Z]...
-Then comment out addProperties part
-'''
+
+
 # ========================================================================================================
+add = None         # if changed 0 to 0.1, then add 1. If changed to 0.01, then add 2
+if changeZeroTo == 0.1:
+    add = 1
+if changeZeroTo == 0.01:
+    add = 2
+
 
 csvList = []
 
