@@ -20,10 +20,12 @@ import math
 
 # Inputs ================================================================================================
 
-inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.18.19 distribution/164167CSV.csv"
-OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.18.19 distribution/"
-OutputName = "2.18.19 MDSInput.csv"
+inputdir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.19.19(164,167 KR,NA,EU)/needlog.csv"
+OutputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/2.19.19(164,167 KR,NA,EU)/"
+OutputName = "2.19.19 MDSInput(164,167,KR,NA,EU).csv"
 clade = "C"   
+
+InputContainsProperties = False  # True 
 changeZeroTo = 0.1  # can be 0.1, or 0.001
 add = 1             # if changed 0 to 0.1, then add 1. If changed to 0.01, then add 2
 year = "[2007,2015]"
@@ -45,7 +47,7 @@ def readCSV(filedir,listname):
 readCSV(inputdir,csvList)
 
 debugList = csvList[:] # preserve an original csv list for debugging
-'''
+
 def addProperties():  # add three properties so that the output can be used in Euclidean.py
     csvList[0].insert(0,"Clade")
     csvList[0].insert(2,"Year")
@@ -53,9 +55,10 @@ def addProperties():  # add three properties so that the output can be used in E
     for i in csvList[1:]:
         i.insert(0,clade)
         i.insert(2,year)
+        
+if InputContainsProperties == True:
+    addProperties()
 
-addProperties()
-'''
 def logConversion():
     i = 1
     while i < len(csvList):
