@@ -23,7 +23,7 @@ AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/B-14-15 A
 outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/"
 outputName = "C-14-15 AccessionNumbers(withX).txt"
 # =======================================================================================================
-
+'''
 from re import compile
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}|[A-Za-z]\d{5}')
 
@@ -79,44 +79,7 @@ def checkDup(): # check the duplicate again in the AccessionList
                 print(j)
         i = i+1
 checkDup()
-           
-
-
-'''
-leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.14/leftover (question mark and X).csv"
-csvContent = []
-def readCSV():
-    file = open(leftoverDir)
-    reader = csv.reader(file)
-    for row in reader:
-        csvContent.append(row)   
-
-readCSV()
-AccessCSVList = [] #################
-def AccessInCSV():
-    for i in csvContent[1:]:
-        AccessCSVList.append(i[0])
-AccessInCSV()
-print(AccessCSVList)
-print(len(AccessCSVList))
-
-def debug():
-    for i in AccessCSVList:
-        if i not in AccessionList:
-            print(i)
-
-print("debug: ")
-debug()
-
-def special(x):
-    count = 0
-    for i in AAContent:
-        count += 1
-        if x in i:
-            print(count-1)         
-'''
-
-
+'''        
 
 
 
