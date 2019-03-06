@@ -13,6 +13,7 @@ Created on Wed Jan 16 15:12:13 2019
             AADir: the directory  AA sequence
             outputDir: directory for the ourput file
             outputName: the name for the output file. 
+    !!!: ONLY WORKS WHEN THE Accession number IS THE FIRST SHOWEN PROPERTY
 '''
 
 
