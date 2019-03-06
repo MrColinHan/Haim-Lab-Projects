@@ -10,7 +10,7 @@ HIV project:
 - Automate Log Conversion Process
 - Distribution Percentage Cutoff
 - Translate positions into ChimeraInputFormat
-
+- Filt out accession numbers from B.KR in a .NWK format file
 
 
 Flu project:
