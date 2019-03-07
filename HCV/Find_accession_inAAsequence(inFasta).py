@@ -7,14 +7,14 @@ Created on Tue Mar  5 23:38:36 2019
 """
 
 ''' 
-    FOR FLU & HCV project
-    This script finds all Accession numers that contain '#' or '?' in a AA Sequence fasta file. 
+    FOR HCV project
+    This script finds all Accession numers that contain special characters in a AA Sequence fasta file. 
     
     INPUTS: 
             AADir: the directory  AA sequence
             outputDir: directory for the ourput file
             outputName: the name for the output file. 
-    !!!: 1. two possible forms of accession number: MM123456 , M12345
+    !!!: 1. Three possible forms of accession number: MM123456 , M12345 , MM_123456
          2. if a '#' appears at the end of a sequence, then no need to remove this sequence
 '''
 
@@ -28,7 +28,7 @@ remove2 = '$'
 # =======================================================================================================
 
 from re import compile
-ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}|[A-Za-z]\d{5}')
+ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}$|[A-Za-z]\d{5}$|[A-Za-z]{2}\_\d{6}$')
 
 AAContent = [] # a list for all AA sequence
 
@@ -66,19 +66,39 @@ def findX(): # find 'X' or '?' in the AA sequence and then store the accession n
     count = 0
     i = 0
     while i < (len(HeaderList)-1):
-        for j in AAContent[(HeaderList[i]+1):HeaderList[i+1]]:
-            if (remove1 in j) or (remove2 in j): # check '#' and '$
-               if (getAccessNum(AAContent[HeaderList[i]]) not in AccessionList):
-                         
+        
+        j = 0
+        fragment = AAContent[(HeaderList[i]+1):HeaderList[i+1]]
+        #print(fragment[-1])
+        while j < (len(fragment)-1):
+
+            if (remove1 in (fragment[j])) or (remove2 in (fragment[j])): # check '#' and '$
+               if (getAccessNum(AAContent[HeaderList[i]]) not in AccessionList):     
+                   AccessionList.append(getAccessNum(AAContent[HeaderList[i]]))
+            j+=1
+        # now check if the last line of AA sequence contains only one '#' at the end
+        if (remove1 in (fragment[-1][:-2])) or (remove2 in (fragment[-1][:-2])):
+           # print(fragment[-1][:-2])
+            if (getAccessNum(AAContent[HeaderList[i]]) not in AccessionList):     
                    AccessionList.append(getAccessNum(AAContent[HeaderList[i]]))
         i += 1
     #while loop doesn't check the last sample because of i < (len(HeaderList)-1)
     #now check the last sample to see if it contains #$
-    for k in AAContent[(HeaderList[-1])+1:]:
-        if (remove1 in k) or (remove2 in k):
+    k = 0
+    fragment2 = AAContent[(HeaderList[-1])+1:]
+    while k < (len(fragment2)-1):
+        if (remove1 in fragment2[k]) or (remove2 in fragment2[k]):
            count += 1
            if (getAccessNum(AAContent[HeaderList[-1]]) not in AccessionList):
                AccessionList.append(getAccessNum(AAContent[HeaderList[-1]]))
+        k += 1
+    
+    if (remove1 in (fragment2[-1][:-1])) or (remove2 in (fragment2[-1][:-1])):
+        
+        if (getAccessNum(AAContent[HeaderList[-1]]) not in AccessionList):
+               AccessionList.append(getAccessNum(AAContent[HeaderList[-1]]))
+
+        
 
 findX() # execute the function 
 
@@ -94,8 +114,8 @@ checkDup()
 
 print("How many accession numbers contain either "+remove1+" or "+remove2 +" : " + str(len(AccessionList))) # print the length of AccessionList to double check the number
 print('\n')
-print("Need to be removed: ")
-print("check out the output txt file")
+print("Accession numbers that need to be removed: ")
+print("......check out the output txt file......")
 #print(AccessionList) # print all the accession numbers that contains '#' or '$'
 
 def writeTxt(): # write the AccessionList into a new text file 
