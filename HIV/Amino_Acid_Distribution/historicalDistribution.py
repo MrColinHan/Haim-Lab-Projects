@@ -10,6 +10,10 @@ Created on Mon Jun 25 13:42:51 2018
 import xlrd
 import openpyxl
 
+'''
+    !!!!Remember to refactor this script in order to improve efficiency!!!
+'''
+
 #This script calculate the historical distribution of different positions' amino acids
 #  STEPS:
 #1. Change the Input directory, do not delete r 
