@@ -5,7 +5,7 @@ Created on Wed Mar  6 17:23:47 2019
 
 @author: Han
 """
-
+from re import compile
 '''
     This script removes Accession groups in a Nucleotide sequence fasta file based 
     on the Accession numbers I found in the AA Sequence. Since special characters('#''$''?''X') only appear
@@ -19,16 +19,13 @@ Created on Wed Mar  6 17:23:47 2019
             outputName: directory of the output file
 '''
 
-
-
-
 # Inputs ###############################################################################################
 leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/AccessionNumbers(with# & $).txt"
 NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/HCV E1 and E2 USA 1a AA frame 1.fas"
 outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/"
 outputName = "HCVNucleotide(without#$).fas"
 ########################################################################################################
-from re import compile
+
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}$|[A-Za-z]\d{5}$|[A-Za-z]{2}\_\d{6}$')
 
 
@@ -36,11 +33,15 @@ fasContent = [] # a list for all nucleotide sequence
 TXTContent = [] # a list for all accession numbers that contain special characters
 outputList = [] # a list used to save clean sequence
 
-def readFasta(x,y): # read a fasta file x and store into a list y
+
+def readFasta(x,y):  # read a fasta file x and store into a list y
     file = open(x,"r")
     for line in file:
         y.append(line)
-readFasta(NucleotideDir,fasContent) # read the nucleotide sequence into fasContent list
+
+
+readFasta(NucleotideDir,fasContent)  # read the nucleotide sequence into fasContent list
+
 
 def getAccessNum(string):
     """
@@ -51,11 +52,14 @@ def getAccessNum(string):
     #print(string)
     return ACCESSION_MATCHER.findall(string)[0]
 
-def readTXT(): # read a text file into a list
+
+def readTXT():  # read a text file into a list
     file = open(leftoverDir,'r+')
     rows = file.readlines()
     for i in rows:
         TXTContent.append(i[:-1])
+
+
 readTXT()
 
 print("TXT file: ")
@@ -65,17 +69,20 @@ print("Fasta File: ")
 
 HeaderList = [] # a list contains index of all headers starting with ">"
 
-def getHeaderIndex (x,y) :  # read x save to y
+
+def getHeaderIndex (x,y):  # read x save to y
     i = 0
     while i < len(x):
         if x[i][0] == '>':
             y.append(i)
         i += 1
+
+
 getHeaderIndex(fasContent,HeaderList)
 print("before removing, input fasta has: "+ str(len(HeaderList)) + " samples.")
 
-def remove(): # Remove the accession numbers 
-              # and then write the remaining into a new fasta file 
+
+def remove():  # Remove the accession numbers and then write the remaining into a new fasta file
     
     i = 0
     output= open(outputDir+outputName,"w+") 
@@ -90,8 +97,9 @@ def remove(): # Remove the accession numbers
     if getAccessNum(fasContent[HeaderList[-1]]) not in TXTContent:
         for p in fasContent[HeaderList[-1]:]:
             output.write(p)
-    
     output.close
+
+
 remove()
 
 outputFasContent = [] # a list for all sequence of output nucleotide fasta file
@@ -119,6 +127,8 @@ print('\n')
 print('Debug:')
 print(len(inputAccessList))
 print(len(outputAccessList))
+
+
 def debug():
     i = 0
     while i < len(inputAccessList):
@@ -131,6 +141,7 @@ def debug():
         if i in inputAccessList:
             count += 1
     print(count)'''
+
 
 debug()
 
