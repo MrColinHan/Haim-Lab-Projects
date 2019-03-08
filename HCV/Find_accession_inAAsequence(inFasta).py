@@ -5,7 +5,7 @@ Created on Tue Mar  5 23:38:36 2019
 
 @author: Han
 """
-
+from re import compile
 ''' 
     FOR HCV project
     This script finds all Accession numers that contain special characters in a AA Sequence fasta file. 
@@ -19,29 +19,31 @@ Created on Tue Mar  5 23:38:36 2019
 '''
 
 # Inputs ================================================================================================
-AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/HCV E1 and E2 USA 1a AA frame 1.fas"
+AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 HCV&kr(rm 61 access nums)/HCV/HCV E1 and E2 USA 1a AA frame 1.fas"
 #AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/B-14-15 AA Sequence(with X).fas"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/"
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 HCV&kr(rm 61 access nums)/HCV/"
 outputName = "AccessionNumbers(with# & $).txt"
 remove1 = '#'
 remove2 = '$'
 # =======================================================================================================
 
-from re import compile
+
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}$|[A-Za-z]\d{5}$|[A-Za-z]{2}\_\d{6}$')
 
 AAContent = [] # a list for all AA sequence
 
-def readFasta(x,y):  # read the AA Sequence fasta file and then store them in list AAContent
+
+def readFasta(x, y):  # read the AA Sequence fasta file and then store them in list AAContent
     file = open(x,"r")
     for line in file:
         y.append(line)
 
-readFasta(AADir,AAContent) # execute the function
+
+readFasta(AADir, AAContent)  # execute the function
 
 
-AccessionList = [] # a list for all Accession Numbers that contains '#' or '$'
-HeaderList = [] # a list contains index of all headers starting with ">"
+AccessionList = []  # a list for all Accession Numbers that contains '#' or '$'
+HeaderList = []  # a list contains index of all headers starting with ">"
 
 def getHeaderIndex () :
     
@@ -50,9 +52,12 @@ def getHeaderIndex () :
         if AAContent[i][0] == '>':
             HeaderList.append(i)
         i += 1
+
+
 getHeaderIndex()
 print("How many accession numbers in this file: "+ str(len(HeaderList)))
-  
+
+
 def getAccessNum(string):
     """
     extract accession from the given string, returns the first match if there are multiple matches
@@ -61,8 +66,9 @@ def getAccessNum(string):
     """
     #print(string)
     return ACCESSION_MATCHER.findall(string)[0]
-     
-def findX(): # find 'X' or '?' in the AA sequence and then store the accession number in a list
+
+
+def findX():  # find 'X' or '?' in the AA sequence and then store the accession number in a list
     count = 0
     i = 0
     while i < (len(HeaderList)-1):
@@ -73,8 +79,8 @@ def findX(): # find 'X' or '?' in the AA sequence and then store the accession n
         while j < (len(fragment)-1):
 
             if (remove1 in (fragment[j])) or (remove2 in (fragment[j])): # check '#' and '$
-               if (getAccessNum(AAContent[HeaderList[i]]) not in AccessionList):     
-                   AccessionList.append(getAccessNum(AAContent[HeaderList[i]]))
+                if getAccessNum(AAContent[HeaderList[i]]) not in AccessionList:
+                    AccessionList.append(getAccessNum(AAContent[HeaderList[i]]))
             j+=1
         # now check if the last line of AA sequence contains only one '#' at the end
         if (remove1 in (fragment[-1][:-2])) or (remove2 in (fragment[-1][:-2])):
@@ -93,7 +99,8 @@ def findX(): # find 'X' or '?' in the AA sequence and then store the accession n
                AccessionList.append(getAccessNum(AAContent[HeaderList[-1]]))
         k += 1
     
-    if (remove1 in (fragment2[-1][:-1])) or (remove2 in (fragment2[-1][:-1])):
+    #print(fragment2[-1][:-2])
+    if (remove1 in (fragment2[-1][:-2])) or (remove2 in (fragment2[-1][:-2])):
         
         if (getAccessNum(AAContent[HeaderList[-1]]) not in AccessionList):
                AccessionList.append(getAccessNum(AAContent[HeaderList[-1]]))
