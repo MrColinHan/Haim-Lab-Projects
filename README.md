@@ -15,9 +15,16 @@ HIV project:
 
 Flu project:
 
-- Find Accession Numbers that contain 'X' or '?' in a AA sequence fasta file. 
-- Remove Accession Numbers that contain 'X' or '?' in a Nucleotide sequence fasta file. 
+- (Need a update)Find Accession Numbers that contain 'X' or '?' in a AA sequence fasta file. 
+- (Need a update)Remove Accession Numbers that contain 'X' or '?' in a Nucleotide sequence fasta file. 
 - Remove 8 Characters & dash  Before each Dash in a newick format file.
 - Assign Hydropathy Value.
 - Combine several fasta format files into one fasta file.
 - Group Amino Acids
+
+
+HCV project: 
+
+- (New version, might work for Flu sequence)Find Accession Numbers that contain special characters(e.g. #, $)
+- Remove Accession Numbers that contain special characters
+
