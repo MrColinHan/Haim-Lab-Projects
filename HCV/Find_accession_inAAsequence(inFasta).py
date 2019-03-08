@@ -15,7 +15,7 @@ from re import compile
             outputDir: directory for the ourput file
             outputName: the name for the output file. 
     !!!: 1. Three possible forms of accession number: MM123456 , M12345 , MM_123456
-         2. if a '#' appears at the end of a sequence, then no need to remove this sequence
+         2. if there's only one '#' in the sequence and it appears at the end, then no need to remove this sequence
 '''
 
 # Inputs ================================================================================================
