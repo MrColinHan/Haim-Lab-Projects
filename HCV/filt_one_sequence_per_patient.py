@@ -14,16 +14,17 @@ Created on Mon Mar 11 17:55:20 2019
             
             >Genetype. Country. Year. Patient Code. Sequence name. Accession number  
     
-    1. only take US's patinent
+    1. only take US's patient
+    2. check year, if '_' then ignore
     2. take first sequence of each patient code
     3. if patient code is '_' then ignore
 '''
 
 # Inputs ================================================================================================
-AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.8 test HCV & distri/hcv/C-HCVNucleotide(without#$)Spain.fas"
+AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.8 test HCV & distri/hcv/C-HCVNucleotide(without#$)USA.fas"
 outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.8 test HCV & distri/hcv/"
-outputName = "(Spain)One_sequence_per_patient.fas"
-country = 'ES'  # search from this country 
+outputName = "(US test)One_sequence_per_patient.fas"
+country = 'US'  # search from this country 
 # =======================================================================================================
 
 output = []
@@ -71,11 +72,37 @@ def find_country(x,y):  # find country 'x' of each patient, if find it then save
             
 find_country(country, US_locations)
 
+# now check year
+with_year = [] # after getting all US, now put the ones that has a valid year in this list
+
+def check_year(x,y): # check US_locations then remove ones without a year
+    for i in x:
+        
+        j = 0
+        dot_count = 0 # take the string between dot 2 and dot 3
+        dot_third_index = 0
+        dot_forth_index = 0
+        while j < len(AAContent[i]):
+            if AAContent[i][j] == '.':
+                dot_count += 1
+            if (dot_count == 2) & (dot_third_index == 0):
+                dot_third_index = j
+                
+            if (dot_count == 3) & (dot_forth_index == 0):
+                dot_forth_index = j
+                if (AAContent[i][dot_third_index+1 : dot_forth_index]) != '_': 
+                    
+                    with_year.append(i)
+            j += 1
+
+check_year(US_locations, with_year)
+
+
 #for i in US_locations:
     #print(AAContent[i])
 
 # now take first shown patient code into a list
-fist_patientcode_index = [] # not index in AAContent, it's index in US_locations
+fist_patientcode_index = [] # index of AAContent
 fist_patientcode_name = []
 def find_first_patient(x,y): # in x, find all first shown patient code, save index in y
     i = 0
@@ -88,21 +115,18 @@ def find_first_patient(x,y): # in x, find all first shown patient code, save ind
             if AAContent[x[i]][j] == '.':
                 dot_count += 1
             if (dot_count == 3) & (dot_third_index == 0):
-                dot_third_index = j
-                
+                dot_third_index = j                
             if (dot_count == 4) & (dot_forth_index == 0):
                 dot_forth_index = j
-                if (AAContent[x[i]][(dot_third_index+1):dot_forth_index]) != '_' and (
-                        AAContent[x[i]][(dot_third_index+1):dot_forth_index]) not in fist_patientcode_name:
+                if ((AAContent[x[i]][(dot_third_index+1):dot_forth_index]) != '_') and ((
+                        AAContent[x[i]][(dot_third_index+1):dot_forth_index]) not in fist_patientcode_name):
                     fist_patientcode_name.append((AAContent[x[i]][(dot_third_index+1):dot_forth_index]))
                     y.append(x[i])
-                    
-                
             j += 1
         i += 1
     
 
-find_first_patient(US_locations,fist_patientcode_index)
+find_first_patient(with_year,fist_patientcode_index)
 print('\n')
 print('There are '+str(len(fist_patientcode_index)) + " unique patient code from "+ country +" in this file: ")
 print('\n')
@@ -114,9 +138,9 @@ print('\n')
 #for i in fist_patientcode_index:
     #print(AAContent[i])
 
-match_header = []
+match_header = [] # 
 def matchindex_in_header(x,y): # x : headerlist, y: fist_patientcode_index
-                               # y[0] is the x[match_header[0]]
+                               # Headerlist[match_header[0]] = 
     
     for i in y: 
         #print(i)
@@ -144,3 +168,6 @@ def writeTxt(x): # write the x into a new text file
             output.write(j) # one number one line 
     output.close
 writeTxt(output) # execute the function 
+
+
+
