@@ -7,8 +7,9 @@ Created on Mon Jan 28 01:24:12 2019
 """
 import re
 # copy positions from excel and translated int0 [[88,88],[168,168],......]
+# input format '160 161 162 163 164 165'
 
-a = "134 148 505 506"
+a = '370 371 376 377 475 476'
 b = re.sub("\s+", ",", a.strip())
 
 txtlist = b.split(",")

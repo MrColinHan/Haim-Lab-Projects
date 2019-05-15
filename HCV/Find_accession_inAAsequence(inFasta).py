@@ -125,9 +125,9 @@ print("Accession numbers that need to be removed: ")
 print("......check out the output txt file......")
 #print(AccessionList) # print all the accession numbers that contains '#' or '$'
 
-def writeTxt(): # write the AccessionList into a new text file 
+def writeTxt(x): # write the x into a new text file 
     output= open(outputDir+outputName,"w+") 
-    for i in AccessionList:
+    for i in x:
         output.write(i+"\n") # one number one line 
     output.close
-writeTxt() # execute the function 
+writeTxt(AccessionList) # execute the function 

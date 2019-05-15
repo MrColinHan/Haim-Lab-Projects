@@ -20,9 +20,9 @@ from re import compile
 '''
 
 # Inputs ###############################################################################################
-leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/AccessionNumbers(with# & $).txt"
-NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/HCV E1 and E2 USA 1a AA frame 1.fas"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 kr(rm 61 access nums)/for raid/"
+leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 HCV&kr(rm 61 access nums)/HCV/AccessionNumbers(with# & $).txt"
+NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 HCV&kr(rm 61 access nums)/HCV/HCV E1 and E2 USA 1a AA frame 1.fas"
+outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/3.5.19 HCV&kr(rm 61 access nums)/HCV/"
 outputName = "HCVNucleotide(without#$).fas"
 ########################################################################################################
 
