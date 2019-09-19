@@ -5,7 +5,7 @@ Created on Wed Jan 16 15:12:13 2019
 
 @author: Han
 """
-'''NEED TO UPDATE: cannot check 'X' if the accession number contains 'X' '''
+
 ''' 
     For FLU project
     This script finds all Accession numers that contain 'X' or '?' in a AA Sequence fasta file. 
@@ -19,12 +19,13 @@ Created on Wed Jan 16 15:12:13 2019
 
 
 # Inputs ================================================================================================
-AADir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/B-14-15 AA Sequence(with X).fas"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/"
-outputName = "C-14-15 AccessionNumbers(withX).txt"
+AADir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.19_flu/B_aa.fas"
+outputDir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.19_flu/"
+outputName = "C_AA_AccessionNumbers(withX).txt"
 # =======================================================================================================
-'''
+
 from re import compile
+# use regular expre define accession_num format: for now I've only seen AB123456 and A12345
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}|[A-Za-z]\d{5}')
 
 AAContent = [] # a list for all AA sequence
@@ -56,11 +57,11 @@ def findX(): # find 'X' or '?' in the AA sequence and then store the accession n
             if (getAccessNum(AAContent[i-1]) not in AccessionList):# make sure there's no duplicate in the list
                 AccessionList.append(getAccessNum(AAContent[i-1])) # if not in list, add to list
         i += 2
-    print(count) # print the amount of accession numbers that are stored
+    print(f"{count} accession num found: ") # print the amount of accession numbers that are stored
     
-findX() # execute the function 
+findX() # execute the function
 print(AccessionList) # print all the accession numbers that contains 'X' or '?'
-print(len(AccessionList)) # print the length of AccessionList to double check the number
+print(f"\ndouble check amount: {len(AccessionList)} \n") # print the length of AccessionList to double check the number
 
 
 def writeTxt(): # write the AccessionList into a new text file 
@@ -78,8 +79,10 @@ def checkDup(): # check the duplicate again in the AccessionList
                 print("find duplicate")  # if there is a duplicate, print it 
                 print(j)
         i = i+1
-checkDup()
-'''        
+checkDup() # execute the function 
+
+
+
 
 
 
