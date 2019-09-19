@@ -11,16 +11,19 @@ HIV project:
 - Distribution Percentage Cutoff
 - Translate positions into ChimeraInputFormat
 - Filt out accession numbers from B.KR in a .NWK format file
+- Convert AA sequence from csv to fasta
 
 
 Flu project:
 
-- (Need an update)Find Accession Numbers that contain 'X' or '?' in a AA sequence fasta file. 
-- (Need an update)Remove Accession Numbers that contain 'X' or '?' in a Nucleotide sequence fasta file. 
+- NEW APPROACH: clean data by searching non-ACTG chars and remove the corresponding sequence directly in a Nucleotide file
 - Remove 8 Characters & dash  Before each Dash in a newick format file.
 - Assign Hydropathy Value.
 - Combine several fasta format files into one fasta file.
 - Group Amino Acids
+- Equally distribute a stdev_output into 2 groups
+- Extract position pairs based on a given range of p_value in a co-volatility matrix
+- Compare two groups of position pairs and extract overlapping pairs
 
 
 HCV project: 
