@@ -17,10 +17,11 @@ import openpyxl
 #4. change the Position 
 
 
-Input =r"/Users/Han/Documents/Haim Lab(2018 summer)/8.1.18 Clade C Single Samples/Clade C input/Eastern Central_Africa_2(Use in Code).xlsx"#3B Europe Single TP 2_more Envs_W_T-R_PAIRS.xlsx"#AllEnvs_B_NA.xlsx"
-Output = r"/Users/Han/Documents/Haim Lab(2018 summer)/8.1.18 Clade C Single Samples/"
-OutputName = "C_ECA2_295.xlsx"#"7.31.18Single C_ECA2_667.xlsx"
-Position = 295
+Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/single_sample/AllEnvs_B_NA.xlsx" 
+Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/8.20.19(grant)/"
+OutputName = "8.20.19_AllEnvs_B_NA_372.xlsx"
+Position = 372
+TabNumber = 0 # tab number in Excel file, start as index 0
 ##################################################################
 ##################################################################
 ##################################################################
@@ -30,7 +31,7 @@ Position = 295
 
 
 workbook = xlrd.open_workbook(Input)
-sheet = workbook.sheet_by_index(0)
+sheet = workbook.sheet_by_index(TabNumber)
 nRows = sheet.nrows
 nCols = sheet.ncols
 
@@ -155,7 +156,7 @@ def writeFile():
     sheet.cell(row=25, column=1).value = "#OfSequence"
     for i in range(len(NumOfSequence)):
         sheet.cell(row=25, column=i+2).value = NumOfSequence[i]
-        
+    sheet.cell(row=26, column=1).value = "Country"
     for i in range(len(CountryList)):
         sheet.cell(row=26, column=i+2).value = CountryList[i]
     wb.save(Output+OutputName)
