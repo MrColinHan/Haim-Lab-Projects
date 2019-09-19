@@ -8,7 +8,7 @@ Created on Tue Mar  5 23:38:36 2019
 from re import compile
 ''' 
     FOR HCV project
-    This script finds all Accession numers that contain special characters in a AA Sequence fasta file. 
+    This script finds all Accession numbers that contain special characters in a AA Sequence fasta file. 
     
     INPUTS: 
             AADir: the directory  AA sequence
