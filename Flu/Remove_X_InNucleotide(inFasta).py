@@ -23,9 +23,9 @@ Created on Mon Jan 14 15:05:31 2019
 
 
 # Inputs ###############################################################################################
-leftoverDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/C-14-15 AccessionNumbers(withX).txt"
-NucleotideDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/A-2014-2015 USA H3N2 nucleotide(1929samples).fasta"
-outputDir = r"/Users/Han/Documents/Haim Lab(2018 summer)/1.23.19(12-15flu)/"
+leftoverDir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.23.19(12-15flu)/C-14-15 AccessionNumbers(withX).txt"
+NucleotideDir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.23.19(12-15flu)/A-2014-2015 USA H3N2 nucleotide(1929samples).fasta"
+outputDir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.19_flu/"
 outputName = "D-14-15 Nucleotide(withoutX).fas"
 ########################################################################################################
 
@@ -55,8 +55,8 @@ print('There are '+ str(len(TXTContent))+ ' accession numbers need to be removed
 print("\n")
 print("Fasta File: ")
 def NumRowsEachAccession(): # check how many rows does a accession number have in the nucleotide
-                            # sequence fasta file. The fasta format might be different for different
-                            # files, so we need to check the number of rows. With this number, I 
+                            # sequence fasta file. The fasta format might be different from different
+                            # files, so need to check the number of rows. With this number, I 
                             # will know how many rows I need to skip when I want to remove a accession number 
     rowCounts = 1
     if fasContent[0][0] == '>':  # make sure the fasta format is correct (starts with a '>')
@@ -69,7 +69,7 @@ def NumRowsEachAccession(): # check how many rows does a accession number have i
         print("this file doesnt start with '>', make sure the input file is in Fasta format")
 
 NumRowsPerAccessionNum = NumRowsEachAccession() # store the number of rows 
-print("Each Accession number has "+ str(NumRowsPerAccessionNum)+ " rows(for debugging)")
+print("Each Accession number has "+ str(NumRowsPerAccessionNum)+ " rows(<--for debugging)")
 
 
 AccessFasList = [] # a list for all accession numbers of the nucleotide sequence
