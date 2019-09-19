@@ -13,7 +13,6 @@ Created on Wed Feb  6 01:07:37 2019
 
 import re
 
-positions = "543	236	602	26	95	175	163	374	171	273	288	85	192	525	437"
-
+positions = "133	377	266	723	490	72	727	168	561	728	167	267	166	524	169	455"
 print(re.sub("\s+",",",positions))
     
