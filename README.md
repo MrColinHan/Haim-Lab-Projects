@@ -32,6 +32,6 @@ Flu project:
 
 HCV project: 
 
-- (New version, might also work for Flu sequence)Find Accession Numbers that contain special characters(e.g. #, $)
+- (New version)Find Accession Numbers that contain special characters(e.g. #, $)
 - Remove Accession Numbers that contain special characters
 
