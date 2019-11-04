@@ -3,13 +3,13 @@
 """
 Created on Fri Sep 13 14:34:27 2019
 
-@author: Han
+@author: Changze Han
 """
 '''
     For FLU project
     This script goes through each sequence and Search & Count the number of letter 
     that's not A C T G. Then clean the data by removing sequences that 
-    contains more than 1 non-ACTG letter. ('-' and ' ' and '\n'are ignored)
+    contains more than 1 non-ACTG letter. ( '-' and ' ' and '\n'are ignored)
     
     IMPORTANT: currently, this script only works for sequences with only accession number as 
                their properties. When more properties(country, year) are selected, some parts 
@@ -23,19 +23,20 @@ Created on Fri Sep 13 14:34:27 2019
             4. double check file (for debugging, can be deleted)
             5. double check file (for debugging, can be deleted)
 '''
+
 from re import compile
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.13.19_h1n1_usa/test/"
-fas_name = "test1.fasta"
-out_name = "test1"  # no need to put a suffix because three files will be generated
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/"
+fas_name = "B.human_15-19_season_H3N2_USA_nucl_aligned_9515.fas"
+out_name = "C.human_15-19_season_H3N2_USA_nucl_aligned_9515_cleaned.fasta"  
 non_ACTG_count_cutoff = 1  # if seen >1 1 non-ACTG letter then remove this accession
 # ==========================================================================================
 
 fas_input = working_dir + fas_name
-out_acc_list = working_dir + out_name + "_rm_acc_list.txt"
-out_rm_seq = working_dir + out_name + "_rm_seq.fas"
-out_clean_seq = working_dir + "C." + out_name + "_clean_seq.fas"
+out_acc_list = working_dir + "rm_acc_list.txt"
+out_rm_seq = working_dir + "rm_seq.fas"
+out_clean_seq = working_dir + out_name
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}|[A-Za-z]{1}\d{5}|[A-Za-z]{3}\d{5}')
 nucleotide_seq = ('A','C','T','G','-',' ','\n')
 
