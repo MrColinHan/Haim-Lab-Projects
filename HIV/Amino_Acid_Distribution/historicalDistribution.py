@@ -31,11 +31,11 @@ import openpyxl
 #7. run Forest run!
 
 # input format : Country Year Patient Accession 131 132 133 ......
-Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp120_pngs/7.12.19_A1_GP120_PNGS.xlsx" 
-Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/8.21.19_4pos_dist/"
-OutputName ="8.21.19_A1_392,386_dyna.xlsx"
+Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp120_pngs/7.12.19_B_GP120_PNGS.xlsx" 
+Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.20.19_h1n1_season/15-19_season/"
+OutputName ="test_output.xlsx"
 TabNumber = 0 # tab number in Excel file, start as index 0
-PositionRange = [[392, 392], [386, 386]]
+PositionRange = [[386, 392]]
 #pngs:[[88,88],[156,156],[160,160],[197,197],[230,230],[234,234],[241,141],[262,262],
 #[276,276],[289,289],[295,295],[301,301],[332,332],[339,339],[356,356],[362,362],[386,386],
 #[392,392],[448,448],[133,133],[137,137],[185,185],[355,355],[398,398],[406,406],[411,411],[462,462]]
