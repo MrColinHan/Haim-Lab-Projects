@@ -3,12 +3,12 @@
 """
 Created on Wed Sep 18 15:23:04 2019
 
-@author: Han
+@author: Changze Han
 """
 
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.13.19_h1n1_usa/";
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.13.19_h1n1_usa_year/";
 group1_name = "1st_half_pos_pairs_0.05.csv";
 group2_name = "2nd_half_pos_pairs_0.05.csv"
 out_name = "compare_2_groups_0.05.csv"
@@ -84,7 +84,7 @@ print(f"rest pairs in group1: {len(rest_group1_list)}")
 print(f"rest pairs in group2: {len(rest_group2_list)} \n")
 print(f"original pairs group1: {len(group1_list)}")
 print(f"original pairs group2: {len(group2_list)}")
-overall_list = [["overlap:"]] + overlap_list + [[]] + [["rest 1:"]] + rest_group1_list + [[]] + [["rest 1:"]] + rest_group2_list
+overall_list = [["overlap:"]] + overlap_list + [[]] + [["rest 1:"]] + rest_group1_list + [[]] + [["rest 2:"]] + rest_group2_list
 write_csv(overall_list,out_file )
 
             
