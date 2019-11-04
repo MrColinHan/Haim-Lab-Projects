@@ -1,0 +1,263 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Sep 25 11:29:05 2019
+
+@author: Changze Han
+"""
+
+
+'''
+    For Flu Project:
+    calculate FD 
+    
+    Allow user to select from: position range
+                               Flu Season: single season(13-14) or multiple season (13-16)
+                               Group : calculate FD for each group
+                               State/Province
+                               Country
+                               a list of accession numbers
+
+
+    Ignore '?' '-' during the FD calculation: 
+        e.g:  a position column has 10 AA, one of them is ?, then the total count of AA of this 
+              position column is 9. When calculating the frequency distribution, divide by 9. 
+'''
+
+import pandas as pd
+import csv
+
+# ==========================================================================================
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/"                     
+seq_filename = r"human_15-19_PNGS&Attributes.csv"
+output_filename = r"18-19_season_FD.csv"  # if selection_name is group, then output name doesn't matter
+                                          # make sure to make a new folder to perfrom FD for group selection
+
+#option 1:
+season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
+#option 2:
+group_attribute_name = 'Group'  # this is the name of group attribute appears in the sequence file
+#option 3:
+state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
+#option 4:
+country_attribute_name = 'Country'  # this is the name of country attribute appears in the sequence file
+#option 5:
+#  'Accession List'
+
+selection_name = season_attribute_name  # choose from 5 options above
+position_range = (1,550)  
+# remember to change the position based on different flu type
+# e.g: H1N1--(1,549)   H3N2--(1,550)
+selection_value = '18-19'  
+# 1. if 'Flu Season' is selected, you can also do multiple 
+#    years : '13-16' which will combine 13-14,14-15,15-16
+# 2. if 'Group' is selected, then selection_value is the cutoff value, 
+#    cutoff meaning: ignore groups that have sample numbers <= cutoff value
+
+# ==========================================================================================
+
+
+seq_file = working_dir + seq_filename
+buffer_file = r"buffer.csv"  # store sequences after the selection, for debugging 
+buffer_file = working_dir + buffer_file
+out_file = working_dir + output_filename
+AA=['Z','N','T','S','D','E','K','R','H','Y','Q','I','L','V','A','C','F','G','M','P','W']
+
+seq_list = []  # list store seq file
+selection_list = []  # store lists after selection
+df = None  # dataframe for FD selection_list
+out_list = []  # store output lists
+group_name_list = []  # store the distinct group names
+
+
+
+def read_csv(filedir,listname):
+    file = open(filedir)
+    reader = csv.reader(file)
+    for row in reader:
+        listname.append(row) 
+        
+        
+def write_csv(x,y):  # write list x into file y
+    with open(y,'w+') as file:
+        wr = csv.writer(file, dialect='excel')
+        wr.writerows(x)
+    file.close()
+
+
+def generate_season_range(x):  # x = '13-16', output = ['13-14','14-15','15-16']
+    output = []
+    dash_index = x.index('-')
+    start_year = int(x[:dash_index])
+    end_year = int(x[dash_index+1:])
+    if ((end_year) - (start_year)) >1:
+        while ((start_year+1)<= end_year): 
+            fix_1st_year = start_year
+            fix_2nd_year = start_year+1
+            if fix_1st_year < 10:
+                fix_1st_year = f'0{fix_1st_year}'
+            if fix_2nd_year < 10:
+                fix_2nd_year = f'0{fix_2nd_year}'
+            output.append(f"{fix_1st_year}-{fix_2nd_year}")
+            start_year += 1
+        return output
+    else:
+        output.append(x)
+        return output
+
+
+def generate_group_name_list():
+    global group_name_list
+    for i in seq_list[1:]:
+        if i[0] not in group_name_list:
+            group_name_list.append(i[0])
+
+
+
+def select_rows(name,value):  #select rows based on target attribute 'name' and target value 'value'
+    global selection_list
+    selection_list = []  # reset list
+    selection_list.append(seq_list[0])  # add header row 
+    target_name_index = seq_list[0].index(name)  # find the index of target_attribute in header row
+    if name != group_attribute_name:
+        print(f"{name} index: {target_name_index}")
+    # if want to select seasons: 
+    if name == season_attribute_name:  
+        print(f"Year selected: \n  {generate_season_range(value)}")
+        season_range = generate_season_range(value)
+        for i in seq_list[1:]:  # exclude header row
+            if i[target_name_index] in season_range:  # check season
+                selection_list.append(i)
+    
+    #if want to select states or country: 
+    if (name == state_attribute_name) or (name == country_attribute_name):
+        for i in seq_list[1:]:
+            if i[target_name_index] == value:
+                selection_list.append(i)
+    
+    # if want to select groups: 
+    if name == group_attribute_name: 
+        for i in seq_list[1:]:
+            if i[target_name_index] == value:
+                selection_list.append(i)
+
+
+def calculate_fd(x):  # x = position_range   e.g. (1,549)
+    global out_list
+    out_list = []  # reset
+    header_row = seq_list[0]
+    #construct a dataframe for the selected lists
+    global df
+    df = pd.DataFrame(selection_list[1:], columns = header_row)
+    
+    out_list.append([f'{selection_value}_Position'] + AA + ['Sample#'])  # add headers for the outpur
+    
+    i = x[0]
+    while ((i >= x[0]) and (i <= x[1])):
+        total_count = 0  # count the total sample number of this position
+        aa_count_dic = {'Z':0
+                        ,'N':0
+                        ,'T':0
+                        ,'S':0
+                        ,'D':0
+                        ,'E':0
+                        ,'K':0
+                        ,'R':0
+                        ,'H':0
+                        ,'Y':0
+                        ,'Q':0
+                        ,'I':0
+                        ,'L':0
+                        ,'V':0
+                        ,'A':0
+                        ,'C':0
+                        ,'F':0
+                        ,'G':0
+                        ,'M':0
+                        ,'P':0
+                        ,'W':0}  # store the count of each AA, reset for each position
+        aa_count_list = []  # store aa count(values of dict) to a list, first element is the position
+        aa_pct_list = []  # store the percentages of aa to a list
+        
+        aa_list = df[str(i)].tolist()  # use dataframe to extract the column of this position
+        
+        #print(aa_list)
+        for j in aa_list:
+            if j in list(aa_count_dic.keys()):   # only count AA, ignore '?' '-'
+                aa_count_dic[j] = aa_count_dic[j] + 1  # count the AA and add number in dict
+        
+        #print(len(list(aa_count_dic.values())))
+        #print(list(aa_count_dic.values()))
+        
+        pure_aa_list = list(aa_count_dic.values())  # transfer the value of dict to a list
+        total_count = sum(list(aa_count_dic.values()))  # total sample count of this position
+        
+        aa_count_list = pure_aa_list[:]
+        aa_count_list.insert(0,i)  # add position to the front of the list
+        aa_count_list.append(total_count)  # add the total sample number of this position to the end
+        
+        # calculate percentage
+        for k in pure_aa_list:
+            if total_count != 0:
+                aa_pct_list.append(k/total_count*100)  # calculate %
+            else:
+                aa_pct_list.append(0)
+        
+        aa_pct_list.insert(0,i)
+        aa_pct_list.append(total_count)
+        
+        out_list.append(aa_pct_list)  # add to the output list
+        #out_list.append(aa_count_list)  # If want to debug, then replace the above line with this line
+        
+        i += 1
+    del df  # clean the dataframe mem
+
+
+zip_output = []
+def zip_out_list():
+    global zip_output 
+    zip_output = []  # reset
+    zip_output_tuple = list(zip(*out_list))
+    for i in zip_output_tuple:
+        zip_output.append(list(i))
+
+
+def main():
+    
+    # add another if here later, if selection_name == cal_fd_of_combined_groups: 
+    #      combine multiple small groups toghter save store in selection_list then cal fd
+    
+    if selection_name == group_attribute_name:
+        read_csv(seq_file, seq_list)
+        generate_group_name_list()
+        print(f"Original sequence file contains {len(seq_list)-1} samples")
+        print(f"{len(group_name_list)} groups total\n")
+        check_count = 0
+        for i in group_name_list:
+            select_rows(selection_name,i)
+            if (len(selection_list)-1) <= (selection_value):
+                continue
+            print(f"{i}: {len(selection_list)-1} samples are selected to calculate FD")
+            calculate_fd(position_range)
+            zip_out_list()
+            write_csv(selection_list, f"{working_dir}Buffer({i}).csv")
+            write_csv(zip_output, f"{working_dir}FD({i}).csv")
+            check_count += 1
+        print(f"\nCheck...... {check_count} groups are calculated. ")
+    else:
+        read_csv(seq_file, seq_list)
+        select_rows(selection_name,selection_value)
+        print(f"\nOriginal sequence file contains {len(seq_list)-1} samples")
+        print(f"After the selection, {len(selection_list)-1} samples are selected to calculate FD")
+        calculate_fd(position_range)
+        zip_out_list()
+        write_csv(selection_list, buffer_file)
+        write_csv(zip_output, out_file)
+
+
+main()
+
+
+
+
+
