@@ -22,12 +22,12 @@ import csv
 from re import compile
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/10-19_season_E&A/removed one sample from tree/"
-seq_filename = r"human_10-19_PNGS&Attributes.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/17-19/"
+seq_filename = r"human_17-19_PNGS&Attributes.csv"
 group_filename = r"groups_0.009.txt" 
-output_filename = r"human_10-19_PNGS&Attributes&groups.csv"
+output_filename = r"human_17-19_PNGS&Attributes&groups.csv"
 threshold = 0.009  # for naming the group
-season = '10-19'  # for naming the group  e.g.: '14-15'
+season = '17-19'  # for naming the group  e.g.: '14-15'
 
 accession_attribute_name = 'Sequence Accession'  # this is the name of accession attribute appears in the sequence file
 # ==========================================================================================
@@ -132,11 +132,11 @@ else:
 
 # check output list
 print("Check output lists: ")
-if (len(out_list)-1) != total_samples:
+if (len(out_list) - 1) != total_samples:
     print("  !!!OUTPUT SAMPLE NUMBER DOESN'T MATCH!!! SOMETHING WRONG!!! ")
-    print(f"  Output file contains {len(out_list)-1} samples")
+    print(f"  Output file contains {len(out_list) - 1} samples")
 else:
-    print(f"  Output file contains {len(out_list)-1} samples  CORRECT! ")
+    print(f"  Output file contains {len(out_list) - 1} samples  CORRECT! ")
     
     
     

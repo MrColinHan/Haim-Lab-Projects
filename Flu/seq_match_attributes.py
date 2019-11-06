@@ -19,10 +19,10 @@ import csv
 
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/"
-seq_filename = r"F.human_15-19_season_H3N2_USA_AA_CSV_PNGS_9426.csv"
-attributes_filename = r"Attributes_15-19_season_H3N2_USA_9516.csv" 
-output_filename = r"human_15-19_PNGS&Attributes.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/"
+seq_filename = r"F.human_10-19_season_H3N2_USA_AA_CSV_PNGS_7759.csv"
+attributes_filename = r"attributes_10-19_7892.csv" 
+output_filename = r"human_10-19_PNGS&Attributes.csv"
 
 accession_attribute_name = 'Sequence Accession'  # this is the name of accession attribute appears in the all_attributes_file
 # ==========================================================================================
@@ -82,11 +82,11 @@ write_csv(out_list, out_file)  # write out file
 # check
 print(f"Input sequence file contains {len(seq_list)-1} samples")
 print(f"Input attributes file contains {len(atb_list)-1} samples \n")
-if (len(seq_list)-1) != (len(out_list)-1):
+if (len(seq_list)-1) != (len(out_list) - 1):
     print("!!!OUTPUT SAMPLE NUMBER DOESN'T MATCH!!! SOMETHING WRONG!!!")
-    print(f"Output sequence file contains {len(out_list)-1} samples")
+    print(f"Output sequence file contains {len(out_list) - 1} samples")
 else:
-    print(f"Correct ! Output sequence file contains {len(out_list)-1} samples")
+    print(f"Correct ! Output sequence file contains {len(out_list) - 1} samples")
 
 
 
