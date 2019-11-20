@@ -20,7 +20,7 @@ import csv
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/"
-seq_filename = r"F.human_10-19_season_H3N2_USA_AA_CSV_PNGS_7759.csv"
+seq_filename = r"G.human_10-19_season_H3N2_USA_AA_CSV_PNGS_7750.csv"
 attributes_filename = r"attributes_10-19_7892.csv" 
 output_filename = r"human_10-19_PNGS&Attributes.csv"
 
