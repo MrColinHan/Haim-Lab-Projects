@@ -8,10 +8,10 @@ Created on Wed Sep 18 15:23:04 2019
 
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.13.19_h1n1_usa_year/";
-group1_name = "1st_half_pos_pairs_0.05.csv";
-group2_name = "2nd_half_pos_pairs_0.05.csv"
-out_name = "compare_2_groups_0.05.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/stdev/";
+group1_name = "1st_pos_pairs_all.csv";
+group2_name = "2nd_pos_pairs_all.csv"
+out_name = "compare_2_groups_all.csv"
 # ========================================================================================================
 group1_file = working_dir + group1_name
 group2_file = working_dir + group2_name
@@ -47,7 +47,7 @@ def find_overlap():  # find overlap pairs
         for j in group2_list:
             if (i[0],i[1]) == (j[0],j[1]):
                 #print(str((i[0],i[1])) + " vs " + str((j[0],j[1])))
-                overlap_list.append(i)
+                overlap_list.append(i+[j[2]])
        
 
 # check the remaining pos pairs in two groups
@@ -84,7 +84,7 @@ print(f"rest pairs in group1: {len(rest_group1_list)}")
 print(f"rest pairs in group2: {len(rest_group2_list)} \n")
 print(f"original pairs group1: {len(group1_list)}")
 print(f"original pairs group2: {len(group2_list)}")
-overall_list = [["overlap:"]] + overlap_list + [[]] + [["rest 1:"]] + rest_group1_list + [[]] + [["rest 2:"]] + rest_group2_list
+overall_list = [["overlap position pairs:"],["pos1","pos2","1st half p","2nd half p"]] + overlap_list + [[]] + [["Remaining 1st half:"],["pos1","pos2","1st half p"]] + rest_group1_list + [[]] + [["Remaining 2nd half:"],["pos1","pos2","2nd half p"]] + rest_group2_list
 write_csv(overall_list,out_file )
 
             
