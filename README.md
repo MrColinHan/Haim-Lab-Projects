@@ -1,7 +1,13 @@
 
 ## Codes for Haim Lab Projects
 
-HIV project:
+HIV Volatility project:
+
+- Divide a fasta file into multiple fasta files based on identifiers
+- Divide a csv file into multiple csv/fasta files based on identifiers
+- Calculate the volatility 
+
+HIV AA Frequency project:
 
 - Amino Acids Distribution.
 - In-host Amino Acids Distribution.
