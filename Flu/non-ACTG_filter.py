@@ -29,7 +29,7 @@ from re import compile
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/"
 fas_name = "B.human_10-19_season_H3N2_USA_nucl_7890_aligned.fas"
-out_name = "temp_test.fasta"  
+out_name = "TEST.fasta"  
 non_ACTG_count_cutoff = 1  # if seen >1 1 non-ACTG letter then remove this accession
 # ==========================================================================================
 
