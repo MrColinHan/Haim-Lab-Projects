@@ -26,14 +26,14 @@ Created on Wed Sep 25 11:29:05 2019
 
 import pandas as pd
 import csv
-import statistics 
+#import statistics 
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/test_stdev/"                     
-seq_filename = r"human_15-19_PNGS&Attributes.csv"
-fd_output_filename = r"15-16_season_FD.csv"
-stdev_output_filename = r"15-16_season_stdev.csv"  # if need_stdev is False, then this name doesn't matter
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/test_stdev/group_fd/"                     
+seq_filename = r"human_15-17_PNGS&Attributes&groups.csv"
+fd_output_filename = r"test_FD.csv"
+stdev_output_filename = r"test_stdev.csv"  # if need_stdev is False, then this name doesn't matter
 # if selection_name is group, then both file out file names don't matter
 # make sure to make a new folder to perfrom FD for group selection
 
@@ -48,16 +48,16 @@ country_attribute_name = 'Country'  # this is the name of country attribute appe
 #option 5:
 #  'Accession List'
 
-selection_name = season_attribute_name  # choose from 5 options above
+selection_name = group_attribute_name  # choose from 5 options above
 position_range = (1,550)  
 # remember to change the position based on different flu type
 # e.g: H1N1--(1,549)   H3N2--(1,550)
-selection_value = '15-16'  
+selection_value = 50 #'15-16'  
 # 1. if 'Flu Season' is selected, you can also do multiple 
 #    years : '13-16' which will combine 13-14,14-15,15-16
 # 2. if 'Group' is selected, then selection_value is the cutoff value, 
 #    cutoff meaning: ignore groups that have sample numbers <= cutoff value
-need_stdev = True  # False if don't want to calculate stdev; stdev doesn't perfrom well on group selection 
+need_stdev = True  # True : if want to calculate stdev
 
 # ==========================================================================================
 
@@ -76,7 +76,8 @@ df = None  # dataframe for selection_list in FD/stdev cal
 fd_out_list = []  # store FD output lists
 stdev_out_list = []  # store stdev output lists
 group_name_list = []  # store the distinct group names
-
+fd_zip_output = []  # save ziped fd out list, will be wrote in output file
+stdev_zip_output = []  # save ziped stdev out list, will be wrote in output file
 
 
 def read_csv(filedir,listname):
@@ -150,7 +151,7 @@ def select_rows(name,value):  #select rows based on target attribute 'name' and 
                 selection_list.append(i)
 
 
-def calculate_fd(x):  # x = position_range   e.g. (1,549)
+def calculate_fd(x,y):  # x = position_range   e.g. (1,549); y is the title added to right corner of output
     global fd_out_list
     fd_out_list = []  # reset
     header_row = seq_list[0]
@@ -158,7 +159,7 @@ def calculate_fd(x):  # x = position_range   e.g. (1,549)
     global df
     df = pd.DataFrame(selection_list[1:], columns = header_row)
     
-    fd_out_list.append([f'{selection_value}_Position'] + AA + ['Sample#'])  # add headers for the outpur
+    fd_out_list.append([f'{y}'] + AA + ['Sample#'])  # add headers for the output
     
     i = x[0]   # start from the first position in the position range
     while ((i >= x[0]) and (i <= x[1])):
@@ -262,23 +263,17 @@ def cal_stdev(x):  # x = position_range   e.g. (1,549)
         aa_list = df[str(i)].tolist()  # use dataframe to extract the column of this position
 '''
 
-fd_zip_output = []
-stdev_zip_output = []
+
+
 def zip_list(x,y):  # zip x then save to y
-    global fd_zip_output
-    global stdev_out_list
-    fd_zip_output = []  # reset
-    stdev_zip_output = []  # reset
     zip_output_tuple = list(zip(*x))
     for i in zip_output_tuple:
         y.append(list(i))
 
 
 def main():
-    
-    # add another if here later, if selection_name == cal_fd_of_combined_groups: 
-    #      combine multiple small groups toghter save store in selection_list then cal fd
-    
+    global fd_zip_output
+    global stdev_zip_output
     if selection_name == group_attribute_name:
         read_csv(seq_file, seq_list)
         generate_group_name_list()
@@ -287,30 +282,31 @@ def main():
         check_count = 0
         for i in group_name_list:
             select_rows(selection_name,i)
-            if (len(selection_list)-1) <= (selection_value):
+            if (len(selection_list)-1) <= (selection_value):  # cutoff, ignore low sample number groups
                 continue
             print(f"{i}: {len(selection_list)-1} samples are selected to calculate FD")
-            calculate_fd(position_range)
-            zip_list(fd_out_list, fd_zip_output)
-            write_csv(selection_list, f"{working_dir}Buffer({i}).csv")
-            write_csv(fd_zip_output, f"{working_dir}FD({i}).csv")
+            calculate_fd(position_range, i)
+            fd_zip_output = []  # reset for each group's output
+            zip_list(fd_out_list, fd_zip_output)   # zip the fd output
+            write_csv(selection_list, f"{working_dir}Buffer({i}).csv")  # write the selection list file
+            write_csv(fd_zip_output, f"{working_dir}FD({i}).csv")  # write fd output file
             check_count += 1
-        print(f"\nCheck...... {check_count} groups are calculated. ")
+        print(f"\nChecking ...... {check_count} groups are calculated. ")
     else:
         read_csv(seq_file, seq_list)
         select_rows(selection_name,selection_value)
         print(f"\nOriginal sequence file contains {len(seq_list)-1} samples")
         print(f"After the selection, {len(selection_list)-1} samples are selected to calculate FD")
         if need_stdev == True:
-            calculate_fd(position_range)
-            zip_list(fd_out_list, fd_zip_output)
-            write_csv(selection_list, buffer_file)
-            write_csv(fd_zip_output, fd_out_file)
-        else:
-            calculate_fd(position_range)
-            zip_list(fd_out_list, fd_zip_output)
-            write_csv(selection_list, buffer_file)
-            write_csv(fd_zip_output, fd_out_file)
+            calculate_fd(position_range, selection_value)
+            zip_list(fd_out_list, fd_zip_output)   # zip the fd output
+            write_csv(selection_list, buffer_file)  # write the selection list file
+            write_csv(fd_zip_output, fd_out_file)  # write fd output file
+        if need_stdev == False:
+            calculate_fd(position_range, selection_value)
+            zip_list(fd_out_list, fd_zip_output)  # zip the fd output
+            write_csv(selection_list, buffer_file)  # write the selection list file
+            write_csv(fd_zip_output, fd_out_file)  # write fd output file
 
 
 main()
