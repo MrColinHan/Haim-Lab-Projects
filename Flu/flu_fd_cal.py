@@ -46,17 +46,22 @@ state_attribute_name = 'State/Province'  # this is the name of state attribute a
 #option 4:
 country_attribute_name = 'Country'  # this is the name of country attribute appears in the sequence file
 #option 5:
-#  'Accession List'
+accession_attribute_name = "Sequence Accession"  # value e.g.: ['KU591055', 'KU591039', 'KU590350']
 
-selection_name = group_attribute_name  # choose from 5 options above
-position_range = (1,550)  
-# remember to change the position based on different flu type
-# e.g: H1N1--(1,549)   H3N2--(1,550)
-selection_value = 50 #'15-16'  
+selection_name = accession_attribute_name  # choose from 5 options above
+
+selection_value = ['KU590454', 'KU592096', 'KU591140', 'KU592142', 'KX003406', 'KX413369', 'KX413331', 'KU591700', 'KU590828', 'KU591007', 'KX413665', 'KX413705', 'KX413561', 'KY044240', 'KX412630', 'KX412814', 'KX413953', 'KX413649', 'KY044247', 'KX412502', 'KX413545', 'KX413553', 'KX413737', 'KX413745', 'KX003471'] #'15-16'  
 # 1. if 'Flu Season' is selected, you can also do multiple 
 #    years : '13-16' which will combine 13-14,14-15,15-16
 # 2. if 'Group' is selected, then selection_value is the cutoff value, 
 #    cutoff meaning: ignore groups that have sample numbers <= cutoff value
+# 3. if 'Sequence Accession' is selected, then the selection_value is a list of accession numbers, 
+#      e.g.: ['KU591055', 'KU591039', 'KU590350']
+
+# remember to change the position range based on different flu type
+# e.g: H1N1--(1,549)   H3N2--(1,550)
+position_range = (1,550) 
+ 
 need_stdev = True  # True : if want to calculate stdev
 
 # ==========================================================================================
@@ -149,7 +154,12 @@ def select_rows(name,value):  #select rows based on target attribute 'name' and 
         for i in seq_list[1:]:
             if i[target_name_index] == value:
                 selection_list.append(i)
-
+    
+    # if want to select a list of accession numbers
+    if name == accession_attribute_name: 
+        for i in seq_list[1:]:
+            if i[target_name_index] in value:
+                selection_list.append(i)
 
 def calculate_fd(x,y):  # x = position_range   e.g. (1,549); y is the title added to right corner of output
     global fd_out_list
