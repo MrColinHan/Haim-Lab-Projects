@@ -10,7 +10,9 @@ Created on Thu Jan  3 17:09:00 2019
 # 1. assigns each amino acid a hydropathy value 
 # 2. remove rows with "x" or "?" to a new tab 
 
-'''This script is merged into the Volatility.py.'''
+'''
+    For HIV Project
+'''
 
 
 ###################################################################
