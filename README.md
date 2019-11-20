@@ -1,5 +1,5 @@
 
-## Codes for Haim Lab Projects
+## Python Code for Haim Lab Projects
 
 HIV Volatility project:
 
