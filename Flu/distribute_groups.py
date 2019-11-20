@@ -11,7 +11,7 @@ Created on Mon Sep 16 16:32:57 2019
     This script equally distribute x groups into 2 parts in order to run the fisher 
     test fairly. 
     How it works: 
-        Input: first part of flu_stdev.py's output. 
+        Input: first part of flu_stdev.py's output. (include position row)
         procedure: 
             sort by each group's amount of samples(accession numbers)
             even index's row goes into one part (0,2,4,6,8...)
@@ -22,8 +22,8 @@ Created on Mon Sep 16 16:32:57 2019
 import operator
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.13.19_h1n1_usa/"
-csv_name = "0.009_divide_input.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/stdev/"
+csv_name = "need_to_sep.csv"
 # ========================================================================================================
 
 input_file = working_dir + csv_name
