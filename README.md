@@ -15,7 +15,7 @@ HIV AA Frequency project:
 - Euclidean Distance.
 - Automate Log Conversion Process
 - Distribution Percentage Cutoff
-- Translate positions into ChimeraInputFormat
+- Translate a Excel/CSV row into a python list
 - Filt out accession numbers from B.KR in a .NWK format file
 - Convert AA sequence from csv to fasta
 
