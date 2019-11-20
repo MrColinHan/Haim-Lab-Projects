@@ -16,10 +16,10 @@ Created on Wed Sep 18 03:08:21 2019
 
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.13.19_h1n1_usa/"
-csv_name = "2nd_half_fisher.csv"
-out_name = "2nd_half_pos_pairs_0.05"   # no need to put a suffix
-p_range = (0,0.05)  # assume max range always < smallest position (e.g. <1)
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/stdev/"
+csv_name = "2nd_fisher_p.csv"
+out_name = "2nd_pos_pairs_all"   # no need to put a suffix
+p_range = (0,1.1)  # (0,0.05) means  0 < p < 0.05
 # ========================================================================================================
 
 input_file = working_dir + csv_name
@@ -54,7 +54,7 @@ def look_up(x,y):
     row = 1  # index to iterate rows, skip header row index = 0, start from 1
     out_list = []  # use to save output list
     while row < len(input_list):
-        column = row+1  # set column = row + 1, because only want to look at right up half of the matrix
+        column = row+1  # set column = row + 1, because only want to look at right top half of the matrix
         while column < len(input_list[row]):
             if (float(input_list[row][column]) > x) and (float(input_list[row][column]) < y) :
                 out_list.append([input_list[0][column],input_list[row][0],input_list[row][column]])
