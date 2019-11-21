@@ -9,7 +9,7 @@ Created on Wed Sep 25 11:29:05 2019
 
 '''
     For Flu Project:
-    calculate FD 
+    Select a specific group of samples(based on different identifier) and then calculate FD & Stdev: 
     
     Allow user to select from: position range
                                Flu Season: single season(13-14) or multiple season (13-16)
@@ -32,10 +32,12 @@ import statistics
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/test_stdev/group_fd/"                     
 seq_filename = r"human_15-17_PNGS&Attributes&groups.csv"
-fd_output_filename = r"test_FD.csv"
-stdev_output_filename = r"test_stdev.csv"  # if need_stdev is False, then this name doesn't matter
-# if selection_name is group, then both file out file names don't matter
-# make sure to make a new folder to perfrom FD for group selection
+fd_output_filename = r"test_FD.csv"    
+# if selection_name is group, then 1. this fd output file name doesn't matter 
+#                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
+stdev_output_filename = r"test_stdev.csv"  
+# if need_stdev is False, then stdev output file name doesn't matter
+
 
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
