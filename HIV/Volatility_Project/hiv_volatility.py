@@ -63,14 +63,14 @@ import csv
 from re import compile
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/11.5.19_hiv_volatility/volatility_cal/B_long/"                     
-png_seq_folder_name = "test_separated_csv/"  # slash at the end
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/11.5.19_hiv_volatility/volatility_cal/B_long_part2/"                     
+png_seq_folder_name = "loop_separated_csv/"  # slash at the end
 div_genetic_dis = True  # True: divides Phenotypic Distance by Genetic distance; False: divides Phenotypic Distance by 1                              
-genetic_dis_file_name = "B_long_MEGA_GD_matrix.csv" 
-hydro = True  # True: use hydrophy value to calculate  False: Input sequences are already numbers instead of AA
-output_file_name = "test_B_Long_volatility.csv"
-#debug = False  # True: write debug file;  False: 
-#debug_folder_name = "debug/" # for program debugging purpose, slash at the end
+genetic_dis_file_name = "B_Long_partials2_MEGA_GDmatrix.csv" 
+hydro = False  # True: use hydrophy value to calculate  False: Input sequences are already numbers instead of AA
+average = True # True: calculate the average instead of volatility (just the avg of current position column's value, each cell must be number instead of AA)
+output_file_name = "test_volatility.csv"  
+# average has its own build-in output name, no need to change this variable for average output
 
 # tuples: attribute name and column number. !!! Col count starts from 0, NOT 1 !!!
 #png_clade = ("Clade", 0)
@@ -81,11 +81,13 @@ png_days= ("Days", 3)
 png_acc = ("Accession", 4)   
 png_seq_start= 5  # start column number of sequences which is position 1
 
-position_range = (1,856) 
+position_range = (1,10) 
 # customize the output attributes
 output_attributes = (png_country, png_year, png_name, png_days)
 # note: #ofEnv for each group will always be added to the output
 
+#debug = False  # True: write debug file;  False: 
+#debug_folder_name = "debug/" # for program debugging purpose, slash at the end
 # ==========================================================================================
 
 png_seq_folder = working_dir + png_seq_folder_name
@@ -295,8 +297,6 @@ def one_group_volatility(png):
         one_group_out_list.append(current_pos_vol)  # add current position's volatility to the out list
         start_pos += 1
 
-            
-    
     return one_group_out_list
 
 
@@ -305,7 +305,9 @@ def cal_each_group_volatility():
     global output_attributes
     global all_groups_out_list  # final output list
     current_group_png = []  # read one png file at a time and save it to this list
-    
+#======================temporary variable for average cal=======================
+    all_group_average_out_list = []
+#===============================================================================
     header_row = []  # a local list for constructing and storing the header row for the final output
     header_row.append("#ofEnv")  # add the sample number attribute to the front
     for i in output_attributes:  # go through customized output attributes
@@ -319,6 +321,31 @@ def cal_each_group_volatility():
          # cal current group's volatiloty and add it to all groups' final output
         all_groups_out_list.append(one_group_volatility(current_group_png)) 
         
+#======================calculate average code===================================
+        current_group_average_out_list = []  # save current group's 
+        current_group_average_out_list = [len(current_group_png)-1] + current_group_png[1][:(png_acc[1])]
+        pos_kaishi = position_range[0]  # starting position
+        pos_jieshu = position_range[1]  # ending position
+        average_row_count = 0  #  check sample number for debugging
+            
+        while pos_kaishi <= pos_jieshu:  # iterate through all required positions
+            pos_dangxia = png_seq_start + pos_kaishi -1  # translate current position to correct index
+            pos_dangxia_list = []
+            for row in current_group_png[1:]: #add each row's current position's value to list
+                pos_dangxia_list.append(int(row[pos_dangxia]))  # add this position's value to list
+                average_row_count += 1
+            current_group_average_out_list.append(sum(pos_dangxia_list)/len(pos_dangxia_list))  # calculate average of this position 
+            pos_kaishi += 1
+        
+        all_group_average_out_list.append(current_group_average_out_list)  # add this group's average to output as a row
+    
+    # add header row: '#ofEnv' + all attributes except accession + positions
+    all_group_average_out_list.insert(0,["#ofEnv"] + current_group_png[0][:(png_acc[1])] + current_group_png[0][png_seq_start:])
+    if average == True:   
+        write_csv(all_group_average_out_list, f"{working_dir}average.csv")
+        
+#===============================================================================
+    
     write_csv(all_groups_out_list, output_file)  # write the final output file
     
 
@@ -341,6 +368,8 @@ def main():
     
     print(f"{len(gd_list[0])} samples found in the genetic distance file")
     
+    if average == True: 
+        print("\nAlso calculated average")
     #print(gd_look_up(gd_list, 'AY535431', 'AY535427'))
     #print(gd_look_up(gd_list, 'AY535441', 'AY535432'))
     #print(gd_look_up(gd_list, 'DQ410198', 'MF499371'))
