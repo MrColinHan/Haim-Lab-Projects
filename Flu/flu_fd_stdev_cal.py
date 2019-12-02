@@ -26,12 +26,13 @@ Created on Wed Sep 25 11:29:05 2019
 
 import pandas as pd
 import csv
-import statistics 
+import numpy as np
+#import statistics 
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/test_stdev/group_fd/"                     
-seq_filename = r"human_15-17_PNGS&Attributes&groups.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/test_stdev/"                     
+seq_filename = r"human_10-19_PNGS&Attributes&groups.csv"
 fd_output_filename = r"test_FD.csv"    
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
@@ -51,9 +52,9 @@ country_attribute_name = 'Country'  # this is the name of country attribute appe
 accession_attribute_name = "Sequence Accession"  # value e.g.: ['KU591055', 'KU591039', 'KU590350']
 
 # select identifier : 
-selection_name = group_attribute_name  # choose from 5 options above
+selection_name = accession_attribute_name  # choose from 5 options above
 # select cutoff/value/... : 
-selection_value = 100 #'15-16'  
+selection_value = ['KC882681', 'KC882799', 'KC882698', 'KC882678', 'KC883209', 'KC882621', 'KC883353', 'MK729818', 'KC883323', 'KC882557', 'KC882563', 'KC882950', 'CY111166', 'KC883383', 'KC883223', 'KC883017', 'KR611836', 'CY111478', 'CY111422'] #'15-16'  
 # 1. if 'Flu Season' is selected, you can also do multiple 
 #    years : '13-16' which will combine 13-14,14-15,15-16
 # 2. if 'Group' is selected, then selection_value is the cutoff value, 
@@ -66,7 +67,7 @@ selection_value = 100 #'15-16'
 position_range = (1,550) 
  
 need_stdev = True  # True : if want to calculate stdev  False: only calculate FD
-
+zero_thresh = float('1e-5')  # stdev values < zero_thresh will be assigned zero
 # ==========================================================================================
 
 
@@ -260,7 +261,13 @@ def calculate_fd_stdev(x,y):  # x = position_range   e.g. (1,549); y is the titl
         
         fd_out_list.append(aa_pct_list)  # add to the output list
         #print(hyd_stdev_list)
-        stdev_out_list[1].append(statistics.stdev(hyd_stdev_list))  # add this pos's stdev to the 2nd row of the output which is the stdev value row
+        
+        temp_std = np.std(hyd_stdev_list)  # temporary place for stdev value
+        if temp_std > zero_thresh:  # check the zero_thresh
+            stdev_out_list[1].append(temp_std) # add this pos's stdev to the 2nd row of the output which is the stdev value row
+        else:
+            stdev_out_list[1].append(0)
+
         '''
             For Debug purpose: replace the above line with this line (see the count of aa instead of pct)
         fd_out_list.append(aa_count_list)  
@@ -296,7 +303,7 @@ def main():
             write_csv(selection_list, f"{working_dir}Buffer({i}).csv")  # write the selection list file
             write_csv(fd_zip_output, f"{working_dir}FD({i}).csv")  # write fd output file
             
-            all_group_stdev_output.append(stdev_out_list[1])  # only add the stdev value row
+            all_group_stdev_output.append(stdev_out_list[1])  # only add the stdev value row (index 0 is attributes row)
             
             check_count += 1
         print(f"\nChecking ...... {check_count} groups are calculated. ")
