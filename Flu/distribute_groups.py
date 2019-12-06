@@ -1,29 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep 16 16:32:57 2019
+Created on Fri Dec  6 11:14:25 2019
 
-@author: Changze Han
+@author: Han
 """
 
+
 '''
-    For FLU project: 
+    For FLU project: (NEW Program, used on new stdev cal's output)
     This script equally distribute x groups into 2 parts in order to run the fisher 
     test fairly. 
     How it works: 
-        Input: first part of flu_stdev.py's output. (include position row)
+        Input: stdev output of flu_fd_stdev_cal.py, 
+               Before put the input in this program: 
+                      1. sort the file by sample number in Excel from largest to smallest
+                      2. delete samples less than a certain cutoff number (e.g: 10)
         procedure: 
-            sort by each group's amount of samples(accession numbers)
-            even index's row goes into one part (0,2,4,6,8...)
-            odd index's row goes into another part (1,3,5,7,9...)
+            even index's row goes into one part (0,2,4,6,8...)    (doesn't count header row)
+            odd index's row goes into another part (1,3,5,7,9...) (doesn't count header row)
         Output: two csv files 
 '''
 
-import operator
 import csv
 # Inputs ================================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/stdev/"
-csv_name = "need_to_sep.csv"
+csv_name = "new_stdev(need_sep).csv"
 # ========================================================================================================
 
 input_file = working_dir + csv_name
@@ -31,9 +33,9 @@ out_1st = working_dir + "1st_half.csv"
 out_2nd = working_dir + "2nd_half.csv"
 
 input_list = []  #save input data to a list
-acc_amt_dict = {}  # count each row's amount of samples into a dict: {index_0:count_of_samples, index_1:count_of_samples, ...}
-half_1st = [] 
-half_2nd = []
+half_1st = [] # for output
+half_2nd = [] # for output
+
 
 
 def readCSV(filedir,listname):
@@ -50,93 +52,62 @@ def write_csv(x,y):  # write list x into file y
     file.close()
 
 
-def count_acc():  #count the number of samples
-    index = 1  # iterate each row, start from the second row(index 1)
-    while index < len(input_list):
-        count = 1
-        for i in input_list[index][0]:
-            if i == '+':
-                count += 1
-        acc_amt_dict[index] = count
-        index += 1
-
-
-def distribute(x):  # equally distribute list x into two lists
-    index = 0  # iterate sorted dict_list
-    length = len(x)
-    if length%2 ==0:  # if even length
-        while index < length-1:
-            half_1st.append(input_list[x[index][0]])
-            half_2nd.append(input_list[x[index+1][0]])
-            index = index + 2
-    else:  # if odd length 
-        half_1st.append(input_list[x[-1][0]])  # add the last one to 1st half, then treat the rest as even
-        while index < length-2:  # -2 because need to -1 more to be even
-            half_1st.append(input_list[x[index][0]])
-            half_2nd.append(input_list[x[index+1][0]])
-            index = index + 2
+def main():
+    global input_list
+    global half_1st
+    global half_2nd
+    
+    readCSV(input_file, input_list)  # read input file
+    
+    input_list_no_header = input_list[1:]  # remove header and then save to a list
+    
+    total_count = 0 
+    for i in input_list_no_header:  # record the total count of input file
+        total_count += int(i[0])
+    print(f"Input file contains {len(input_list)-1} groups. Total sample number: {total_count}\n")
+    
+    half_1st.append(input_list[0])  # add header row
+    half_2nd.append(input_list[0])
+    
+    for row_i in range(len(input_list_no_header)):
+        if row_i % 2 == 0: 
+            half_1st.append(input_list_no_header[row_i])
+        else:
+            half_2nd.append(input_list_no_header[row_i])
+    
+    half_1st_count = 0
+    half_2nd_count = 0
+    for j in half_1st[1:]:
+        half_1st_count += int(j[0])
+    for k in half_2nd[1:]:
+        half_2nd_count += int(k[0])
+    
+    print(f"1st part output contains {len(half_1st)-1} groups. Total sample number: {half_1st_count}")
+    print(f"2nd part output contains {len(half_2nd)-1} groups. Total sample number: {half_2nd_count}")
+    
+    print("\n   Checking......   ")
+    print(f"        {len(half_1st)-1} + {len(half_2nd)-1} = {len(half_1st)-1 + len(half_2nd)-1}")
+    print(f"        {half_1st_count} + {half_2nd_count} = {half_1st_count + half_2nd_count}")
+    
+    write_csv(half_1st, out_1st)  # write first output
+    write_csv(half_2nd, out_2nd)  # write second output
     
     
-readCSV(input_file,input_list)  # save input data to list
-
-count_acc()  # form a dict
-
-# sort the dic, output a list of tuples [(index_0,count_of_samples), (index_1,count_of_samples), ...]
-sorted_dic = sorted(acc_amt_dict.items(), key=operator.itemgetter(1)) 
-
-half_1st.append(input_list[0])  # add position number row as first row
-half_2nd.append(input_list[0])
-distribute(sorted_dic)
-
-write_csv(half_1st,out_1st)
-write_csv(half_2nd,out_2nd)
-
-print(f"Before sort, dict(index:count),len: {len(acc_amt_dict)} : \n {acc_amt_dict} \n")
-print(f"After sort, [(index:count)], len: {len(sorted_dic)} : \n {sorted_dic} \n")
-print("...Equally distribute...")
-print(f"First half len: {len(half_1st)-1}")
-print(f"Second half len: {len(half_2nd)-1} \n")
-
-print("Running tests: ")
-if len(sorted_dic)%2 ==0:
-    print("  check 1st half: ")
-    if (input_list[sorted_dic[0][0]][0]) == (half_1st[1][0]):
-        if (input_list[sorted_dic[2][0]][0]) == (half_1st[2][0]):
-            print("     Correct")
-        else:
-            print("     !!!WRONG!!!")
-    else:
-        print("     !!!WRONG!!!")
+main()
     
-    print("\n  check 2nd half: ")
-    if (input_list[sorted_dic[1][0]][0]) == (half_2nd[1][0]):
-        if (input_list[sorted_dic[3][0]][0]) == (half_2nd[2][0]):
-            print("     Correct")
-        else:
-            print("     !!!WRONG!!!")
-    else:
-        print("     !!!WRONG!!!")
-
-else:
-    print("  check 1st half: ")
-    if (input_list[sorted_dic[-1][0]][0]) == (half_1st[1][0]):
-        if (input_list[sorted_dic[0][0]][0]) == (half_1st[2][0]):
-            print("     Correct")
-        else:
-            print("     !!!WRONG!!!")
-    else:
-        print("     !!!WRONG!!!")
-    
-    print("\n  check 2nd half: ")
-    if (input_list[sorted_dic[1][0]][0]) == (half_2nd[1][0]):
-        if (input_list[sorted_dic[3][0]][0]) == (half_2nd[2][0]):
-            print("     Correct")
-        else:
-            print("     !!!WRONG!!!")
-    else:
-        print("     !!!WRONG!!!")
 
 
 
-# equally distribute, sorted_dic's even index row & sorted_dic's odd index row
+
+
+
+
+
+
+
+
+
+
+
+
 
