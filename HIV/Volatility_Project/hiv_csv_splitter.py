@@ -29,19 +29,19 @@ Created on Fri Nov  8 15:42:05 2019
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/11.5.19_hiv_volatility/volatility_cal/B_long/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/fd/B_NA/"
 #input_file_name = r"small_test_sample.csv"
-input_file_name = r"B_Long_png_seq.csv"
+input_file_name = r"B_NA_single_PNGS_2660.csv"
 output_format = 'csv'  # select output formats : 'csv'  or 'fasta'
-output_folder_name = r"separated_csv/"  # slash at the end
+output_folder_name = r"test_separated(check fd_buffer)/"  # slash at the end
 
 # Column number of each attribute  !!! Col count start from 0, NOT 1 !!!
 patient_name_col = 2 
 year_col = 1  
 days_col = 3  
-seq_start_col = 5 # start column number of sequences which is position 1
+seq_start_col = 4#5 # start column number of sequences which is position 1
 
-identifier_format = 'name-days'   # choose from three formats below
+identifier_format = 'name'   # choose from three formats below
 # avaliable formats:  'name'    'name-year'    'name-days' 
 sample_num_cutoff = 0  # groups contain <= cutoff samples will be dropped
 
