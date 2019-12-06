@@ -22,6 +22,9 @@ Created on Wed Sep 25 11:29:05 2019
     Ignore '?' '-' during the FD calculation: 
         e.g:  a position column has 10 AA, one of them is ?, then the total count of AA of this 
               position column is 9. When calculating the frequency distribution, divide by 9. 
+    
+    For HIV Project: (this program can also perform some fd calculations in HIV)
+        1. single sample: change the group_attribute_name to 'Patient'
 '''
 
 import pandas as pd
@@ -31,8 +34,8 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/test_stdev/"                     
-seq_filename = r"human_10-19_PNGS&Attributes&groups.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/fd/B_NA/"                     
+seq_filename = r"B_NA_single_PNGS_2660.csv"
 fd_output_filename = r"test_FD.csv"    
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
@@ -43,7 +46,7 @@ stdev_output_filename = r"test_stdev.csv"
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
 #option 2:
-group_attribute_name = 'Group'  # this is the name of group attribute appears in the sequence file
+group_attribute_name = 'Patient'#'Group'  # this is the name of group attribute appears in the sequence file
 #option 3:
 state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
 #option 4:
@@ -52,9 +55,9 @@ country_attribute_name = 'Country'  # this is the name of country attribute appe
 accession_attribute_name = "Sequence Accession"  # value e.g.: ['KU591055', 'KU591039', 'KU590350']
 
 # select identifier : 
-selection_name = accession_attribute_name  # choose from 5 options above
+selection_name = group_attribute_name  # choose from 5 options above
 # select cutoff/value/... : 
-selection_value = ['KC882681', 'KC882799', 'KC882698', 'KC882678', 'KC883209', 'KC882621', 'KC883353', 'MK729818', 'KC883323', 'KC882557', 'KC882563', 'KC882950', 'CY111166', 'KC883383', 'KC883223', 'KC883017', 'KR611836', 'CY111478', 'CY111422'] #'15-16'  
+selection_value =  0 #'15-16'  
 # 1. if 'Flu Season' is selected, you can also do multiple 
 #    years : '13-16' which will combine 13-14,14-15,15-16
 # 2. if 'Group' is selected, then selection_value is the cutoff value, 
@@ -64,9 +67,9 @@ selection_value = ['KC882681', 'KC882799', 'KC882698', 'KC882678', 'KC883209', '
 
 # remember to change the position range based on different flu type
 # e.g: H1N1--(1,549)   H3N2--(1,550)
-position_range = (1,550) 
+position_range = (1,856) 
  
-need_stdev = True  # True : if want to calculate stdev  False: only calculate FD
+need_stdev = False  # True : if want to calculate stdev  False: only calculate FD
 zero_thresh = float('1e-5')  # stdev values < zero_thresh will be assigned zero
 # ==========================================================================================
 
@@ -127,9 +130,10 @@ def generate_season_range(x):  # x = '13-16', output = ['13-14','14-15','15-16']
 
 def generate_group_name_list():
     global group_name_list
+    group_att_index = seq_list[0].index(group_attribute_name)
     for i in seq_list[1:]:
-        if i[0] not in group_name_list:
-            group_name_list.append(i[0])
+        if i[group_att_index] not in group_name_list:
+            group_name_list.append(i[group_att_index])
 
 
 
