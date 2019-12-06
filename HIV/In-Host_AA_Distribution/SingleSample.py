@@ -9,13 +9,16 @@ Created on Mon Jul  2 15:41:36 2018
 import xlrd
 import openpyxl
 
-# this program calculates every single sample's amino acids distribution 
-#Steps
-#1. change the Input directory, don't delete r 
-#2. change the Output directory, don't delete r. When you copy the address, keep in mind there's also a slash at the end.
-#3. Make a name of the Output file                 
-#4. change the Position 
 
+'''
+    For HIV Project: (! this program can't calculate multiple positions)
+     this program calculates every single sample's amino acids distribution 
+         Steps: 
+                 1. change the Input directory, don't delete r 
+                 2. change the Output directory, don't delete r. When you copy the address, keep in mind there's also a slash at the end.
+                 3. Make a name of the Output file                 
+                 4. change the Position 
+'''
 
 Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/single_sample/AllEnvs_B_NA.xlsx" 
 Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/8.20.19(grant)/"
