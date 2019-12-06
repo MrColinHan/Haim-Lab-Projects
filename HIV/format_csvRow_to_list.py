@@ -13,7 +13,7 @@ Created on Wed Feb  6 01:07:37 2019
 
 import re
 
-positions = "KU590454	KU592096	KU591140	KU592142	KX003406	KX413369	KX413331	KU591700	KU590828	KU591007	KX413665	KX413705	KX413561	KY044240	KX412630	KX412814	KX413953	KX413649	KY044247	KX412502	KX413545	KX413553	KX413737	KX413745	KX003471	KX414465"
+positions = "KC882681	KC882799	KC882698	KC882678	KC883209	KC882621	KC883353	MK729818	KC883323	KC882557	KC882563	KC882950	CY111166	KC883383	KC883223	KC883017	KR611836	CY111478	CY111422"
 sep = re.sub("\s+",",",positions)
 
 result = []
@@ -22,5 +22,6 @@ for i in range(len(sep)):
     if sep[i] == ',':
         result.append(sep[current_index:i])
         current_index = i+1
-
+    if i == len(sep)-1: 
+        result.append(sep[current_index:])
 print(result)
