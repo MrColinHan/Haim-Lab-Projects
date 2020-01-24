@@ -9,7 +9,7 @@ Created on Fri Nov  8 15:42:05 2019
 '''
     For HIV Volatility Project:
         Input: sequences in CSV format
-        The program divides the input csv file into multiple fasta files based on :
+        The program divides the input csv file into multiple csv/fasta files based on :
             1. distinct patient name
             2. distinct year : when patient names are the same, then separate by year
             3. distinct days : when patient names and years are same, then separate by days
@@ -29,11 +29,10 @@ Created on Fri Nov  8 15:42:05 2019
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/fd/B_NA/"
-#input_file_name = r"small_test_sample.csv"
-input_file_name = r"B_NA_single_PNGS_2660.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/B_Val/B_Eur_val/"
+input_file_name = r"B_Eur_val_PNGS_180.csv"
 output_format = 'csv'  # select output formats : 'csv'  or 'fasta'
-output_folder_name = r"test_separated(check fd_buffer)/"  # slash at the end
+output_folder_name = r"separated/"  # slash at the end
 
 # Column number of each attribute  !!! Col count start from 0, NOT 1 !!!
 patient_name_col = 2 
@@ -127,7 +126,7 @@ def write_dict_to_fas_or_csv(d,h): # write the dict into multiple fasta files; h
             elif output_format == 'csv': 
                 temp_csv_list = [] # save this key's sequences to this list in order to write a csv file
                 temp_csv_list = d[i].copy()
-                print(len(temp_csv_list))
+                #print(len(temp_csv_list))
                 temp_csv_list.insert(0,h)
                 write_csv(temp_csv_list, f"{output_folder}{i}.csv")
             name_list_after_cut.append(i)  # construct after_cutoff group name list
