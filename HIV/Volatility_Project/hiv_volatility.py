@@ -5,6 +5,8 @@ Created on Fri Nov 15 13:49:23 2019
 
 @author: Changze Han
 """
+import csv
+from re import compile
 
 '''
     For HIV Volatility Project: 
@@ -12,7 +14,7 @@ Created on Fri Nov 15 13:49:23 2019
         More details : https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2001549 
         
         Inputs: 
-                1. PNGS converted AA sequences 
+                1. PNGS converted AA sequences (positions need to be consecutive, no '-')
                   (attributes must contain 'Patient name', 'Days', 'Accession'. Other attributes are optional)
                    example format: 
                     | Clade | Country | Year | Patient | Days | Accession | 1 | 2 | 3 | ...
@@ -54,39 +56,36 @@ Created on Fri Nov 15 13:49:23 2019
         Rules: 
             1. Ignore X, plus 0 and then (current_pos_divisor - 1)
             2. When GD = 0, numerator must be 0 too, so set GD = 1 and then (current_pos_divisor - 1)
-            3. 'Not Valid' in the output meaning: maybe size too small and also contains many GD=0 which cause current_pos_divisor = 0
+            3. 'Not Valid' in the output meaning: maybe size too small and also contains many GD=0 which causes current_pos_divisor = 0
 
 
 '''
 
-import csv
-from re import compile
-
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/11.5.19_hiv_volatility/volatility_cal/B_long_part2/"                     
-png_seq_folder_name = "loop_separated_csv/"  # slash at the end
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/B_Val/B_Eur_val/"
+png_seq_folder_name = "separated/"  # slash at the end
 div_genetic_dis = True  # True: divides Phenotypic Distance by Genetic distance; False: divides Phenotypic Distance by 1                              
-genetic_dis_file_name = "B_Long_partials2_MEGA_GDmatrix.csv" 
-hydro = False  # True: use hydrophy value to calculate  False: Input sequences are already numbers instead of AA
-average = True # True: calculate the average instead of volatility (just the avg of current position column's value, each cell must be number instead of AA)
-output_file_name = "test_volatility.csv"  
+genetic_dis_file_name = "B_Eur_val_GD_Matrix.csv"
+hydro = True  # True: use hydrophy value to calculate  False: Input sequences are already numbers instead of AA
+average = False # True: calculate the average instead of volatility (just the avg of current position column's value, each cell must be number instead of AA)
+output_file_name = "B_Eur_val_volatility.csv"
 # average has its own build-in output name, no need to change this variable for average output
 
 # tuples: attribute name and column number. !!! Col count starts from 0, NOT 1 !!!
-#png_clade = ("Clade", 0)
-png_country= ("Country", 0)    
-png_year= ("Year", 1)        
-png_name= ("Patient", 2)     
-png_days= ("Days", 3)        
-png_acc = ("Accession", 4)   
-png_seq_start= 5  # start column number of sequences which is position 1
+# png_clade = ("Clade", 0)
+png_country = ("Country", 0)
+png_year = ("Year", 1)
+png_name = ("Patient", 2)
+png_days = ("Days", 3)  # IN single sample sequences, there's no Days
+png_acc = ("Accssion", 3)
+png_seq_start = 4  # start column number of sequences which is position 1
 
-position_range = (1,10) 
+position_range = (1, 856)
 # customize the output attributes
-output_attributes = (png_country, png_year, png_name, png_days)
+output_attributes = (png_country, png_year, png_name)
 # note: #ofEnv for each group will always be added to the output
 
-#debug = False  # True: write debug file;  False: 
+#debug = False  # True: write debug file;  False:
 #debug_folder_name = "debug/" # for program debugging purpose, slash at the end
 # ==========================================================================================
 
@@ -100,7 +99,7 @@ check_folder = False  # check folder function will change this to True
 png_seq_header_row = []  # after checking the png file folder, save a header row here for final output
 name_list = []  # read name list file and store the name list here
 gd_list = []  # read the gd file and store here
-all_groups_out_list = [] # for final outputs 
+all_groups_out_list = [] # for final outputs
 
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}|[A-Za-z]{1}\d{5}|[A-Za-z]{3}\d{5}')
 HYDROPATHY_SCORE_TABLE = {
@@ -140,9 +139,9 @@ def read_csv(filedir,listname):
     file = open(filedir)
     reader = csv.reader(file)
     for row in reader:
-        listname.append(row) 
-        
-        
+        listname.append(row)
+
+
 def write_csv(x,y):  # write list x into file y
     with open(y,'w+') as file:
         wr = csv.writer(file, dialect='excel')
@@ -161,20 +160,20 @@ def check_png_seq_folder(n):  # n is the name list. Use name list to search for 
     global check_folder
     for i in n:
         temp_list = []
-        try: 
+        try:
             read_csv(f"{png_seq_folder}{i}.csv", temp_list)
             print_total_sample_num += (len(temp_list)-1)
-        except: 
+        except:
             raise ValueError (f"Input file Error: Couldn't find file {i}.csv")
     check_folder = True  # everything is correct, give it True
     local_temp_png_list = []
     read_csv(f"{png_seq_folder}{n[0]}.csv", local_temp_png_list)  # read one seq file in the folder
     png_seq_header_row = local_temp_png_list[0]  # add the header row for final output use
-    
+
 
 
 # Genetic distance look up function: l is the list, x,y is a pair of accession number. Return a float value. 
-def gd_look_up(l, x, y):  
+def gd_look_up(l, x, y):
     # use two coordinates to locate the gd value
     gd = 0
     coord_1 = 0
@@ -198,26 +197,26 @@ def gd_look_up(l, x, y):
         gd = l[coord_2][coord_1]
         check_access_pair.append(l[coord_2][0])
         check_access_pair.append(l[0][coord_1])
-        
+
     else:
         gd = l[coord_1][coord_2]
         check_access_pair.append(l[coord_1][0])
         check_access_pair.append(l[0][coord_2])
-    
+
     # check two accessions 
     if (x not in check_access_pair) or (y not in check_access_pair):
-        raise ValueError("GD loop_up Error: accession pair doesn't match the input pair") 
+        raise ValueError("GD loop_up Error: accession pair doesn't match the input pair")
 
     return float(gd)
 
 
-def find_all_comb(l): # find all combinations from a list 
+def find_all_comb(l): # find all combinations from a list
     result = []
     for i in range(len(l)):
         for j in range(i+1, len(l)):
             result.append([l[i],l[j]])
 
-    return result 
+    return result
 
 
 
@@ -232,12 +231,12 @@ def one_group_volatility(png):
     one_group_out_list = []  # store the current group's final result to a list, reset every time the function called 
     divisor = int(group_sample_ct * (group_sample_ct-1) /2)  # n(n-1)/2 is the count of half a matrix; Use this number to check the combination counts later
     accession_list = []  # store current group's accession number in the list 
-    
+
     one_group_out_list.append(group_sample_ct)  # add the group sample number to the beginning of the out list
     for i in output_attributes:  # go through customized output attributes
         # add this group's attribute values to the output in order; Use png[1] because they all have the same value anyway
-        one_group_out_list.append(png[1][i[1]]) 
-    
+        one_group_out_list.append(png[1][i[1]])
+
     acc_i = 1  # keep track accession number index
     while acc_i < len(png):
         if (png[acc_i][png_acc[1]],acc_i) not in accession_list:
@@ -246,7 +245,7 @@ def one_group_volatility(png):
     comb_accession_list = find_all_comb(accession_list)  # construct the Phenotypic Dis matrix in combinarion pairs
     # format of comb_accession_list:  all combination pairs of tuple (accession number, index of this row)
     #       [ [(acc1, 1),(acc2, 2)], [(acc1, 1),(acc3, 3)], [(acc2, 2),(acc3, 3)] ]
-    
+
     #print(accession_list)
     #print(comb_accession_list)
     if group_sample_ct == len(accession_list):  # check the total sample count again
@@ -257,7 +256,7 @@ def one_group_volatility(png):
     # check if the count of comb matches the divisor n(n-1)/2
     if len(comb_accession_list) != divisor:
         raise ValueError("Divisor doesn't match the total count of all combination pairs! ")
-    
+
     start_pos = position_range[0]
     end_pos = position_range[1]
     while start_pos <= end_pos: # loop through all positions
@@ -266,7 +265,7 @@ def one_group_volatility(png):
         current_pos_index = png_seq_start + start_pos -1  # index of the current position
         if png[0].index(str(start_pos)) != current_pos_index:  # check the all positions' index just incase
             raise ValueError(f"Input Error: Sequence Starting column number is wrong at {start_pos} ")
-        
+
         for pair in comb_accession_list:  # calculate the distance for each pair
             if hydro == True:  # assign hydropathy value
                 diff_1 = HYDROPATHY_SCORE_TABLE[png[pair[0][1]][current_pos_index]]  # png[pair[0][1]] finds the row, [current_pos_index] finds the pos col
@@ -274,24 +273,24 @@ def one_group_volatility(png):
             else:   # use current value in the sequence
                 diff_1 = int(png[pair[0][1]][current_pos_index])
                 diff_2 = int(png[pair[1][1]][current_pos_index])
-                
+
             if (diff_1 == 'unknown') or (diff_2 == 'unknown'):  # check for 'X'
                 diff_sq = 0  # ignore 'X' AA, just set diff_sq to 0
                 current_pos_divisor -= 1  # total count -1
-            else: 
+            else:
                 diff_sq = (diff_1 - diff_2)**2  # square the difference
-                
+
             if div_genetic_dis == True:  # look up value on GD matrix
-                ini_gd = gd_look_up(gd_list, pair[0][0], pair[1][0]) # look up the gd by accession number pair        
+                ini_gd = gd_look_up(gd_list, pair[0][0], pair[1][0]) # look up the gd by accession number pair
                 if ini_gd == 0:  # When GD = 0, numerator must be 0 too
                     ini_gd = 1  # so set gd to 1 because it doesnt matter when numerator is 0
                     current_pos_divisor -= 1  # total count -1
-            
+
             current_pos_vol += (diff_sq/ini_gd)
-        
+
         if current_pos_divisor != 0:
             current_pos_vol = current_pos_vol/current_pos_divisor
-            
+
         else:
             current_pos_vol = 'Not Valid'
         one_group_out_list.append(current_pos_vol)  # add current position's volatility to the out list
@@ -313,29 +312,32 @@ def cal_each_group_volatility():
     for i in output_attributes:  # go through customized output attributes
         header_row.append(png_seq_header_row[i[1]])  # add the header attributes in the first row
     all_groups_out_list.append(header_row + png_seq_header_row[png_seq_start:])  # add the positions in the first row and add to the final output list
-    
+
     for i in name_list:  # formal loop for calculating each group's volatility and constructing final output list
         current_group_png = []  # reset the list just in case
         read_csv(f"{png_seq_folder}{i}.csv" , current_group_png)
         print(f"{i}: ")
          # cal current group's volatiloty and add it to all groups' final output
-        all_groups_out_list.append(one_group_volatility(current_group_png)) 
-        
+        all_groups_out_list.append(one_group_volatility(current_group_png))
+
+
+    write_csv(all_groups_out_list, output_file)  # write the final output file
 #======================calculate average code===================================
+'''
         current_group_average_out_list = []  # save current group's 
         current_group_average_out_list = [len(current_group_png)-1] + current_group_png[1][:(png_acc[1])]
-        pos_kaishi = position_range[0]  # starting position
-        pos_jieshu = position_range[1]  # ending position
+        ave_pos_start = position_range[0]  # starting position
+        ave_pos_end = position_range[1]  # ending position
         average_row_count = 0  #  check sample number for debugging
             
-        while pos_kaishi <= pos_jieshu:  # iterate through all required positions
-            pos_dangxia = png_seq_start + pos_kaishi -1  # translate current position to correct index
-            pos_dangxia_list = []
+        while ave_pos_start <= ave_pos_end:  # iterate through all required positions
+            ave_pos_current = png_seq_start + ave_pos_start -1  # translate current position to correct index
+            ave_pos_current_list = []
             for row in current_group_png[1:]: #add each row's current position's value to list
-                pos_dangxia_list.append(int(row[pos_dangxia]))  # add this position's value to list
+                ave_pos_current_list.append(int(row[ave_pos_current]))  # add this position's value to list
                 average_row_count += 1
-            current_group_average_out_list.append(sum(pos_dangxia_list)/len(pos_dangxia_list))  # calculate average of this position 
-            pos_kaishi += 1
+            current_group_average_out_list.append(sum(ave_pos_current_list)/len(ave_pos_current_list))  # calculate average of this position 
+            ave_pos_start += 1
         
         all_group_average_out_list.append(current_group_average_out_list)  # add this group's average to output as a row
     
@@ -343,37 +345,34 @@ def cal_each_group_volatility():
     all_group_average_out_list.insert(0,["#ofEnv"] + current_group_png[0][:(png_acc[1])] + current_group_png[0][png_seq_start:])
     if average == True:   
         write_csv(all_group_average_out_list, f"{working_dir}average.csv")
-        
+ '''
 #===============================================================================
-    
-    write_csv(all_groups_out_list, output_file)  # write the final output file
-    
+    #write_csv(all_groups_out_list, output_file)  # write the final output file
 
 
-def main(): 
+
+def main():
     global name_list
     global gd_list
     read_txt(name_list_file, name_list)  # read the name list file and save to a list
     name_list = name_list[0].split(",")  # comma-delimited
-    
+
     check_png_seq_folder(name_list)  # check the seq file folder
 
     read_csv(gd_file, gd_list)  # read the gd file to a list
-    
+
     cal_each_group_volatility()
-    
-    if check_folder == True: 
+
+    if check_folder == True:
         print(f"\n{len(name_list)} PNGS sequence files found in the folder")
         print(f"with a total sample number: {print_total_sample_num}\n")
-    
-    print(f"{len(gd_list[0])} samples found in the genetic distance file")
-    
-    if average == True: 
+
+    print(f"{len(gd_list[0])-1} samples found in the genetic distance file")
+
+    if average == True:
         print("\nAlso calculated average")
-    #print(gd_look_up(gd_list, 'AY535431', 'AY535427'))
-    #print(gd_look_up(gd_list, 'AY535441', 'AY535432'))
-    #print(gd_look_up(gd_list, 'DQ410198', 'MF499371'))
-    
+
+
 main()
 
 
