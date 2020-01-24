@@ -16,10 +16,10 @@ Created on Wed Sep 18 03:08:21 2019
 
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/stdev/"
-csv_name = "2nd_fisher_p.csv"
-out_name = "2nd_pos_pairs_all"   # no need to put a suffix
-p_range = (0,1.1)  # (0,0.05) means  0 < p < 0.05
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/"
+csv_name = "(bin)2nd_fisher_p.csv"
+out_name = "(bin)2nd_fisher_p_pairs"   # no need to put a suffix
+p_range = (0, 10000)  # cutoff for p value: (0,0.05) means  0 < p < 0.05
 # ========================================================================================================
 
 input_file = working_dir + csv_name
