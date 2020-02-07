@@ -6,6 +6,7 @@ Created on Jan 06 2020
 import itertools
 import csv
 '''
+    (Note: Trimer coordinates are downloaded from https://www.rcsb.org )
     For HIV project - trimer distance step1 (in order to calculate euclidean distance on a trimer): 
     NAG, BMA, MAN, GAL, FUC contain positions that need to be converted to their root position. 
     e.g. A1088 -> A88, A1089 -> A88   
