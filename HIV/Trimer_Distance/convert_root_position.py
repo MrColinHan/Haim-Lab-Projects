@@ -13,15 +13,41 @@ import csv
     NOTE: need to make sure int always starts at string[1:]. Meaning only first digit is prefix letter. 
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.3.20_trimer_distance/"
-in_csv_name = "need_convert.csv"
-out_csv_name = "converted.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.7.20_4tvp/"
+in_csv_name = "m3_need_convert.csv"
+out_csv_name = "part1-m3_converted.csv"
 # ========================================================================================================
 in_csv_file = working_dir + in_csv_name
 out_csv_file = working_dir + out_csv_name
 in_csv_list = []  # store input csv file
 out_csv_list = []  # store output csv file
 
+# for 4tvp:
+child_position_mapping = {
+    611: [1611],
+    618: [1618],
+    637: [1637],
+    88: [1088, 1089, 1090, 1091, 1092, 1093, 1094],
+    133: [1133],
+    137: [1137, 1138, 1139, 1140],
+    156: [1156, 1157, 1158, 1159, 1169],
+    197: [1197, 1198],
+    234: [1234, 1235],
+    262: [1262, 1263, 1264, 1265, 1268, 1269],
+    276: [1276],
+    295: [1296, 1295],
+    301: [1301, 1302],
+    332: [1331, 1332, 1333, 1334, 1335, 1336, 1337, 1338, 1339, 1340],
+    355: [1355],
+    363: [1363, 1364],
+    386: [1386, 1387],
+    392: [1392, 1393],
+    448: [1448, 1449, 1450],
+    339: [1839],
+    160: [1160, 1161]
+}
+'''
+# for 5fuu: 
 child_position_mapping = {
     88: [1088, 1089, 1090],
     135: [1135, 1136],
@@ -45,7 +71,7 @@ child_position_mapping = {
     625: [1625, 1626],
     637: [1637, 1638, 1639, 1640, 1641, 1642, 1643, 1644, 1645, 1646, 1647, 1648, 1650]
 }
-
+'''
 # use this list below to check whether a input child position is missing from the current table
 all_child_positions = []  # store all child positions in POS_1600_MAPPING
 all_child_positions = list(itertools.chain(*list(child_position_mapping.values())))  # flat the list
@@ -73,9 +99,10 @@ def main():
             temp_row = row[:]  # make a copy of this row
             for root in child_position_mapping:  # check each root position in the dict
                 if int(row[0][1:]) in child_position_mapping[root]:  # if found root
-                    temp_row[0] = f"{row[0][0]}{root}"  # convert first cell to root pos
+                    temp_row[0] = f"{root}"  # convert first cell to root pos
+                    temp_row.insert(0, row[0][0])  # insert the original chain letter
                     out_csv_list.append(temp_row)  # add this row to output list
-                    print(f"{row[0]} -> {temp_row[0]}")  # check
+                    print(f"{row[0]} -> {temp_row[0]}{temp_row[1]}")  # check
         else:
             raise ValueError(f"Error: Couldn't locate {row[0]} in the current dictionary.")
 
