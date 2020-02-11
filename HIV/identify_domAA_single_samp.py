@@ -24,7 +24,7 @@ Created on Thu Dec  5 11:50:05 2019
                         10    |   abc   | Z-1 | N-0 | Z-0 | ...
                         
         
-        Note: Sometimes there might be an error cause by .DS_Store file. 
+        Note: Sometimes there might be an error caused by .DS_Store file while reading the input folder. 
               Use this cmd in the terminal : " find . -name '.DS_Store' -type f -delete " 
 '''
 
