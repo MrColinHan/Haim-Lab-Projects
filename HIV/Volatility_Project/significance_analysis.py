@@ -137,7 +137,7 @@ def cal_avg_variance():  # variance calculation based on 'pat_aa_dict', avg var 
     for col in range(len(current_shuffle_avg_var_lists)):  # go through each column tuple
         # replace this col list with its average
         current_shuffle_avg_var_lists[col] = (sum(current_shuffle_avg_var_lists[col])/len(current_shuffle_avg_var_lists[col]))
-    print(f"current shuffle avg var(average): {current_shuffle_avg_var_lists}")
+    print(f"current shuffle average variance: {current_shuffle_avg_var_lists}")
 
     avg_var_lists.append(current_shuffle_avg_var_lists)  # add current shuffle's avg var to all shuffle lists
 
