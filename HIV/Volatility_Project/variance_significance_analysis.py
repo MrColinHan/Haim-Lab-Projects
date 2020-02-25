@@ -23,7 +23,7 @@ import copy
             4.a. calculate how many times are smaller than the original avg var? 
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.8.10_variance_volatility/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.8.20_variance_volatility/"
 in_csv_name = "(bin)All_Bs_long_Volatility.csv"
 # Final P value will be printed out in the console
 
