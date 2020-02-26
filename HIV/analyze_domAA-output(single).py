@@ -5,10 +5,10 @@ Created on Feb 21 2020
 """
 
 '''
-    For HIV Project: 
-    Use this program to analyze the output of "identify_domAA_single_samp.py"
+    For HIV Project(single sample): 
+    Use this program to analyze the output of "identify_FD_domAA.py"
     Manual Step: 
-        The input file is not the actual output of "identify_domAA_single_samp.py.
+        The input file is not the actual output of "identify_FD_domAA.py.
         Need to transpose paste the value part to ease the calculation in this script. 
     
     Results: 
@@ -21,8 +21,8 @@ import csv
 import operator
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single_dominantAA/B_ALL/"
-input_name = "(transpose)B_all_single_dominant_AA.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/B_ALL_Long/"
+input_name = "(transpose)B_all_Long_dominant_AA(no partials).csv"
 output_name = r"domAA_analysis_result.csv"
 
 # ==========================================================================================
