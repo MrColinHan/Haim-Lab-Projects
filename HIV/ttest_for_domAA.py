@@ -6,9 +6,24 @@ Created on Feb 24 2020
 
 '''
     For HIV Project: 
-    Use this program to analyze the output of "analyze_domAA-output.py"
+    Use this program to analyze the output of "analyze_domAA-output(count-single).py" or "analyze_domAA-output(emerge-long).py"
     
-    Perform two tailed test on each position's top two AA. (two AAs which have the most and second most count)
+    Perform two tailed test on each position's top two most counted AA. 
+        New RULE for '(new rulw)top vs second':
+                     1. The top two AAs need to have both 'aa-1' and 'aa-0'. 
+                               |  Z-1  |
+                               |  T-0  | 
+                               |  Z-0  |  
+                     In this example, T only has 0, so T doesn't count as the second most counted AA.
+                     In this case, need to keep going and look for the next most counted AA. For example: 
+                               |  Z-1  |
+                               |  T-0  | 
+                               |  Z-0  | 
+                               |  Q-1  | 
+                               |  Q-0  | 
+                     Then for this position, the t-test should be done on Z and Q. 
+                
+                
     stats.ttest_ind gives a tuple output with two values inside: 
                     statistic : The calculated t-statistic
                     pvalue : The two-tailed p-value
@@ -28,9 +43,11 @@ from scipy import stats
 import itertools
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single_dominantAA/B_ALL/"
-input_name = "domAA_analysis_result.csv"
-output_name = "ttest_results.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/B_ALL_Long/"
+input_name = "domAA_emerge_analysis_result.csv"
+output_name = "oldrule-ttest_results.csv"
+
+newRule_top_vs_second = False   # if True, then apply the new rule
 
 # ==========================================================================================
 input_file = working_dir + input_name
@@ -71,35 +88,63 @@ def main():
     for row_i in range(len(input_file_list)):  # go through each row index
         if row_i % 2 == 0:  # index 0,2,4,6... are the position rows, 1,3,5,7... are the count rows
 
-            top_aa_dict = {}  # record the index of top and second most counted aa and their index
-            second_aa_dict = {}  # dict format: {'R': [3,6]} means 'R' appears in index 3 and 6
-                                 # {'R': [3]} means only 'R' only appear once in index 3
+            current_row_dicts = {}  # {'R': [0,6], 'Z': [2,4]} for each aa this row
+                                    # order of each AA dict should already be sorted from most counted to least
+                                    # each dict format: {'R': [3,6]} means 'R' appears in index 3 and 6 of this row
 
-            list_top = []  # save output of 'make_repeat_list(n,t)' for t test
+            # pick the top two dicts and saved here separately.
+            # RULE: ignore aa dicts that don't have both aa-0 and aa-1. e.g. {'R': [2]} means only found 'R-1' or 'R-0'
+            top_aa_dict = {}
+            second_aa_dict = {}
+
+            list_top = []  # save output of 'make_repeat_list(n,t)' for t test. n & t are from top_aa_dict value
             list_second = []
 
-            for aa in input_file_list[row_i][1:]:  # go through this position row's aa, exclude first index
-                if len(top_aa_dict) == 0:  # haven't found the top aa yet
+            if newRule_top_vs_second:  # apply new rule on the selection of top and second
+                # now construct the aa dicts for this row.
+                for aa in input_file_list[row_i][1:]:  # go through this position row's aa, exclude first index
                     if (aa != 'None') and (aa != ''):  # skip 'None' and empty cells
-                        # aa format is 'R-1', so aa[0] is the aa letter
-                        # 'input_file_list[row_i].index(aa)' is the index of aa
-                        top_aa_dict[aa[0]] = [input_file_list[row_i].index(aa)]
-                else:  # already found at least one half of top aa, now need to look for the other half of top aa or second aa
-                       # 'R-0' is the other half of 'R-1'
-                    if (aa != 'None') and (aa != ''):
-                        if aa[0] in top_aa_dict:  # if this is the other half of top aa
-                            top_aa_dict[aa[0]].append(input_file_list[row_i].index(aa))  # add new index
-                        else:  # if not, then check if second dict is empty
-                            if len(second_aa_dict) == 0:
-                                second_aa_dict[aa[0]] = [input_file_list[row_i].index(aa)]
-                            else:  # already found at least one half of second aa
-                                if aa[0] in second_aa_dict:
-                                    second_aa_dict[aa[0]].append(input_file_list[row_i].index(aa))
-                                # there's no other situation after here
+                        if aa[0] not in current_row_dicts:  # if this aa letter is not found in the dict
+                            # aa format is 'R-1', so aa[0] is the aa letter
+                            # 'input_file_list[row_i].index(aa)' is the index of aa
+                            current_row_dicts[aa[0]] = [input_file_list[row_i].index(aa)]
+                        else:  # this aa letter already in the dict
+                            current_row_dicts[aa[0]].append(input_file_list[row_i].index(aa))
+                print(f"\n{input_file_list[row_i][0]}: {current_row_dicts}")
+
+                # now construct the top second dict from current_row_dicts
+                for aa_key in current_row_dicts:  # go through each key
+                    if len(top_aa_dict) == 0:  # top dict is currently empty
+                        if len(current_row_dicts[aa_key]) == 2:  # only take the aa dict that has both 'aa-1' and 'aa-0'
+                            top_aa_dict[aa_key] = current_row_dicts[aa_key]  # make this dict the top dict
+                    elif len(second_aa_dict) == 0:  # second dict is currently empty
+                        if len(current_row_dicts[aa_key]) == 2:
+                            second_aa_dict[aa_key] = current_row_dicts[aa_key]
+                #print(f"top : {top_aa_dict}      second : {second_aa_dict}")
+
+            else:  # ignore new rule
+                for aa in input_file_list[row_i][1:]:  # go through this position row's aa, exclude first index
+                    if len(top_aa_dict) == 0:  # haven't found the top aa yet
+                        if (aa != 'None') and (aa != ''):  # skip 'None' and empty cells
+                            # aa format is 'R-1', so aa[0] is the aa letter
+                            # 'input_file_list[row_i].index(aa)' is the index of aa
+                            top_aa_dict[aa[0]] = [input_file_list[row_i].index(aa)]
+                    else:  # already found at least one half of top aa, now need to look for the other half of top aa or second aa
+                           # 'R-0' is the other half of 'R-1'
+                        if (aa != 'None') and (aa != ''):
+                            if aa[0] in top_aa_dict:  # if this is the other half of top aa
+                                top_aa_dict[aa[0]].append(input_file_list[row_i].index(aa))  # add new index
+                            else:  # if not, then check if second dict is empty
+                                if len(second_aa_dict) == 0:
+                                    second_aa_dict[aa[0]] = [input_file_list[row_i].index(aa)]
+                                else:  # already found at least one half of second aa
+                                    if aa[0] in second_aa_dict:
+                                        second_aa_dict[aa[0]].append(input_file_list[row_i].index(aa))
+                                    # there's no other situation after here
+            print(f"{input_file_list[row_i][0]}: top : {top_aa_dict}      second : {second_aa_dict}")
+
+            
             # now construct the two lists for t test using two dicts
-            print(input_file_list[row_i][0])
-            print(top_aa_dict)
-            print(second_aa_dict)
             if (len(top_aa_dict) == 0) or (len(second_aa_dict) == 0):  # if no top or second aa found, then no need for t test
                 output_file_list.append([input_file_list[row_i][0]] + ["insufficient data"])
                 output_file_list.append([f"{input_file_list[row_i][0]} P_Value"] + ["insufficient data"])
@@ -121,12 +166,7 @@ def main():
                 output_file_list.append([input_file_list[row_i][0]] + [f"{list(top_aa_dict.keys())[0]} vs {list(second_aa_dict.keys())[0]}"])
                 output_file_list.append([f"{input_file_list[row_i][0]} P_Value"] + [twotail_test(list_top, list_second)[1]])
 
-
-
-
-
-
-    print(f"{int(len(input_file_list)/2)} positions total")
+    print(f"\n{int(len(input_file_list)/2)} positions total")
     write_csv(output_file_list, output_file)
 
 
