@@ -34,8 +34,8 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/fd/B_NA/"                     
-seq_filename = r"B_NA_single_PNGS_2660.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_single/"
+seq_filename = r"INPUT-Single_C_All_PNGS_sequences(ECA&SA).csv"
 fd_output_filename = r"test_FD.csv"    
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
@@ -67,7 +67,7 @@ selection_value =  0 #'15-16'
 
 # remember to change the position range based on different flu type
 # e.g: H1N1--(1,549)   H3N2--(1,550)
-position_range = (1,856) 
+position_range = (1, 856)
  
 need_stdev = False  # True : if want to calculate stdev  False: only calculate FD
 zero_thresh = float('1e-5')  # stdev values < zero_thresh will be assigned zero
