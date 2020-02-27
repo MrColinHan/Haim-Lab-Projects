@@ -7,7 +7,7 @@ Created on Wed Sep 18 03:08:21 2019
 """
 
 '''
-    For FLU project: 
+    For FLU project: (extract based on p value)
     
     This script takes co-volatility matrix as input file and extract 
     a list of position pairs based on the given p_value range. 
