@@ -128,8 +128,9 @@ def main():
                         emerge_aa_count_dict[f"{row[pat_col_dict[key][0]][0]}/0"] += 1
         print(f"{row[0]}: {emerge_aa_count_dict}")
 
-        output_file_list.append([row[0]] + list(emerge_aa_count_dict.keys()))
-        output_file_list.append([f"{row[0]} count"] + list(emerge_aa_count_dict.values()))
+        sorted_emerge_aa_count_dict = dict(sorted(emerge_aa_count_dict.items(), key=operator.itemgetter(1), reverse=True))
+        output_file_list.append([row[0]] + list(sorted_emerge_aa_count_dict.keys()))
+        output_file_list.append([f"{row[0]} count"] + list(sorted_emerge_aa_count_dict.values()))
 
 
     print(f"{len(input_file_list[0])-1} samples in the input file")
