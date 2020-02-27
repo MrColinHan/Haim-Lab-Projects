@@ -16,6 +16,7 @@ from re import compile
         Inputs: 
                 1. PNGS converted AA sequences (positions need to be consecutive, no '-')
                   (attributes must contain 'Patient name', 'Days', 'Accession'. Other attributes are optional)
+                  (positions need to be consecutive. e.g. 1,2,3,4,5,10,11 is not allowed )
                    example format: 
                     | Clade | Country | Year | Patient | Days | Accession | 1 | 2 | 3 | ...
                     |   B   |    FR   | 1983 |   LAI   |  30  |   K03455  | M | R | V | ...
@@ -62,13 +63,14 @@ from re import compile
 '''
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/B_Val/B_Eur_val/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/B_NA/"
 png_seq_folder_name = "separated/"  # slash at the end
 div_genetic_dis = True  # True: divides Phenotypic Distance by Genetic distance; False: divides Phenotypic Distance by 1                              
-genetic_dis_file_name = "B_Eur_val_GD_Matrix.csv"
+genetic_dis_file_name = "B_NA_GD_Matrix.csv"
 hydro = True  # True: use hydrophy value to calculate  False: Input sequences are already numbers instead of AA
-average = False # True: calculate the average instead of volatility (just the avg of current position column's value, each cell must be number instead of AA)
-output_file_name = "B_Eur_val_volatility.csv"
+average = False  # True: calculate the average instead of volatility (just the avg of current position column's value, each cell must be number instead of AA)
+# to calculate average, need to uncomment a segment of code
+output_file_name = "test_volatility.csv"
 # average has its own build-in output name, no need to change this variable for average output
 
 # tuples: attribute name and column number. !!! Col count starts from 0, NOT 1 !!!
