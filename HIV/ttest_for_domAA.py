@@ -6,8 +6,8 @@ Created on Feb 24 2020
 
 '''
     For HIV Project: 
-    Use this program to analyze the output of "analyze_domAA-output(count-single).py" or "analyze_domAA-output(emerge-long).py"
-    
+    1. Use this program to analyze the output of "analyze_domAA-output(count-single).py" or "analyze_domAA-output(emerge-long).py"
+    2. This program can also calculate the frequency of emerge for longitudinal data. 
     Perform two tailed test on each position's top two most counted AA. 
         New RULE for '(new rulw)top vs second':
                      1. The top two AAs need to have both 'aa-1' and 'aa-0'. 
@@ -48,12 +48,22 @@ input_name = "domAA_emerge_analysis_result.csv"
 output_name = "oldrule-ttest_results.csv"
 
 newRule_top_vs_second = False   # if True, then apply the new rule
+fd_output_name = "emerge_fd_result.csv"  # for emerge frequency output
+cal_emerge_freq = True  # (for long data)if True, then calculate the frequency of becoming emerge for top and second AA
+                        # e.g. At position 332, Z/0 : 10
+                        #                       Z/1 : 8
+                        #                       T/1 : 4
+                        #                       N/1 : 2
+                        #     then top AA    : f(Z/1) = 8/(8+10) * 100    f(Z/1) is frequency of Z/1
+                        #          second AA : f(T/1) = 4/4 * 100
 
 # ==========================================================================================
 input_file = working_dir + input_name
 output_file = working_dir + output_name
+fd_output_file = working_dir + fd_output_name
 input_file_list = []
 output_file_list = []
+fd_output_file_list = []
 
 
 def read_csv(filedir, listname):
@@ -82,6 +92,7 @@ def twotail_test(l1, l2):  # l1 and l2 are two lists
 def main():
     global input_file_list
     global output_file_list
+    global fd_output_file_list
 
     read_csv(input_file, input_file_list)
 
@@ -166,8 +177,64 @@ def main():
                 output_file_list.append([input_file_list[row_i][0]] + [f"{list(top_aa_dict.keys())[0]} vs {list(second_aa_dict.keys())[0]}"])
                 output_file_list.append([f"{input_file_list[row_i][0]} P_Value"] + [twotail_test(list_top, list_second)[1]])
 
+
+            # now calculate Frequency
+            # output design :  two row for each position (emerge_pos_row, emerge_fd_row)
+            #                    |      332     |  f(Z/1)  |  f(T/1)  |
+            #                    |332 f(Emerge) |   30%    |    6%    |
+            if cal_emerge_freq:
+                current_emerge_pos_row = [input_file_list[row_i][0]]  # record output here
+                current_emerge_fd_row = [f"{input_file_list[row_i][0]} f(Emerge)"]
+                top_emerge_freq = 0  # initial frequency value is 0
+                second_emerge_freq = 0
+                if len(top_aa_dict) != 0:  # only calculate dict who is not empty
+                    for t_k in top_aa_dict:  # t_k is top key
+                        if len(top_aa_dict[t_k]) == 1:  # only one value found (eigher /0 or /1)
+                            if input_file_list[row_i][top_aa_dict[t_k][0]][2] == '1': # the only value is emerge
+                                # input_file_list[row_i] locates current row
+                                # [top_aa_dict[t_k]] locates the value list, [0] locates the only index value inside
+                                # [2] locates '1' of 'aa/1'
+                                top_emerge_freq = 100  # frequency is 100 because there's no no-emerge value in the denominator
+                            # the else case would give top_emerge_freq a 0 which is the initial value
+                        if len(top_aa_dict[t_k]) == 2: # two value found (both /0 and /1)
+                            if input_file_list[row_i][top_aa_dict[t_k][0]][2] == '1':  # [0] is /1
+                                top_emerge_freq = 100 * int(input_file_list[row_i+1][top_aa_dict[t_k][0]]) /\
+                                                  (int(input_file_list[row_i+1][top_aa_dict[t_k][0]]) +
+                                                   int(input_file_list[row_i+1][top_aa_dict[t_k][1]]))
+                            else:  # [0] is /0, then second value of dict value list is /1
+                                top_emerge_freq = 100 * int(input_file_list[row_i + 1][top_aa_dict[t_k][1]]) /\
+                                                  (int(input_file_list[row_i + 1][top_aa_dict[t_k][1]]) +
+                                                   int(input_file_list[row_i + 1][top_aa_dict[t_k][0]]))
+                    current_emerge_pos_row.append(f"f({input_file_list[row_i][top_aa_dict[t_k][0]][0]}/1)")
+                    current_emerge_fd_row.append(top_emerge_freq)
+                # now same procedure for second dict
+                if len(second_aa_dict) != 0:
+                    for t_k in second_aa_dict:
+                        if len(second_aa_dict[t_k]) == 1:
+                            if input_file_list[row_i][second_aa_dict[t_k][0]][2] == '1':
+                                second_emerge_freq = 100
+                        if len(second_aa_dict[t_k]) == 2:
+                            if input_file_list[row_i][second_aa_dict[t_k][0]][2] == '1':
+                                second_emerge_freq = 100 * int(input_file_list[row_i+1][second_aa_dict[t_k][0]]) /\
+                                                     (int(input_file_list[row_i+1][second_aa_dict[t_k][0]]) +
+                                                      int(input_file_list[row_i+1][second_aa_dict[t_k][1]]))
+                            else:
+                                second_emerge_freq = 100 * int(input_file_list[row_i + 1][second_aa_dict[t_k][1]]) /\
+                                                     (int(input_file_list[row_i + 1][second_aa_dict[t_k][1]]) +
+                                                      int(input_file_list[row_i + 1][second_aa_dict[t_k][0]]))
+                    current_emerge_pos_row.append(f"f({input_file_list[row_i][second_aa_dict[t_k][0]][0]}/1)")
+                    current_emerge_fd_row.append(second_emerge_freq)
+
+
+                # add to final fd output
+                fd_output_file_list.append(current_emerge_pos_row)
+                fd_output_file_list.append(current_emerge_fd_row)
+
+
     print(f"\n{int(len(input_file_list)/2)} positions total")
     write_csv(output_file_list, output_file)
+    if cal_emerge_freq:
+        write_csv(fd_output_file_list, fd_output_file)
 
 
 main()
