@@ -34,8 +34,8 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_single/"
-seq_filename = r"INPUT-Single_C_All_PNGS_sequences(ECA&SA).csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_Long/"
+seq_filename = r"INPUT-Long_C_All_PNGS_sequences.csv"
 fd_output_filename = r"test_FD.csv"    
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
@@ -46,7 +46,7 @@ stdev_output_filename = r"test_stdev.csv"
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
 #option 2:
-group_attribute_name = 'Patient'#'Group'  # this is the name of group attribute appears in the sequence file
+group_attribute_name = 'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
 #option 3:
 state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
 #option 4:
