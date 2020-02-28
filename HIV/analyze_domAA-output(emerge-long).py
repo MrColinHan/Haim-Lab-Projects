@@ -54,7 +54,7 @@ import csv
 import operator
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/B_ALL_Long/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_Long/"
 input_name = "(transpose)input for emerge.csv"
 output_name = r"domAA_emerge_analysis_result.csv"
 
