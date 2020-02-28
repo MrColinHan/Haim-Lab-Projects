@@ -31,10 +31,10 @@ Created on Thu Dec  5 11:50:05 2019
 import csv 
 import os
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_single/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_Long/"
 fd_val_folder_name = r"fd_values/"  # name of the folder that holds all fd values, slash at the end
 fd_buf_folder_name = r"fd_buffers/"
-output_name = r"C_all_single_dominant_AA.csv"
+output_name = r"C_all_Long_dominant_AA.csv"
 
 position_range = (1, 856)
 
