@@ -189,7 +189,7 @@ def main():
         new_aa_cols.insert(0, [])  # insert a fake empty header row
         # now 'new_aa_cols' is the new 'short_input_file_list'
 
-        # uncomment this line if want to see each shuffle's input
+        # uncomment this line if want to see each shuffle's output
         # write_csv(new_aa_cols, working_dir + f"shuffle{shuffle_t}_input.csv")
 
         build_pat_aa_dict(new_aa_cols)
