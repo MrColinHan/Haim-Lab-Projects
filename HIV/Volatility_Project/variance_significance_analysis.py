@@ -29,7 +29,7 @@ in_csv_name = "(bin)All_Bs_long_Volatility.csv"
 
 target_pos_tuple = (281, 281)  # (126, 130) means 126,127,...,130, (126, 126) means one position 126
 shuffle_t = 10000  # shuffle times
-patient_col = 3  # patient identifiers is at this col (starts at index 0)
+patient_col = 3  # patient identifiers is at this col (will be shuffled)(starts at index 0)
 pos_start = 5  # position starts at this col (starts at index 0)
 # ========================================================================================================
 input_file = working_dir + in_csv_name
