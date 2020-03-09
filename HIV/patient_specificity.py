@@ -1,5 +1,5 @@
 """
-Created on Feb 10 2020
+Created on Mar 3 2020
 
 @author: Changze Han
 """
@@ -34,8 +34,8 @@ import itertools
             4.a. calculate how many times t are smaller than the T? 
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.20.20_re-cal_B-long_vola&Orange/B_patient_specificity/"
-in_csv_name = "(bin)(rm137)7patients-orange-input.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.9.20_Orange/"
+in_csv_name = "(for p value)(cutoff10)(bin)B&C_10pos_12patients.csv"
 # Final P value will be printed out in the console
 
 shuffle_t = 10000  # shuffle times
