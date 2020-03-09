@@ -18,13 +18,11 @@ import csv
 
 # Inputs ================================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.18.20_domains-antibody&ppt/"
-csv_name = "C_all_pairs.csv"
-out_name = "target_pairs.csv"
-target_positions = [97, 123, 276, 278, 279, 280, 281, 282, 283, 365, 366, 367,
-                    368, 371, 427, 428, 429, 430, 455, 456, 457, 458, 459, 460,
-                    461, 462, 463, 464, 465, 469, 472, 473, 474, 476, 256, 257,
-                    364, 369, 370, 372, 373, 384, 417, 418, 419, 431, 432, 453,
-                    421, 425, 426, 275, 470, 471, 475, 477, 480, 1276]
+csv_name = "B_all_pairs.csv"
+out_name = "2.27.20_target_pairs.csv"
+target_positions = [97, 276, 278, 279, 280, 281, 282, 283, 365, 366, 367,
+                    368, 371, 427, 428, 429, 430, 455, 456, 457, 458, 459,
+                    460, 461, 462, 463, 464, 465, 469, 472, 473, 474, 476, 1276]
 # ========================================================================================================
 
 input_file = working_dir + csv_name
@@ -71,7 +69,7 @@ def main():
     print(f"check counts: should be {len(target_positions)}*{len(target_positions)-1}/2 = "
           f"{(len(target_positions)*(len(target_positions)-1))/2} ")
     print("(if not same, might because of some "
-          f"target positions are not in the input file, then manually check)")
+          f"target positions are not in the input file (e.g. glycan), then manually check)")
     write_csv(output_list, output_file)
 
 
