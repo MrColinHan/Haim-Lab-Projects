@@ -19,12 +19,12 @@ from sympy import *
     3. format a matrix
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.3.20_trimer_distance/"
-in_csv_name = "5fuu_dist_pairs.csv"
-out_csv_name = "test_matrix.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.11.20_trimer_distance/"
+in_csv_name = "(chain pairs)6mzj_all_coords(atom&hetam).csv"
+out_csv_name = "(position matrix)6mzj_all_coords(atom&hetam).csv"
 
 # output matrix format (NOTE: range(1,6) means [1,2,3,4,5], doesn't cover 6)
-position_range = list(range(31, 665))# + list(range(512, 665))
+position_range = list(range(33, 663))# + list(range(512, 665))
 # ========================================================================================================
 
 input_csv_file = working_dir + in_csv_name
@@ -138,7 +138,6 @@ def main():
     print(f"{available_pos} + {no_available_pos} = {no_available_pos + available_pos}")
     print(f"smallest dict VS available pos = {len(list(smallest_input_dict.keys()))} VS {available_pos}")
 
-    print(position_range[:4])
     write_csv(output_csv_list, output_csv_file)
 
 
