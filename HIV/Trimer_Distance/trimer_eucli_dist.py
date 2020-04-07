@@ -18,9 +18,9 @@ import math
           If more chains are required, then need to add more dictionaries and modify function separate_dict(d)
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.3.20_trimer_distance/"
-in_csv_name = "5fuu_coordinates.csv"
-out_csv_name = "test_output.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.11.20_trimer_distance/"
+in_csv_name = "6mzj_all_coords(atom&hetam).csv"
+out_csv_name = "(chain matrix)6mzj_all_coords(atom&hetam).csv"
 
 # Current output table/matrix: (to customize the table, modify the main function)
 # cols: ['A', 'B', 'C', 'D', 'E', 'F']
@@ -134,13 +134,13 @@ def main():
     # cal shortest dis bet positions and add them to output file
     # ---------------------------Customize the output table/matrix here:---------------------------
     '''
-    # for table output n x m (n rows by m cols, m < n, only top part is a small matrix)
+    # entire matrix: for matrix output n x n (n rows by n cols):
     for row in out_csv_list[1:]:  # ignore header row
         for col in out_csv_list[0][1:]:  # ignore first index because it's empty
             print(f"{row[0]} VS {col}")
             row.append(shortest_eucli(pos_coord_dict[row[0]], pos_coord_dict[col]))
     '''
-    # for matrix output n x n (n rows by n cols):
+    # half matrix: for table output n x m (n rows by m cols, m < n, only top part is a small matrix)
     empty_need = 1
     for row in out_csv_list[1:]:  # ignore header row
         row.extend('' for i in range(empty_need))  # add enough space in advance because only need to cal half matrix
