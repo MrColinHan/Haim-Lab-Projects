@@ -13,15 +13,38 @@ import csv
     NOTE: need to make sure int always starts at string[1:]. Meaning only first digit is prefix letter. 
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.7.20_4tvp/"
-in_csv_name = "m3_need_convert.csv"
-out_csv_name = "part1-m3_converted.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.11.20_trimer_distance/"
+in_csv_name = "6mzj_all_coords(hetatm).csv"
+out_csv_name = "(converted)6mzj_all_coords(hetatm).csv"
 # ========================================================================================================
 in_csv_file = working_dir + in_csv_name
 out_csv_file = working_dir + out_csv_name
 in_csv_list = []  # store input csv file
 out_csv_list = []  # store output csv file
 
+# for 6mzj:
+child_position_mapping = {
+    88: [701, 702],
+    130: [703, 704],
+    156: [705, 706, 707, 708, 709],
+    197: [710, 711, 712, 713, 714, 715],
+    241: [716, 717, 718],
+    262: [719, 720, 721, 722, 723, 724, 725],
+    289: [726, 727],
+    301: [728, 729, 730],
+    332: [731, 732, 733, 734],
+    337: [735, 736],
+    357: [737],
+    386: [738, 739, 740, 741, 742],
+    411: [743],
+    442: [744, 745],
+    611: [746],
+    637: [747],
+    230: [748, 749],
+    392: [750, 751]
+}
+
+'''
 # for 4tvp:
 child_position_mapping = {
     611: [1611],
@@ -46,6 +69,7 @@ child_position_mapping = {
     339: [1839],
     160: [1160, 1161]
 }
+'''
 '''
 # for 5fuu: 
 child_position_mapping = {
