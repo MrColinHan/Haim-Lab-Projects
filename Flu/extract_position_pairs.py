@@ -16,9 +16,9 @@ Created on Wed Sep 18 03:08:21 2019
 
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/"
-csv_name = "(bin)2nd_fisher_p.csv"
-out_name = "(bin)2nd_fisher_p_pairs"   # no need to put a suffix
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.11.20_trimer_distance/"
+csv_name = "(chain matrix)6mzj_all_coords(atom&hetam).csv"
+out_name = "(chain pairs)6mzj_all_coords(atom&hetam)"   # no need to put a suffix
 p_range = (0, 10000)  # cutoff for p value: (0,0.05) means  0 < p < 0.05
 # ========================================================================================================
 
