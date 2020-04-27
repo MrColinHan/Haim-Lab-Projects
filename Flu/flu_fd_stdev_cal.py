@@ -34,9 +34,9 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_Long/"
-seq_filename = r"INPUT-Long_C_All_PNGS_sequences.csv"
-fd_output_filename = r"test_FD.csv"    
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
+seq_filename = r"06-19_season_H1N1_USA_AA_PNGS_10375(&all_attributes).csv"
+fd_output_filename = r"18-19_FD.csv"
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
 stdev_output_filename = r"test_stdev.csv"  
@@ -46,18 +46,18 @@ stdev_output_filename = r"test_stdev.csv"
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
 #option 2:
-group_attribute_name = 'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
+group_attribute_name = 'Flu Season(group)' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
 #option 3:
 state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
 #option 4:
 country_attribute_name = 'Country'  # this is the name of country attribute appears in the sequence file
 #option 5:
-accession_attribute_name = "Sequence Accession"  # value e.g.: ['KU591055', 'KU591039', 'KU590350']
+accession_attribute_name = 'Sequence Accession'  # value e.g.: ['KU591055', 'KU591039', 'KU590350']
 
 # select identifier : 
 selection_name = group_attribute_name  # choose from 5 options above
 # select cutoff/value/... : 
-selection_value =  0 #'15-16'  
+selection_value = 0 #'15-16'
 # 1. if 'Flu Season' is selected, you can also do multiple 
 #    years : '13-16' which will combine 13-14,14-15,15-16
 # 2. if 'Group' is selected, then selection_value is the cutoff value, 
@@ -67,7 +67,7 @@ selection_value =  0 #'15-16'
 
 # remember to change the position range based on different flu type
 # e.g: H1N1--(1,549)   H3N2--(1,550)
-position_range = (1, 856)
+position_range = (1, 549)
  
 need_stdev = False  # True : if want to calculate stdev  False: only calculate FD
 zero_thresh = float('1e-5')  # stdev values < zero_thresh will be assigned zero
@@ -97,7 +97,7 @@ def read_csv(filedir,listname):
     file = open(filedir)
     reader = csv.reader(file)
     for row in reader:
-        listname.append(row) 
+        listname.append(row)
         
         
 def write_csv(x,y):  # write list x into file y
@@ -159,7 +159,7 @@ def select_rows(name,value):  #select rows based on target attribute 'name' and 
                 selection_list.append(i)
     
     # if want to select groups: 
-    if name == group_attribute_name: 
+    if name == group_attribute_name:
         for i in seq_list[1:]:
             if i[target_name_index] == value:
                 selection_list.append(i)

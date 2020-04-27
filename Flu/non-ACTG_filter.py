@@ -27,10 +27,10 @@ Created on Fri Sep 13 14:34:27 2019
 from re import compile
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/10-19(rm_dup)/"
-fas_name = "B.human_10-19_season_H3N2_USA_nucl_7890_aligned.fas"
-out_name = "rm_all_junk.fasta"  
-non_ACTG_count_cutoff = 1 #1  # if seen >1 1 non-ACTG letter then remove this accession
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.7.20_flu&Pneumoviridae/Pneumoviri/"
+fas_name = "B.human_orthopne_f_protein_1135_aligned.fas"
+out_name = "C.human_orthopne_f_protein_1135_aligned_cleaned.fasta"
+non_ACTG_count_cutoff = 1 #1  # if seen >1 non-ACTG letter then remove this sequence
 # ==========================================================================================
 
 fas_input = working_dir + fas_name
@@ -39,6 +39,7 @@ out_rm_seq = working_dir + "rm_seq.fas"
 out_clean_seq = working_dir + out_name
 ACCESSION_MATCHER = compile(r'[A-Za-z]{2}\d{6}|[A-Za-z]{1}\d{5}|[A-Za-z]{3}\d{5}')
 nucleotide_seq = ('A','C','T','G','-',' ','\n')
+#nucleotide_seq = ('Z','N','T','S','D','E','K','R','H','Y','Q','I','L','V','A','C','F','G','M','P','W','-',' ','\n')
 
 def readFasta(x,y): # read a fasta file x and store into a list y
     file = open(x,"r")

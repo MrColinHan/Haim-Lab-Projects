@@ -21,8 +21,8 @@ import csv
 import operator
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_single/"
-input_name = "(transpose)C_all_single_dominant_AA.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs(dominant)/"
+input_name = "(transpose)06-19_dominant_AA.csv"
 output_name = r"domAA_analysis_result.csv"
 
 # ==========================================================================================

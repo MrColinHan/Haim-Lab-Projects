@@ -15,10 +15,10 @@ import csv
 
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.25.19_H3N2/human/15-19_season_USA/"
-fd1_filename = r"16-17_FD.csv"
-fd2_filename = r"17-18_FD.csv"
-output_filename = r"16-17_vs_17-18.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/compare_fd/"
+fd1_filename = r"17-18_FD.csv"
+fd2_filename = r"18-19_FD.csv"
+output_filename = r"17-18_vs_18-19.csv"
 pct_threshold = 50  # if pct difference is larger than this number, then put in output
 # ==========================================================================================
 

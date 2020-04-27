@@ -31,14 +31,14 @@ Created on Thu Dec  5 11:50:05 2019
 import csv 
 import os
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.21.20_b_single&long_dominantAA/C_ALL_Long/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
 fd_val_folder_name = r"fd_values/"  # name of the folder that holds all fd values, slash at the end
 fd_buf_folder_name = r"fd_buffers/"
-output_name = r"C_all_Long_dominant_AA.csv"
+output_name = r"06-19_dominant_AA.csv"
 
-position_range = (1, 856)
+position_range = (1, 549)
 
-patient_name_col = 2  # col index of patient name in Buffer files, index starts at 0 (NOT 1)
+patient_name_col = 10 #2  # col index of patient name in Buffer files, index starts at 0 (NOT 1)
 
 # ==========================================================================================
 
