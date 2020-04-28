@@ -21,8 +21,8 @@ import csv
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.26.20_sars_cov-2/"
-in_fas_name = "SARS-CoV-2_(extracted_1332).fasta"
-out_name = "SARS-CoV-2_(cleaned_).fasta"
+in_fas_name = "complete_record(extracted_1524).fasta"
+out_name = "complete_record(extracted_filtered_).fasta"
 
 length_cutoff = 20000  # if the sequence length < 20000, then remove
 non_ACTG_cutoff = 1  # if the sequence contain >1 non-ACTG, then remove
@@ -55,11 +55,27 @@ def write_csv(x, y):  # write list x into file y
     file.close()
 
 
+# l is the input list or the remaining of input list. This program extract the first set of sequence.
+def find_next_sequence_set(l):
+    result = []
+    for row_i in range(len()):
+        if
+
+    return result
+
 def main():
     readFasta(input_file, input_list)
 
-    print(input_list[0])
-    print(input_list[:3])
+    current_index = 0  # index of current row
+    current_sequence = []
+    while current_index < len()
+    for row in input_list:
+        if row[0] == '>':
+            return
+        else:
+
+
+    write(output_list, output_file)
 
 
 main()

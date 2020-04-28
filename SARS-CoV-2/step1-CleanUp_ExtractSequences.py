@@ -16,8 +16,8 @@ import csv
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.26.20_sars_cov-2/"
-in_fas_name = "SARS-CoV-2_(15279).fasta"
-out_name = "SARS-CoV-2_(extracted).fasta"
+in_fas_name = "complete_record.fasta"#"SARS-CoV-2_(15279).fasta"
+out_name = "complete_record(extracted).fasta"#"SARS-CoV-2_(extracted).fasta"
 # ==========================================================================================
 input_file = working_dir + in_fas_name
 input_list = []  # save input sequences
@@ -111,7 +111,7 @@ main()
 
 # ============================= Check =============================================================
 print(f"\n\n========== Check ============")
-complete_record_file_name = "complete_record.txt"
+complete_record_file_name = "complete_record_summary(1336).txt"
 complete_record_file = working_dir + complete_record_file_name
 
 complete_record_list = []
