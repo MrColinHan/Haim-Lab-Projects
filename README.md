@@ -19,6 +19,10 @@ HIV AA Frequency project:
 - Filt out accession numbers from B.KR in a .NWK format file
 - Convert AA sequence from csv to fasta
 
+SARS-CoV-2 project: 
+- Extract sequences
+- Clean up sequences
+- CSV conversion
 
 Flu project:
 
