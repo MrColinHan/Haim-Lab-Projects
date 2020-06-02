@@ -13,35 +13,36 @@ import openpyxl
 '''
     !!!!Remember to refactor this script in order to improve efficiency!!!
 '''
-
-#This script calculate the historical distribution of different positions' amino acids
-#  STEPS:
-#1. Change the Input directory, do not delete r 
-#2. Change the Output directory, do not delete r, When you copy the address, keep in mind there's also a slash at the end.
-#3. Make a name of the Output file
-#4. Change the PositionRange: if you want to select a single position: [[88,88]]
-#                             if you want to select multiple positions: [[88,88],[156,156],[276,276]]
-#                             if you want to select a position range, like from 88 to 637: [[88,637]]
-#                             you can also mix them: [[88,88],[156,156],[197,295],[392,637]]
-#5. Change the YearRange, the format is the same as the PositionRange:
-#                                 single year:[1979,1979]
-#                                 year range: [[1979,2014]]
-#                                 mix:[[1979,2014],[1985,2006],[1994,2000],[2008,2008]]
-#6. Ignore the output file named 'ignore.xlsx', feel free to delete it
-#7. run Forest run!
+'''
+This program calculates the historical distribution of different positions' amino acids
+  STEPS:
+1. Change the Input directory, do not delete r 
+2. Change the Output directory, do not delete r, When you copy the address, keep in mind there's also a slash at the end.
+3. Make a name of the Output file
+4. Change the PositionRange: if you want to select a single position: [[88,88]]
+                             if you want to select multiple positions: [[88,88],[156,156],[276,276]]
+                             if you want to select a position range, like from 88 to 637: [[88,637]]
+                             you can also mix them: [[88,88],[156,156],[197,295],[392,637]]
+5. Change the YearRange, the format is the same as the PositionRange:
+                                 single year:[1979,1979]
+                                 year range: [[1979,2014]]
+                                 mix:[[1979,2014],[1985,2006],[1994,2000],[2008,2008]]
+6. Ignore the output file named 'ignore.xlsx', feel free to delete it
+7. run Forest run!
+'''
 
 # input format : Country Year Patient Accession 131 132 133 ......
-Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp120_pngs/7.12.19_B_GP120_PNGS.xlsx" 
-Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.20.19_h1n1_season/15-19_season/"
-OutputName ="test_output.xlsx"
+Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp160_pngs/5.15.19_C_gp160_PNGS.xlsx"
+Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.28.20_population_gp160_FD/5.26_dynamic_535_537/"
+OutputName ="C_gp160_dyna_FD_535&537.xlsx"
 TabNumber = 0 # tab number in Excel file, start as index 0
-PositionRange = [[386, 392]]
+PositionRange = [[535, 535], [537, 537]]
 #pngs:[[88,88],[156,156],[160,160],[197,197],[230,230],[234,234],[241,141],[262,262],
 #[276,276],[289,289],[295,295],[301,301],[332,332],[339,339],[356,356],[362,362],[386,386],
 #[392,392],[448,448],[133,133],[137,137],[185,185],[355,355],[398,398],[406,406],[411,411],[462,462]]
 #2g12: [[295,295],[332,332],[339,339],[392,392],[448,448]]
 #2F5: [[662,662],[663,663],[664,664],[665,665],[667,667]]
-YearRange = [[1986,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]]  
+YearRange = [[1986,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]] 
 ## CURRENT: [[2007,2015]]
 # B_NA: 300
 # B_EU: 164
