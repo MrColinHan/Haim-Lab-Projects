@@ -23,12 +23,12 @@ import math
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.13.20_co-vol_network/"
-input_filename = r"(log)B_single_nonBin_co-vol(180patients).csv"
-output_filename = r"332_OUTPUT_two_level_thresh.csv"
+input_filename = r"(log)C_single_nonBin_co-vol(93patients).csv"
+output_filename = r"C_134_OUTPUT_two_level_thresh.csv"
 
 input_has_header = True
-center_position = 332
-first_level_threshold = 3.3  # -log(0.05)+1
+center_position = 134
+first_level_threshold = 3.3  # -log(0.005)+1
 second_level_threshold = 5.3  # -log(0.00005)+1
 # ==========================================================================================
 
