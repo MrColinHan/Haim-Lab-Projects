@@ -32,17 +32,17 @@ This program calculates the historical distribution of different positions' amin
 '''
 
 # input format : Country Year Patient Accession 131 132 133 ......
-Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp160_pngs/5.15.19_C_gp160_PNGS.xlsx"
-Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.28.20_population_gp160_FD/5.26_dynamic_535_537/"
-OutputName ="C_gp160_dyna_FD_535&537.xlsx"
+Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp160_pngs/5.15.19_B_gp160_PNGS.xlsx"
+Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.28.20_population_gp160_FD/7.14_dyna_530-542/"
+OutputName ="B_gp160_dyna_FD_647.xlsx"
 TabNumber = 0 # tab number in Excel file, start as index 0
-PositionRange = [[535, 535], [537, 537]]
+PositionRange = [[647, 647]]
 #pngs:[[88,88],[156,156],[160,160],[197,197],[230,230],[234,234],[241,141],[262,262],
 #[276,276],[289,289],[295,295],[301,301],[332,332],[339,339],[356,356],[362,362],[386,386],
 #[392,392],[448,448],[133,133],[137,137],[185,185],[355,355],[398,398],[406,406],[411,411],[462,462]]
 #2g12: [[295,295],[332,332],[339,339],[392,392],[448,448]]
 #2F5: [[662,662],[663,663],[664,664],[665,665],[667,667]]
-YearRange = [[1986,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]] 
+YearRange = [[1979,1986],[1987,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]]
 ## CURRENT: [[2007,2015]]
 # B_NA: 300
 # B_EU: 164
