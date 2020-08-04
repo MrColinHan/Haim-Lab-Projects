@@ -22,8 +22,8 @@ Created on Jul 21 2020
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Downloads/PRJNA356756-SRX2421069(PrimerID)-3runs/"
-input_filename = r"SRR5105426.fastq"
-output_filename = r"SRR5105426(fasta).fasta"
+input_filename = r"SRR5105435.fastq"
+output_filename = r"SRR5105435(fasta).fasta"
 
 identifier_spliter = " "  # information in the identifier row are usually separated by spliters
 identifier_start_symbol = "@"  # the leading symbol in the identifier row

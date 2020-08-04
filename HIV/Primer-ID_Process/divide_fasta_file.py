@@ -15,9 +15,9 @@ Created on Jul 21 2020
 '''
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Downloads/PRJNA356756-SRX2421069(PrimerID)-3runs/SRR5105426(Fasta Format)/"
-input_filename = r"SRR5105426(fasta)_ALL_(1,094,598).fasta"
-output_file_prefix = r"SRR5105426(fasta)_part"  # number after '_part' will be consecutively generated
+working_dir = r"/Users/Han/Downloads/PRJNA356756-SRX2421069(PrimerID)-3runs/SRR5105435(Fasta Format)/"
+input_filename = r"SRR5105435(fasta)_ALL_(1,153,558).fasta"
+output_file_prefix = r"SRR5105435(fasta)_part"  # numbers after '_part' will be consecutively generated
 # complete output name format: e.g. SRR5105426(fasta)_part1_(#ofEntries).fasta
 
 seq_amount_per_file = 50000
