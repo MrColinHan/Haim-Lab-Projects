@@ -20,9 +20,9 @@ Created on Mon Sep  9 11:16:05 2019
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/7.2.20_weblogo/"
-input_name = r"gp160-nonpng-1575-selecPos_CSV.csv"
-output_name = r"gp160-nonpng-1575-selecPos_FAS.fasta"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/7.2.20_FPPR_weblogo/"
+input_name = r"(8.13.20CSV Input)gp160-nonpng-1575-selecPos.csv"
+output_name = r"gp160-nonpng-1575-528-540_FAS.fasta"
 # ==========================================================================================
 input_file = working_dir + input_name
 input_list = []
