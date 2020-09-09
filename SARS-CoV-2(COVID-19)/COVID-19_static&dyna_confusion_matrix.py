@@ -28,7 +28,7 @@ import copy
             during pre-process in excel, if value <= static cutoff, then become Null. 
         
         how to read output: 
-            each row: [sample_number, fisher_pvalue, FPR%, FNR%, TPR%, TNR%]
+            each row: [sample_number, fisher_pvalue, FPR%, FNR%, TPR%, TNR%, precision]
         
     
 """
@@ -36,19 +36,19 @@ import copy
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.20_covid_dyna_confusionMatrix/"
 input_name = "dynamics_input.csv"
-output_name = "test.csv"#r"cbEli(dyna)_bsl<=200.csv"
+output_name = r"dia(dyna)_Luc<=500.csv"
 missing_value = "Null"
 
 dynamics = True  #True: dynamics confusion matrix
 end_percent = 70  # Neg group goes up to 70% of the entire sample size
 
 label_row_index = 0  # usually it is always the first row
-pred_value_row_index = 2  # row number in csv file that contains true value (index start from 0)
+pred_value_row_index = 1  # row number in csv file that contains true value (index start from 0)
 true_value_row_index = 5
 
 # <= than cutoff will be Neg
 pred_negative_cutoff = 1  # this is static cutoff for predictor (will be ignored in dynamics cal)
-true_negative_cutoff = 200
+true_negative_cutoff = 500
 
 # ==========================================================================================
 input_file = working_dir + input_name  # full directory for input file
@@ -101,9 +101,11 @@ def plot_confusion_matrix(true_list, pred_list):
     FNR = FN / (FN + TP) * 100
     TPR = TP / (TP + FN) * 100
     TNR = TN / (TN + FP) * 100
-    print(f"  sample#, fisherP, FPR%, FNR%, TPR%, TNR%: {[len(true_list), pvalue, FPR, FNR, TPR, TNR]}")
+    precision = TP / (TP + FP) * 100
+    print(f"  sample#, fisherP, FPR%, FNR%, TPR%, TNR%, precision%:"
+          f" {[len(true_list), pvalue, FPR, FNR, TPR, TNR, precision]}")
     #print(classification_report(true_list, pred_list))
-    return [len(true_list), pvalue, FPR, FNR, TPR, TNR]
+    return [len(true_list), pvalue, FPR, FNR, TPR, TNR, precision]
 
 
 def main():
@@ -177,7 +179,7 @@ def main():
         output_list = plot_confusion_matrix(static_true_value, static_pred_value)
         print(f"***csv output row: {output_list}")
         write_csv([[f"predictor:{pred_name}<={pred_negative_cutoff}", f"true:{true_name}<={true_negative_cutoff}"]
-                      , ['sample#', 'fisherP', 'FPR%', 'FNR%', 'TPR%', 'TNR%']
+                      , ['sample#', 'fisherP', 'FPR%', 'FNR%', 'TPR%', 'TNR%', 'precision%']
                       , output_list]
                   , output_file)
 
@@ -189,7 +191,7 @@ def main():
                                , 'Pred_Neg_cutoff'
                                , 'Actual'
                                , 'Acu_Neg_cutoff'
-                               , 'all_sample#', 'fisherP', 'FPR%', 'FNR%', 'TPR%', 'TNR%'])
+                               , 'all_sample#', 'fisherP', 'FPR%', 'FNR%', 'TPR%', 'TNR%', 'precision%'])
         # sort the 'label_pred_true_dict' into list of tuples [(pred, true, label), ...]
         sorted_p_t_l_list = sorted([(p, t, l) for (l, (p, t)) in label_pred_true_dict.items()])
         print(f"  sortted_p-t-l_list:{sorted_p_t_l_list}")
