@@ -15,7 +15,7 @@ import scipy.stats as stats
     For Project COVID-19:
         plot a confusion matrix for two given rows' data (true row and predicted row)
         
-        input file: csv, for each value row, first cell should be label. [DiaSorin,	Neg, Pos, Pos, Pos, ...]
+        input file: csv, for each value row first cell should be label. [DiaSorin,	Neg, Pos, Pos, Pos, ...]
         
         outputs: 
             confusion matrix, and precision reports printed in console. 
