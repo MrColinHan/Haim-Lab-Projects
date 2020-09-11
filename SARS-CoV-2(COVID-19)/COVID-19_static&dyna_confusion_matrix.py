@@ -30,25 +30,30 @@ import copy
         how to read output: 
             each row: [sample_number, fisher_pvalue, FPR%, FNR%, TPR%, TNR%, precision]
         
+        Note: 
+            shouldn't say 'True'. Work 'Actual' is more accurate. 
+            
+            if < cutoff, then Neg
+            if >= cutoff, then Pos
     
 """
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.20_covid_dyna_confusionMatrix/"
 input_name = "dynamics_input.csv"
-output_name = r"dia(dyna)_Luc<=500.csv"
+output_name = r"dyna_up_to_90%/Dia(dyna)_BSL<=200.csv"
 missing_value = "Null"
 
 dynamics = True  #True: dynamics confusion matrix
-end_percent = 70  # Neg group goes up to 70% of the entire sample size
+end_percent = 90  # Neg group goes up to 70% of the entire sample size
 
 label_row_index = 0  # usually it is always the first row
 pred_value_row_index = 1  # row number in csv file that contains true value (index start from 0)
-true_value_row_index = 5
+true_value_row_index = 7
 
 # <= than cutoff will be Neg
 pred_negative_cutoff = 1  # this is static cutoff for predictor (will be ignored in dynamics cal)
-true_negative_cutoff = 500
+true_negative_cutoff = 200
 
 # ==========================================================================================
 input_file = working_dir + input_name  # full directory for input file
@@ -161,24 +166,24 @@ def main():
         if len(static_pred_value) == len(static_true_value):  # check for length again
             temp_i = 0
             while temp_i < len(static_pred_value):
-                if static_pred_value[temp_i] <= pred_negative_cutoff:  # cutoff for predictor
+                if static_pred_value[temp_i] < pred_negative_cutoff:  # cutoff for predictor
                     static_pred_value[temp_i] = "Neg"
                 else:
                     static_pred_value[temp_i] = "Pos"
-                if static_true_value[temp_i] <= true_negative_cutoff:  # cutoff for true value
+                if static_true_value[temp_i] < true_negative_cutoff:  # cutoff for true value
                     static_true_value[temp_i] = "Neg"
                 else:
                     static_true_value[temp_i] = "Pos"
                 temp_i += 1  # iterate
-            print(f"  cutoff_pred<={pred_negative_cutoff}:\n  {static_pred_value}"
-                  f"\n  cutoff_true<={true_negative_cutoff}:\n  {static_true_value}")
+            print(f"  cutoff_pred<{pred_negative_cutoff}:\n  {static_pred_value}"
+                  f"\n  cutoff_true<{true_negative_cutoff}:\n  {static_true_value}")
         else:
             raise Exception("len(static predictor value) != len(static true value)")
 
         # compute confusion matrix
         output_list = plot_confusion_matrix(static_true_value, static_pred_value)
         print(f"***csv output row: {output_list}")
-        write_csv([[f"predictor:{pred_name}<={pred_negative_cutoff}", f"true:{true_name}<={true_negative_cutoff}"]
+        write_csv([[f"predictor:{pred_name}<{pred_negative_cutoff}", f"true:{true_name}<{true_negative_cutoff}"]
                       , ['sample#', 'fisherP', 'FPR%', 'FNR%', 'TPR%', 'TNR%', 'precision%']
                       , output_list]
                   , output_file)
@@ -220,11 +225,11 @@ def main():
             temp_dyna_true_values = copy.deepcopy(dyna_true_values)
             temp_i = 0
             while temp_i < len(temp_dyna_pred_values):
-                if temp_dyna_pred_values[temp_i] <= new_pred_negative_cutoff:
+                if temp_dyna_pred_values[temp_i] <= new_pred_negative_cutoff:  # this needs to be <=
                     temp_dyna_pred_values[temp_i] = "Neg"
                 else:
                     temp_dyna_pred_values[temp_i] = "Pos"
-                if temp_dyna_true_values[temp_i] <= true_negative_cutoff:
+                if temp_dyna_true_values[temp_i] < true_negative_cutoff:
                     temp_dyna_true_values[temp_i] = "Neg"
                 else:
                     temp_dyna_true_values[temp_i] = "Pos"
@@ -237,7 +242,7 @@ def main():
                                + [one_in_all_rate]
                                + [f"<={new_pred_negative_cutoff}"]
                                + [true_name]
-                               + [f"<={true_negative_cutoff}"]
+                               + [f"<{true_negative_cutoff}"]
                                + plot_confusion_matrix(temp_dyna_true_values, temp_dyna_pred_values))
 
             current_pred_neg_size += 1
