@@ -18,8 +18,10 @@ import copy
         pre-process input before this program: 
             replace all missing value cell as "Null"
             transpose copy the column data into row datasion matrix. 
+            
+            for dynamic input, if predictor value < its cutoff, set as "Null" because we want to ignore those data
         
-        Main purpose of this program is calculating Precision based on confu
+        Main purpose of this program is calculating Precision based on confusion matrix
             
             
         this program can do 2 things: 
@@ -76,7 +78,7 @@ true_name = None
 label_pred_true_dict = {}  # {label_1:(pred_1, true_1), label_2:(pred_2, true_2), ...... }
 
 
-def read_csv(filedir, listname):  # output [len(true_list), pvalue, FPR, FNR, TPR, TNR]
+def read_csv(filedir, listname):
     file = open(filedir)
     reader = csv.reader(file)
     for row in reader:
