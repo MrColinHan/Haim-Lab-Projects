@@ -17,11 +17,13 @@ import copy
     For Project COVID-19:
         pre-process input before this program: 
             replace all missing value cell as "Null"
-            transpose copy the column data into row data
+            transpose copy the column data into row datasion matrix. 
+        
+        Main purpose of this program is calculating Precision based on confu
             
             
         this program can do 2 things: 
-        1. for static confusion matrix output
+        1. for static confusion matrix output. 
         
         
         2. for dynamics confusion matrix output
@@ -51,7 +53,7 @@ label_row_index = 0  # usually it is always the first row
 pred_value_row_index = 1  # row number in csv file that contains true value (index start from 0)
 true_value_row_index = 7
 
-# <= than cutoff will be Neg
+# < than cutoff will be Neg
 pred_negative_cutoff = 1  # this is static cutoff for predictor (will be ignored in dynamics cal)
 true_negative_cutoff = 200
 
