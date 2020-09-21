@@ -15,12 +15,12 @@ Created on Jul 21 2020
 '''
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Downloads/PRJNA356756-SRX2421069(PrimerID)-3runs/SRR5105435(Fasta Format)/"
-input_filename = r"SRR5105435(fasta)_ALL_(1,153,558).fasta"
-output_file_prefix = r"SRR5105435(fasta)_part"  # numbers after '_part' will be consecutively generated
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.18.20_sars_cov2_sequences/NCBI/"#r"/Users/Han/Downloads/PRJNA356756-SRX2421069(PrimerID)-3runs/SRR5105435(Fasta Format)/"
+input_filename = r"sars-cov-2_Nucleotide_ALL(16975).fasta"#r"SRR5105435(fasta)_ALL_(1,153,558).fasta"
+output_file_prefix = r"sars-cov-2_Nucleotide_part" # r"SRR5105435(fasta)_part"  # numbers after '_part' will be consecutively generated
 # complete output name format: e.g. SRR5105426(fasta)_part1_(#ofEntries).fasta
 
-seq_amount_per_file = 50000
+seq_amount_per_file = 1000000
 # ==========================================================================================
 input_file = working_dir + input_filename
 

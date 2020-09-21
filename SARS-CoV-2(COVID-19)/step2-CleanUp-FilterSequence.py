@@ -9,7 +9,7 @@ import csv
 """
     This program filter the extracted SARS-Cov-2 nucleotide sequences after step1. 
     
-    Output the sequences with nucleotide segment "GAATGACAAAA"
+    Output the sequences with nucleotide segment "GAATGACAAAA" or other selected segments 
     
     Input: fasta
     Output: fasta
@@ -17,11 +17,11 @@ import csv
 """
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.26.20_sars_cov-2/complete_record/"
-in_fas_name = "complete_record(extracted_1524).fasta"
-out_name = "complete_record(extracted_filtered_).fasta"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.18.20_sars_cov2_sequences/VIPR/From_Download/" #r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.26.20_sars_cov-2/complete_record/"
+in_fas_name = r"sars-cov-2_Genome_Fasta(19172).fasta" #"complete_record(extracted_1524).fasta"
+out_name = "sars-cov-2_Genome_Fasta(19172)_extracted.fasta"
 
-nucleo_segment = "GAATGACAAAA"
+nucleo_segment = "TTTTAGTAGTG"  #"GAATGACAAAA"
 # ==========================================================================================
 input_file = working_dir + in_fas_name
 input_list = []  # save input sequences
