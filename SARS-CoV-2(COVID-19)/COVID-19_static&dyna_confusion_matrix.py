@@ -29,7 +29,7 @@ import copy
         
         
         2. for dynamics confusion matrix output
-            during pre-process in excel, if value <= static cutoff, then become Null. 
+            during pre-process in excel, if value < static cutoff, then become Null. 
         
         how to read output: 
             each row: [sample_number, fisher_pvalue, FPR%, FNR%, TPR%, TNR%, precision]
@@ -37,15 +37,15 @@ import copy
         Note: 
             shouldn't say 'True'. Work 'Actual' is more accurate. 
             
-            if < cutoff, then Neg
+            if < cutoff, then Neg  (but for dyna pred, in each round, if <= then Neg)
             if >= cutoff, then Pos
     
 """
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.20_covid_dyna_confusionMatrix/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.6.20_covid_dyna_confusionMatrix/(NEW)dyna_up_to_90%/"
 input_name = "dynamics_input.csv"
-output_name = r"dyna_up_to_90%/Dia(dyna)_BSL<=200.csv"
+output_name = r"Dia(dyna)_Luc<=500.csv"
 missing_value = "Null"
 
 dynamics = True  #True: dynamics confusion matrix
@@ -53,11 +53,11 @@ end_percent = 90  # Neg group goes up to 70% of the entire sample size
 
 label_row_index = 0  # usually it is always the first row
 pred_value_row_index = 1  # row number in csv file that contains true value (index start from 0)
-true_value_row_index = 7
+true_value_row_index = 5
 
 # < than cutoff will be Neg
 pred_negative_cutoff = 1  # this is static cutoff for predictor (will be ignored in dynamics cal)
-true_negative_cutoff = 200
+true_negative_cutoff = 500
 
 # ==========================================================================================
 input_file = working_dir + input_name  # full directory for input file
@@ -199,7 +199,7 @@ def main():
                                , 'Pred_Neg_#Rate%'
                                , 'Pred_Neg_cutoff'
                                , 'Actual'
-                               , 'Acu_Neg_cutoff'
+                               , 'Act_Neg_cutoff'
                                , 'all_sample#', 'fisherP', 'FPR%', 'FNR%', 'TPR%', 'TNR%', 'precision%'])
         # sort the 'label_pred_true_dict' into list of tuples [(pred, true, label), ...]
         sorted_p_t_l_list = sorted([(p, t, l) for (l, (p, t)) in label_pred_true_dict.items()])
@@ -215,12 +215,15 @@ def main():
             raise Exception("len(dyna_true_values) != len(dyna_pred_values)")
 
         all_sample_size = len(dyna_pred_values)  # keep a record
-        current_pred_neg_size = 1  # Pred Neg size start from 1 sample
+        current_pred_neg_size = 0  # Pred Neg size start from 0 sample
         one_in_all_rate = current_pred_neg_size/all_sample_size*100
         print(f"\n  all sample size: {all_sample_size}, one sample is {one_in_all_rate}%\n")
 
         while one_in_all_rate <= end_percent:
-            new_pred_negative_cutoff = dyna_pred_values[current_pred_neg_size - 1]  # set a new pred cutoff
+            if current_pred_neg_size == 0:
+                new_pred_negative_cutoff = 0
+            else:
+                new_pred_negative_cutoff = dyna_pred_values[current_pred_neg_size - 1]  # set a new pred cutoff
             print(f"++++++ current Neg size:{current_pred_neg_size}({one_in_all_rate} <= {end_percent})"
                   f", new_pred_neg_cutoff={new_pred_negative_cutoff}++++++")
 
