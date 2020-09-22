@@ -17,9 +17,9 @@ Created on Wed Feb  6 01:07:37 2019
 
 import re
 
-Chimera = False
+Chimera = True
 check_gly = False
-positions = "DiaSorin Quant<10	Roche Quant<1	EUROIMMUN <0.6, <1	cbELISA<100,000	Calc Luc IC50	Calc GFP IC50	BSL-3"
+positions = "0	0	0	0	0	0	0	0	0	0	0	190	210	160	140	140	1350	240	1180	720	2220	840	440	270	295	1940	990	1480	940	1140	650	2420	3010	910	380	640	940	1060	1680	1510	700	2000	630	1800	3700"
     # "97	276	278	279	280	281	282	283	365	366	367	368	371	427	428	429	430	455	456	457	458	459	460	461	462	463	464	465	469	472	473	474	476"
 sep = re.sub("\s+", ",", positions)
 
@@ -30,7 +30,7 @@ current_index = 0
 for i in range(len(sep)):
     if sep[i] == ',':
         if Chimera == True:
-            result.append(int(sep[current_index:i]))
+            result.append(float(sep[current_index:i]))
         else:
             result.append(sep[current_index:i])
         current_index = i+1
