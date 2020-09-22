@@ -11,15 +11,16 @@ Created on Wed Feb  6 01:07:37 2019
     
         1. a list format:   ['KC882681', 'KC882799', 'KC882698']
         
-        2. Chimera's command line input format : [295, 332, 339, 392]  (need to remove the brackets)
+        2. Chimera's command line input format : [295, 332, 339, 392]  (remember need to remove the brackets in Chimera)
 '''
 
 
 import re
 
-Chimera = True
-check_gly = True
-positions = "97	276	278	279	280	281	282	283	365	366	367	368	371	427	428	429	430	455	456	457	458	459	460	461	462	463	464	465	469	472	473	474	476"
+Chimera = False
+check_gly = False
+positions = "DiaSorin Quant<10	Roche Quant<1	EUROIMMUN <0.6, <1	cbELISA<100,000	Calc Luc IC50	Calc GFP IC50	BSL-3"
+    # "97	276	278	279	280	281	282	283	365	366	367	368	371	427	428	429	430	455	456	457	458	459	460	461	462	463	464	465	469	472	473	474	476"
 sep = re.sub("\s+", ",", positions)
 
 
