@@ -19,7 +19,7 @@ import re
 
 Chimera = True
 check_gly = False
-positions = "0	0	0	0	0	0	0	0	0	0	0	190	210	160	140	140	1350	240	1180	720	2220	840	440	270	295	1940	990	1480	940	1140	650	2420	3010	910	380	640	940	1060	1680	1510	700	2000	630	1800	3700"
+positions = "0	0	0	0	0	0	5	0	80.58017728	129.4330831	80	160	150	320	412.5	200	160	285	718.907261	35	517.5983437	639.7952655	151.6530179	224	260	320	791.1392405	1439.263097"
     # "97	276	278	279	280	281	282	283	365	366	367	368	371	427	428	429	430	455	456	457	458	459	460	461	462	463	464	465	469	472	473	474	476"
 sep = re.sub("\s+", ",", positions)
 
@@ -37,7 +37,7 @@ for i in range(len(sep)):
         
     if i == len(sep)-1: 
         if Chimera == True:
-            result.append(int(sep[current_index:]))
+            result.append(float(sep[current_index:]))
         else:
             result.append(sep[current_index:])
 child_position_mapping = {
