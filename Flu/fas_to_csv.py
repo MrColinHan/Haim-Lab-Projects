@@ -22,9 +22,9 @@ import csv
 from re import compile
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.7.20_flu&Pneumoviridae/Pneumoviri/"
-fas_input_name = "C.human_orthopne_f_protein_AA_1091_aligned_cleaned.fasta"
-csv_output_name = "D.human_orthopne_f_protein_AA_CSV_1091.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/"
+fas_input_name = "(Combined-AminoAcid)Clade C AFR FPPR.fas"
+csv_output_name = "(Combined-AminoAcid)Clade C AFR FPPR.csv"
 # ========================================================================================================
 fas_input_file = working_dir + fas_input_name
 csv_output_file = working_dir + csv_output_name
@@ -55,7 +55,8 @@ def construct_output_list(x):
     fas_i = 0  # iterate fas list
     while fas_i < len(fas_input_list):
         row = []  # a list to store this one row's data in csv
-        row.append(getAccessNum(fas_input_list[fas_i]))  # add accession number 
+        #row.append(getAccessNum(fas_input_list[fas_i]))  # add accession number
+        row.append(fas_input_list[fas_i])  # add ALL Attributes
         row.append(fas_input_list[fas_i+1])  # add seq
         # now add each seq
         for j in fas_input_list[fas_i+1]:
