@@ -32,9 +32,9 @@ This program calculates the historical distribution of different positions' amin
 '''
 
 # input format : Country Year Patient Accession 131 132 133 ......
-Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/(Combined-AminoAcid)Clade C AFR FPPR.xlsx"# r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp160_pngs/5.15.19_A1_gp160_PNGS.xlsx"
-Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/"
-OutputName ="Clade C FPPR Dyna-FD.xlsx"
+Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp160_pngs/5.15.19_A1_gp160_PNGS.xlsx"#r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/(Combined-AminoAcid)Clade C AFR FPPR.xlsx"
+Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.28.20_population_gp160_FD/10.7.20_07-15_528-540/"
+OutputName ="Clade A1 FPPR 07-15-FD.xlsx"
 TabNumber = 0 # tab number in Excel file, start as index 0
 PositionRange = [[528, 540]]
 #pngs:[[88,88],[156,156],[160,160],[197,197],[230,230],[234,234],[241,141],[262,262],
@@ -42,7 +42,7 @@ PositionRange = [[528, 540]]
 #[392,392],[448,448],[133,133],[137,137],[185,185],[355,355],[398,398],[406,406],[411,411],[462,462]]
 #2g12: [[295,295],[332,332],[339,339],[392,392],[448,448]]
 #2F5: [[662,662],[663,663],[664,664],[665,665],[667,667]]
-YearRange = [[1986,1994],[1995,1999],[2000,2004],[2005,2009],[2010,2015]]
+YearRange = [[2007,2015]]
 ## CURRENT: [[2007,2015]]
 # B_NA: 300
 # B_EU: 164
