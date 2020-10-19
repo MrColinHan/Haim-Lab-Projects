@@ -45,7 +45,7 @@ import copy
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/"
 input_name = "dynamics_input.csv"
-output_name = r"cbEli(dyna)_BSL<400.csv"
+output_name = r"sbElisa(dyna)_BSL<40.csv"
 missing_value = "Null"
 
 dynamics = True  #True: dynamics confusion matrix
@@ -57,7 +57,7 @@ true_value_row_index = 7
 
 # < than cutoff will be Neg
 pred_negative_cutoff = 1  # this is static cutoff for predictor (will be ignored in dynamics cal)
-true_negative_cutoff = 400
+true_negative_cutoff = 40
 
 # ==========================================================================================
 input_file = working_dir + input_name  # full directory for input file
