@@ -22,9 +22,9 @@ import csv
 from re import compile
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.18.20_sars_cov2_sequences/NCBI/"
-fas_input_name = "C.SARS-CoV-2_Seq_Selected_786.fas"
-csv_output_name = "FD.SARS-CoV-2_Seq_Selected_786.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike/"
+fas_input_name = "D_AA_Spike_aligned_SARS2_(13768).fas"
+csv_output_name = "E_AA_Spike_aligned_SARS2_(13768).csv"
 # ========================================================================================================
 fas_input_file = working_dir + fas_input_name
 csv_output_file = working_dir + csv_output_name
