@@ -22,11 +22,11 @@ import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike&N/"
 xml_input_name = "A. NCBI features XML.xml"
-csv_input_name = "E_AA_Spike_aligned_SARS2_(13768).csv"
+csv_input_name = "E_N_AA_aligned_SARS2_(13699).csv"
 
-csv_output_name = "F_AA(wFeatures)_Spike_aligned_SARS2_(13768).csv"
+csv_output_name = "F_N_AA(wFeatures)_aligned_SARS2_(13699).csv"
 
 feature_required = {'INSDInterval_accession', 'organism', 'mol_type'
     , 'isolate', 'host', 'db_xref', 'country', 'collection_date'}
