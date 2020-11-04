@@ -27,7 +27,7 @@ from re import compile
 # Inputs ================================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike&N/"
 sam_input_name = "B. SAM aligment SARS CoV 2.sam"
-fas_output_name = "C_N_nucleotide_aligned_SARS2.fasta"
+fas_output_name = "C_allGeno_nucleotide_aligned_SARS2.fasta"
 
 start_seg = "ATGTCTGATAA"
 end_seg = "TCAGGCCTAA"

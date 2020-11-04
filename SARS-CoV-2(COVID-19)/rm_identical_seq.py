@@ -13,10 +13,10 @@ Created on Oct 28 2020
 
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike&N/N_trees/"
-fas_input_name = "USA_N_nucleotide_aligned_SARS2_(8128).fas"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike&N/all_seq_trees/"
+fas_input_name = "N_nucleotide_aligned_SARS2_(13698).fas"
 
-output_name = "(no-identical)USA_N_nucleotide_aligned_SARS2_(8128).fas"
+output_name = "(no-identical)_N_nucleotide_aligned_SARS2_().fas"
 # ========================================================================================================
 fas_input_file = working_dir + fas_input_name
 output_file = working_dir + output_name
