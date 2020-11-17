@@ -43,21 +43,21 @@ import copy
 """
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD&Covid-updatedcbElisa/11.16.20_new_data/"
 input_name = "dynamics_input.csv"
-output_name = r"sbElisa(dyna)_BSL<40.csv"
+output_name = r"Dia(dyna)_BSL<400.csv"
 missing_value = "Null"
 
 dynamics = True  #True: dynamics confusion matrix
 end_percent = 90  # Neg group goes up to 70% of the entire sample size
 
 label_row_index = 0  # usually it is always the first row
-pred_value_row_index = 4  # row number in csv file that contains true value (index start from 0)
-true_value_row_index = 7
+pred_value_row_index = 1  # row number in csv file that contains true value (index start from 0)
+true_value_row_index = 6
 
 # < than cutoff will be Neg
 pred_negative_cutoff = 1  # this is static cutoff for predictor (will be ignored in dynamics cal)
-true_negative_cutoff = 40
+true_negative_cutoff = 400
 
 # ==========================================================================================
 input_file = working_dir + input_name  # full directory for input file
