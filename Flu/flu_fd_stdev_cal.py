@@ -34,7 +34,7 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/each_group_stdev/all_seg/"
 #r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
 seq_filename = r"segment_3.csv"
 fd_output_filename = r"10-19_FD.csv"
@@ -47,7 +47,7 @@ stdev_output_filename = r"test_stdev.csv"
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
 #option 2:
-group_attribute_name = 'tree_segment' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
+group_attribute_name = 'Group_num' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
 #option 3:
 state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
 #option 4:
