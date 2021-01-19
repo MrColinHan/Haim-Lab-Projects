@@ -34,9 +34,9 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/each_group_stdev/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/each_group_stdev(afterFuse)/"
 #r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
-seq_filename = r"segment_3.csv"
+seq_filename = r"(afterFuse)segment_3.csv"
 fd_output_filename = r"10-19_FD.csv"
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
