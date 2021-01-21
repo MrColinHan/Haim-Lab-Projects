@@ -21,14 +21,12 @@ Created on Wed Jan 13 2021
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/rearrange_group_number/"
-input_file_name = r"(afterFuse)segment_3.csv"
-output_file_name = r"rearanged_output.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/reassign_group_order/"
+input_file_name = r"(group0-18)Eur_Seq_withAttrib&Groups.csv"
+output_file_name = r"rearanged_(group0-18)Eur_Seq_withAttrib&Groups.csv"
 
 attribute_column = "Group_num"
-new_order = [33, 15, 59, 9, 13, 50, 27, 17, 14, 11967, 11068, 30, 23, 5, 25, 0, 29, 8, 43, 42, 28, 51, 36, 12, 11, 4, 48, 26, 58, 44,
-             2, 45, 57, 22, 38, 55, 19, 24, 20, 47, 3, 54, 1, 46, 32, 49, 53, 16, 40, 18, 7, 31, 34, 6, 52, 35, 10]
-
+new_order = [15, 13, 17, 11, 10, 2, 16, 1, 12, 14, 18, 8, 4, 6, 7, 5, 9, 3, 0]
 # H3N2 Tree_0.009 Segment 1 = [106, 33, 65, 15, 94, 96, 59, 60, 9, 13, 50, 67, 27, 63, 17, 14, 110, 68, 93, 80, 30, 23, 73, 62, 109, 69, 5, 108, 25, 0]
 # H3N2 Tree_0.009 Segment 2 = [84, 29, 72, 8, 105, 101, 83, 92, 43, 42, 28, 61, 79, 51, 36, 12, 11, 4, 88, 48, 71, 26, 82, 58, 44, 2, 45, 57, 66, 22, 38, 81, 78, 55, 100, 91, 19, 24, 20, 87, 47, 104, 3, 103, 54, 99, 1]
 # H3N2 Tree_0.009 Segment 3 = [46, 32, 49, 53, 77, 102, 98, 89, 16, 76, 40, 18, 7, 31, 34, 97, 6, 52, 86, 35, 107, 75, 10]

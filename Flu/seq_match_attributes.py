@@ -19,12 +19,12 @@ import csv
 
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.7.20_flu&Pneumoviridae/Pneumoviri/"
-seq_filename = r"E.human_orthopne_f_protein_AA_CSV_PNGS_1091.csv"
-attributes_filename = r"attributes.csv"
-output_filename = r"F.human_orthopne_f_protein_AA_CSV_PNGS_1091(&all_attributes).csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/"
+seq_filename = r"C.human_10-19_season_H3N2_Eur&Asia_nucl_1632_cleaned.csv"
+attributes_filename = r"attributes_1.20.21.csv"
+output_filename = r"D.human_10-19_season_H3N2_Eur&Asia_nucl_1632_Attributes.csv"
 
-accession_attribute_name = 'GenBank Protein Accession' #'Sequence Accession'  # this is the name of accession attribute appears in the all_attributes_file
+accession_attribute_name = 'Sequence Accession' #'GenBank Protein Accession # this is the name of accession attribute appears in the all_attributes_file
 # ==========================================================================================
 
 seq_file = working_dir + seq_filename
@@ -68,7 +68,7 @@ def match():
     global out_list
     out_list.append(atb_list[0] + seq_list[0][1:])  #add header row to output list
     for i in seq_list[1:]:  # exclude header row
-        temp_list = attr_dict[i[0]] + i[1:]
+        temp_list = attr_dict[i[0].strip()] + i[1:]
         out_list.append(temp_list)
 
 

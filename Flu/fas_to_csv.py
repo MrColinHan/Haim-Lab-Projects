@@ -22,9 +22,9 @@ import csv
 from re import compile
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/10.19.20_sars-2_spike&N/all_seq_trees/"
-fas_input_name = "(d)_(no-identical_no-N)_N_AA_aligned_SARS2_(723).fas"
-csv_output_name = "(e)_(no-identical_no-N)_N_AA_aligned_SARS2_(723).csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/"
+fas_input_name = "B.human_10-19_season_H3N2_Eur&Asia_nucl_1632_cleaned.fas"
+csv_output_name = "C.human_10-19_season_H3N2_Eur&Asia_nucl_1632_cleaned.csv"
 # ========================================================================================================
 fas_input_file = working_dir + fas_input_name
 csv_output_file = working_dir + csv_output_name
