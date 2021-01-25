@@ -31,14 +31,14 @@ Created on Thu Dec  5 11:50:05 2019
 import csv 
 import os
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/each_group_FD&stdev(afterFuse)/"
 fd_val_folder_name = r"fd_values/"  # name of the folder that holds all fd values, slash at the end
 fd_buf_folder_name = r"fd_buffers/"
-output_name = r"06-19_dominant_AA.csv"
+output_name = r"dominant_AA.csv"
 
-position_range = (1, 549)
+position_range = (1, 550)
 
-patient_name_col = 10 #2  # col index of patient name in Buffer files, index starts at 0 (NOT 1)
+patient_name_col = 1 #2  # col index of patient name in Buffer files, index starts at 0 (NOT 1)
 
 # ==========================================================================================
 
@@ -70,6 +70,7 @@ def write_csv(x,y):  # write list x into file y
 
 
 def extract_pat_name(x) : # extract patient name from string x which is in format of "FD(UNC5539).csv"
+    print(x)  # sometimes there could be .DS_Store file causing trouble
     left_parenthesis_index = x.index("(")
     right_parenthesis_index = x.index(")")
     #for i,j in enumerate(x):
