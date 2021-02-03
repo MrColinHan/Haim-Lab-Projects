@@ -31,14 +31,14 @@ Created on Thu Dec  5 11:50:05 2019
 import csv 
 import os
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/each_group_FD&stdev(afterFuse)/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.1.21_HIV_Single_FD/single_b_4235_FD/"
 fd_val_folder_name = r"fd_values/"  # name of the folder that holds all fd values, slash at the end
 fd_buf_folder_name = r"fd_buffers/"
 output_name = r"dominant_AA.csv"
 
-position_range = (1, 550)
+position_range = (1, 856)
 
-patient_name_col = 1 #2  # col index of patient name in Buffer files, index starts at 0 (NOT 1)
+patient_name_col = 2 #2  # col index of patient name in Buffer files, index starts at 0 (NOT 1)
 
 # ==========================================================================================
 

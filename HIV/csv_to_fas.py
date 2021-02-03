@@ -20,9 +20,9 @@ Created on Mon Sep  9 11:16:05 2019
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/"
-input_name = r"csv_to_fas_input.csv"
-output_name = r"csv_to_fas_output.fasta"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/"
+input_name = r"G.09-20_season_H1N1_USA_nucl_5983_NO_Attributes.csv"
+output_name = r"H.09-20_season_H1N1_USA_nucl_5983_NO_Attributes.fasta"
 # ==========================================================================================
 input_file = working_dir + input_name
 input_list = []
