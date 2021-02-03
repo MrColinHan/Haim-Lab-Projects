@@ -34,9 +34,9 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/stdev_group0-18/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.1.21_HIV_Single_FD/single_b_4235_FD/"
 #r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
-seq_filename = r"(group0-18)Eur_Seq_withAttrib&Groups.csv"
+seq_filename = r"single_b_seq_4235.csv"
 fd_output_filename = r"10-19_FD.csv"
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
@@ -47,7 +47,7 @@ stdev_output_filename = r"test_stdev.csv"
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
 #option 2:
-group_attribute_name = 'Group_num' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
+group_attribute_name = 'Patient' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
 #option 3:
 state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
 #option 4:
@@ -68,7 +68,7 @@ selection_value = 0 #'15-16'
 
 # remember to change the position range based on different flu type
 # e.g: H1N1--(1,549)   H3N2--(1,550)
-position_range = (1, 550)
+position_range = (1, 856)
  
 need_stdev = True  # True : if want to calculate stdev  False: only calculate FD
 zero_thresh = float('1e-5')  # stdev values < zero_thresh will be assigned zero
@@ -80,7 +80,7 @@ buffer_file = r"buffer.csv"  # store sequences after the selection, for debuggin
 buffer_file = working_dir + buffer_file
 fd_out_file = working_dir + fd_output_filename
 stdev_out_file = working_dir + stdev_output_filename
-AA=['Z','N','T','S','D','E','K','R','H','Y','Q','I','L','V','A','C','F','G','M','P','W']
+AA=['Z','N','T','S','D','E','K','R','H','Y','Q','I','L','V','A','C','F','G','M','P','W']#,'B']
 
 
 seq_list = []  # list store seq file
@@ -203,8 +203,8 @@ def calculate_fd_stdev(x,y):  # x = position_range   e.g. (1,549); y is the titl
             'W': 0.898,
             'Y': 0.900,
             'Z': 0,
-            '-': 1.5
-            }
+            '-': 1.5}
+            #,'B': 1.5}
     
     fd_out_list.append([f'{y}'] + AA + ['Sample#'])  # add header col for the fd output
     stdev_out_list.append(['Sample#'] + ['Group'] + list(range(position_range[0],position_range[1]+1)))  # add header col for stdev output
@@ -234,6 +234,7 @@ def calculate_fd_stdev(x,y):  # x = position_range   e.g. (1,549); y is the titl
                         ,'M':0
                         ,'P':0
                         ,'W':0}  # store the count of each AA, reset for each position
+                        #,'B':0}
         aa_count_list = []  # store aa count(values of dict) to a list, first element is the position
         aa_pct_list = []  # store the percentages of aa to a list
         hyd_stdev_list = []  # store the hydropathy value list of this position
