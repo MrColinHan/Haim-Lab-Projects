@@ -21,13 +21,13 @@ Created on Wed Jan 13 2021
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.12.21_flu_tree/fd&std_output/each_group_FD&stdev(afterFuse)/"
-input_file_name = r"dominant_AA.csv"
-output_file_name = r"rearanged_dominant_AA.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/stdev_analysis/"
+input_file_name = r"0_50_groups.csv"
+output_file_name = r"0_50_groups_rearrange.csv"
 
 attribute_column = "Group_num"
-new_order = [33, 15, 59, 9, 13, 50, 27, 17, 14, 11967, 11068, 30, 23, 5, 25, 0, 29, 8, 43, 42, 28, 51, 36, 12, 11, 4, 48, 26, 58, 44,
-             2, 45, 57, 22, 38, 55, 19, 24, 20, 47, 3, 54, 1, 46, 32, 49, 53, 16, 40, 18, 7, 31, 34, 6, 52, 35, 10]
+new_order = [14,13,12,1,8,9,7,15,0,23,21,27,24,22,19,30,28,34,33,35,43,39,49,48,46,44,40,42,
+                   17,5,16,18,11,3,10,2,4,6,36,32,37,25,20,31,26,29,47,41,45,50,38]
 
 #Eur = [15, 13, 17, 11, 10, 2, 16, 1, 12, 14, 18, 8, 4, 6, 7, 5, 9, 3, 0]
 

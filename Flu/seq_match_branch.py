@@ -22,10 +22,10 @@ import csv
 from re import compile
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/"
-seq_filename = r"Eur_Seq_withAttributes.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/"
+seq_filename = r"K.09-20_season_H1N1_USA_AA_5980_w_Attributes.csv"
 group_filename = r"group_0.009.txt"
-output_filename = r"Eur_Seq_withAttributes_withGroups.csv"
+output_filename = r"L.09-20_season_H1N1_USA_AA_5980_w_AttributesGroups.csv"
 threshold = 0.009  # for naming the group
 season = '10-19'  # for naming the group  e.g.: '14-15'
 

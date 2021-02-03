@@ -19,10 +19,10 @@ import csv
 
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H3N2/"
-seq_filename = r"C.human_10-19_season_H3N2_Eur&Asia_nucl_1632_cleaned.csv"
-attributes_filename = r"attributes_1.20.21.csv"
-output_filename = r"D.human_10-19_season_H3N2_Eur&Asia_nucl_1632_Attributes.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/"
+seq_filename = r"J.09-20_season_H1N1_USA_AA_5980.csv"
+attributes_filename = r"D.attributes_07-20.csv"
+output_filename = r"K.09-20_season_H1N1_USA_AA_5980_w_Attributes.csv"
 
 accession_attribute_name = 'Sequence Accession' #'GenBank Protein Accession # this is the name of accession attribute appears in the all_attributes_file
 # ==========================================================================================
