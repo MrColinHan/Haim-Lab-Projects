@@ -15,9 +15,9 @@ import pandas as pd
 import numpy as np
 import datetime
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/MacMini_Local/HaimLab_CrimeData/separated_csv/"
-input_filename = "2019.csv"
-output_filename = "2019_FD.csv"
+working_dir = r"/Users/Han/MacMini_Local/HaimLab_CrimeData/"
+input_filename = "Crime_Data_2010-2019.csv"
+output_filename = "2010-2019_FD_byYear.csv"
 
 # col index starts from 0
 date_col = 2  # crime date
@@ -46,7 +46,7 @@ input_file = working_dir + input_filename
 output_file = working_dir + output_filename
 input_list = list()
 output_list = list()
-output_list.append(["# of days", "year_week_day", "area"] + list(cd_category_dict.keys()))
+output_list.append(["# of crimes", "year", "week", "area"] + list(cd_category_dict.keys()))
 
 
 def read_csv(filedir, listname):
@@ -80,8 +80,8 @@ def main():
         # isocalendar returns (year, week, weekday)
         # [0] takes the year num, [1] takes the week num, [2] takes the day num
         row_year_week = f"{datetime.date(row_yy, row_mm, row_dd).isocalendar()[0]}_" \
-                        f"{datetime.date(row_yy, row_mm, row_dd).isocalendar()[1]}_" \
-                        f"{datetime.date(row_yy, row_mm, row_dd).isocalendar()[2]}"
+                        f"{datetime.date(row_yy, row_mm, row_dd).isocalendar()[1]}"
+                        #f"{datetime.date(row_yy, row_mm, row_dd).isocalendar()[2]}"
 
         if row_year_week not in week_rows_dict:
             week_rows_dict[row_year_week] = [row]
@@ -127,10 +127,10 @@ def main():
                         break
 
             # double check the order of crime name before writing output
-            if list(cd_count_dict.keys()) == output_list[0][3:]:
+            if list(cd_count_dict.keys()) == output_list[0][4:]:
                 wek_area_count_list = cd_count_dict.values()
                 wek_area_fd_list = [x/sum(wek_area_count_list)*100 for x in wek_area_count_list]
-                output_list.append([sum(wek_area_count_list), wek, a] + wek_area_fd_list)
+                output_list.append([sum(wek_area_count_list), wek.split('_')[0], wek.split('_')[1], a] + wek_area_fd_list)
             else:
                 raise Exception("crime name order doesnt match header row, CHECK!!!")
 
