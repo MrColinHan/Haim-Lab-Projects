@@ -20,9 +20,9 @@ import datetime
 import statistics
 # Inputs ================================================================================================
 working_dir = r"/Users/Han/MacMini_Local/HaimLab_CrimeData/"
-input_filename = "FD_year_week_area_2010-2019.csv"
+input_filename = "(no week53)FD_year_week_area_2010-2019.csv"#"FD_year_week_area_2010-2019.csv"
 centroid_output_filename = "centroids.csv"
-dist_output_filename = "mean_dict.csv"
+dist_output_filename = "mean_dist.csv"
 
 # col index starts from 0
 year_col = 1  # crime date
@@ -122,6 +122,68 @@ def main():
 
     write_csv(centroid_output_list, centroid_output_file)
     write_csv(mean_dict_output_list, dist_output_file)
+
+    # ========================================NEW FEATURE====================================================================
+    # monthly calculation
+
+    week_num_per_month = 4
+
+    monthly_centroids_output_list = list()
+    monthly_centroids_output_list.append(["# of crimes", "year", "area", "month"] + header[feature_start_col:])
+
+    week_vs_monthCentroid_dist_stdev_output_list = list()
+    week_vs_monthCentroid_dist_stdev_output_list.append(["# of crimes", "year", "area", "month", "stdev of dist"])
+
+    print(f"\ncalculate monthly centroids and sample stdev.........")
+    for y_a_k in clean_yearArea_rows_dict:
+        y_a_v = clean_yearArea_rows_dict[y_a_k]
+
+        # for every 4 weeks, group into one month
+        month_groups = [y_a_v[i:i + week_num_per_month] for i in range(0, len(y_a_v), week_num_per_month)]
+
+        month_count = 1
+        for month in month_groups:
+            month_centroids = list()
+
+            month_zip = list(zip(*month))
+            month_zip_crime_count = month_zip[0]
+            month_zip_features = month_zip[feature_start_col:]
+            #print(month_zip)
+            for feature in month_zip_features:
+                month_centroids.append(statistics.mean([float(x) for x in feature]))
+            #print(f"{y_a_k} month{month_count} centroids: \n    {month_centroids}")
+            monthly_centroids_output_list.append([sum([int(x) for x in month_zip_crime_count]),
+                                                  y_a_k.split('_')[0],
+                                                  y_a_k.split('_')[1],
+                                                  month_count] + month_centroids)
+
+
+            # calculate the dist between each week and the month centroid
+            week_and_monthCentroid_dist_list = list()
+            for week in month:
+                week_features = [float(x) for x in week[feature_start_col:]]
+                #print(week_features)
+                week_and_monthCentroid_dist_list.append(Euclidean(month_centroids, week_features))
+            #print(week_and_monthCentroid_dist_list)
+
+            # calculate sample stdev
+            week_vs_monthCentroid_dist_stdev_output_list.append([sum([int(x) for x in month_zip_crime_count]),
+                                                  y_a_k.split('_')[0],
+                                                  y_a_k.split('_')[1],
+                                                  month_count, statistics.stdev(week_and_monthCentroid_dist_list)])
+            #print(f"stdev: {statistics.stdev(week_and_monthCentroid_dist_list)}")
+
+            month_count += 1
+
+
+    write_csv(monthly_centroids_output_list, working_dir + "monthly_centroids.csv")
+
+    write_csv(week_vs_monthCentroid_dist_stdev_output_list, working_dir + "week_vs_monthCentroid_stdevDist.csv")
+
+    print("\nall calculations done!")
+
+
+
 
 
 
