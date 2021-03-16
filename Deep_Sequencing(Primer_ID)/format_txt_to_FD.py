@@ -19,8 +19,8 @@ import csv
 import math
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.1.21_deep_sequence/"
-input_filename = r"Aminoacid Frequence input sample.txt"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.1.21_deep_sequence_FD/"
+input_filename = r"3.1.2021 SRR5105377 1HB3 D0  Fw.txt"
 output_filename = "formated_FD.csv"
 
 read_line_number = 5  # start counting from 0
