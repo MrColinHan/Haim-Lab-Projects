@@ -34,15 +34,15 @@ import itertools
             4.a. calculate how many times t are smaller than the T? 
 '''
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.26.21_crime_data/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.29.21 MDS 10pat 10pos/"
 #r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.9.20_Orange/"
-in_csv_name = r"crime centroids.csv"
+in_csv_name = r"(for P value)3.29.21 B&C 10pos 10 pat BINARY.csv"
 #"(for p value)(cutoff10)(bin)B&C_10pos_12patients.csv"
 # Final P value will be printed out in the console
 
 shuffle_t = 100000  # shuffle times
-shuffle_col = 2  # shuffle identifiers is at this col (will be shuffled)(starts at index 0)
-pos_start = 3  # position starts at this col (starts at index 0)
+shuffle_col = 3  # shuffle identifiers is at this col (will be shuffled)(starts at index 0)
+pos_start = 5  # position starts at this col (starts at index 0)
 # ========================================================================================================
 input_file = working_dir + in_csv_name
 input_file_list = []  # store input file to list
