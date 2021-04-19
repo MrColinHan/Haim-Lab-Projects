@@ -19,9 +19,9 @@ import csv
 import math
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.1.21_deep_sequence_FD/"
-input_filename = r"3.1.2021 SRR5105377 1HB3 D0  Fw.txt"
-output_filename = "formated_FD.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.16.21 grant FD & deep seq/deep_seq_fd/"
+input_filename = r"3.29.21 SRR5105421 1HD1 D0 Fw.txt"
+output_filename = "3.29.21 SRR5105421 1HD1 D0 Fw.csv"
 
 read_line_number = 5  # start counting from 0
 data_start_index = 24  # after getting the line number, narrow down to the starting index

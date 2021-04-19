@@ -34,9 +34,9 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/3.12.21 Single Dom AA/single C/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.16.21 grant FD & deep seq/rx2/"
 #r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
-seq_filename = r"Single C Sequence 3.12.21.csv"
+seq_filename = r"Treated Seq B Eur RX2.csv"
 fd_output_filename = r"10-19_FD.csv"
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
@@ -70,7 +70,7 @@ selection_value = 0 #'15-16'
 # e.g: H1N1--(1,549)   H3N2--(1,550)
 position_range = (1, 856)
  
-need_stdev = True  # True : if want to calculate stdev  False: only calculate FD
+need_stdev = False  # True : if want to calculate stdev  False: only calculate FD
 zero_thresh = float('1e-5')  # stdev values < zero_thresh will be assigned zero
 # ==========================================================================================
 

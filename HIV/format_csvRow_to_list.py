@@ -17,10 +17,10 @@ Created on Wed Feb  6 01:07:37 2019
 
 import re
 
-Chimera = False
-check_gly = False
-positions = "16M	17M	703010131	703010159	703010256	704010042	705010162	705010185	705010198	706010164	CAP210	CAP239	CAP45	703010505	CAP256	707010457	ZM1024F	702010047	703010010	703010200	703010228	703010275	703011244	705010078	703011754	703011012	714903902	714904403	715901209	1022M	21M	CAP177	CAP225	CH848	PC76	3011_1	3011_2	3012_1	3012_2	3012_3	3022_2	3025_2	3026_2	3027_2	3027_3	3029_2	3031_2	3034_2	3036_1	3036_2	3040_2	3042_2	3045_2	3048_1	3048_2	3048_3	3050_1	3050_2"
-    # "97	276	278	279	280	281	282	283	365	366	367	368	371	427	428	429	430	455	456	457	458	459	460	461	462	463	464	465	469	472	473	474	476"
+Chimera = True
+check_gly = True
+positions = "747	295	397	92	135	130	87	322	291	415	398	403	188	346	401"
+
 sep = re.sub("\s+", ",", positions)
 
 
@@ -30,16 +30,17 @@ current_index = 0
 for i in range(len(sep)):
     if sep[i] == ',':
         if Chimera == True:
-            result.append(float(sep[current_index:i]))
+            result.append(int(sep[current_index:i]))
         else:
             result.append(sep[current_index:i])
         current_index = i+1
         
     if i == len(sep)-1: 
         if Chimera == True:
-            result.append(float(sep[current_index:]))
+            result.append(int(sep[current_index:]))
         else:
             result.append(sep[current_index:])
+
 child_position_mapping = {
     611: [1611],
     618: [1618],
@@ -63,6 +64,7 @@ child_position_mapping = {
     339: [1839],
     160: [1160, 1161]
 }
+
 if check_gly == True:
     for root_pos in result:
         if root_pos in child_position_mapping:

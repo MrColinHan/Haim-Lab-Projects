@@ -34,9 +34,9 @@ Feb 12, 2021
 import csv
 # Inputs ================================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.15.21_hiv_cleaned_seq/"
-fisher_input_filename = "c_sing_fisher_p(pairs).csv"
-longVol_input_filename = "21721_c long vol.csv"
-output_filename = "network_volatility_C_Single.csv"
+fisher_input_filename = "b_sing_fisher_p(pairs).csv"
+longVol_input_filename = "rp input B NA RX3.csv"
+output_filename = "Rp_B NA RX3_singleBnetwork.csv"
 
 position_range = (1, 856)
 # ========================================================================================================
