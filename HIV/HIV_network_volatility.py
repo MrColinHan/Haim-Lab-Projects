@@ -35,8 +35,8 @@ import csv
 # Inputs ================================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.15.21_hiv_cleaned_seq/"
 fisher_input_filename = "b_sing_fisher_p(pairs).csv"
-longVol_input_filename = "rp input B NA RX3.csv"
-output_filename = "Rp_B NA RX3_singleBnetwork.csv"
+longVol_input_filename = "4.19.21_709volatility.csv"
+output_filename = "Rp_709_singleBnetwork.csv"
 
 position_range = (1, 856)
 # ========================================================================================================

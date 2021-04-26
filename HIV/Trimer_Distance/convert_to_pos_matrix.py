@@ -9,7 +9,7 @@ from sympy import *
 '''
     For HIV project - trimer distance step3: 
     convert the entire chain-pos matrix to regular pos matrix. 
-    Input: pairs format of the chain-pos matrix. (by using the extract_position_pairs.py)
+    Input: pairs format of the chain-pos matrix. (by using the fisherMatrix_to_Column.py)
     Output: A matrix 
     
     Algorithm: 

@@ -5,7 +5,7 @@ Created on Feb 18 2020
 """
 
 '''
-    After extract_position_pairs.py
+    After fisherMatrix_to_Column.py
 
     This script takes three or more col csv data as input 
     The first two cols are position pairs (pos1, pos2, p_value)

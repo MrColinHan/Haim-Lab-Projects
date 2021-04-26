@@ -64,13 +64,13 @@ from re import compile
 
 # ==========================================================================================
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/B_NA/"
-png_seq_folder_name = "separated/"  # slash at the end
+png_seq_folder_name = "4.19.21 separated/"  # slash at the end
 div_genetic_dis = True  # True: divides Phenotypic Distance by Genetic distance; False: divides Phenotypic Distance by 1                              
-genetic_dis_file_name = "B_NA_GD_Matrix.csv"
+genetic_dis_file_name = "4.19.21 Genetic dist matrix.csv"
 hydro = True  # True: use hydrophy value to calculate  False: Input sequences are already numbers instead of AA
 average = False  # True: calculate the average instead of volatility (just the avg of current position column's value, each cell must be number instead of AA)
 # to calculate average, need to uncomment a segment of code
-output_file_name = "test_volatility.csv"
+output_file_name = "4.19.21_volatility.csv"
 # average has its own build-in output name, no need to change this variable for average output
 
 # tuples: attribute name and column number. !!! Col count starts from 0, NOT 1 !!!
