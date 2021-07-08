@@ -14,7 +14,7 @@ Created on Sun Sep 22 20:14:48 2019
     Before today, we've been doing fasta -> tab(use a web tool) -> copy to excel -> apply func in excel. 
     The old procedure was really time consuming. 
     Now: fas --directly--> csv
-    
+
 '''
 
 
@@ -22,9 +22,9 @@ import csv
 from re import compile
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/12.5.19_hiv_single/volatility/B_NA/"
-fas_input_name = "4.19.21 NNN AA 709 w HX.fas"
-csv_output_name = "4.19.21 NNN AA 709 w HX.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/6.14.21/"
+fas_input_name = "aligned.fas"
+csv_output_name = "aligned.csv"
 # ========================================================================================================
 fas_input_file = working_dir + fas_input_name
 csv_output_file = working_dir + csv_output_name

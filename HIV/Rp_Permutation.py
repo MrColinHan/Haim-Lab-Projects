@@ -22,11 +22,11 @@ import random
 working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.15.21_hiv_cleaned_seq/Rp_Permutation/"
 all_fisher_name = "(log)sing b fisher ALL(pairs).csv"
 cutoff_fisher_name = "(log)sing_b_fisher_0.05.csv"
-long_vol_name = "(log)21721_b long vol(env8).csv"
+long_vol_name = "(log_oneSample)21721_b long vol(env8).csv"
 
-target_pos = 332
+target_pos = 169
 shuffle_time = 10000
-output_filename = "332_permutation_Rp.csv"
+output_filename = "169_permutation_Rp.csv"
 
 position_range = (1, 856)
 # ========================================================================================================

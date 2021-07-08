@@ -19,7 +19,7 @@ import re
 
 Chimera = True
 check_gly = True
-positions = "747	295	397	92	135	130	87	322	291	415	398	403	188	346	401"
+positions = "688	525	89	854	259	274	134	375	315	730	148	689	9	705	270	142	143	178	724	135	362	744	140	677	137	130	787	20	620	147	309	795	387	721	46	4	816	183	340	149	767	845	379	345	818	280	494	156	781	624	150	403	145	344	346	232	356	360	550	291	163	167	177"
 
 sep = re.sub("\s+", ",", positions)
 
@@ -41,6 +41,7 @@ for i in range(len(sep)):
         else:
             result.append(sep[current_index:])
 
+# glycan mapping
 child_position_mapping = {
     611: [1611],
     618: [1618],

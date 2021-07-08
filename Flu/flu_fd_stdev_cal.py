@@ -34,10 +34,10 @@ import numpy as np
 #from constants import HYDROPATHY_SCORE_TABLE
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/4.16.21 grant FD & deep seq/rx2/"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/5.10.21 B gp120 gp160dynaFD/6.7.21/new c FD/"
 #r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.25.19_new_accession(H1N1_USA)/06-19_season/season_FDs/"
-seq_filename = r"Treated Seq B Eur RX2.csv"
-fd_output_filename = r"10-19_FD.csv"
+seq_filename = r"long C png seq(new patients).csv"
+fd_output_filename = r"Clade B gp160 Dyna-FD.csv"
 # if selection_name is group, then 1. this fd output file name doesn't matter 
 #                                  2. make sure to make a new folder to perfrom FD for group selection(due to large amount of outputs)
 stdev_output_filename = r"test_stdev.csv"  
@@ -47,7 +47,7 @@ stdev_output_filename = r"test_stdev.csv"
 #option 1:
 season_attribute_name = 'Flu Season'  # this is the name of season attribute appears in the sequence file
 #option 2:
-group_attribute_name = 'Patient' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
+group_attribute_name = 'Patient-Days' #'Patient-Days'#'Group'  # this is the name of group attribute appears in the sequence file
 #option 3:
 state_attribute_name = 'State/Province'  # this is the name of state attribute appears in the sequence file
 #option 4:

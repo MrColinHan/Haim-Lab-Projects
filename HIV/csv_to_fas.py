@@ -20,9 +20,9 @@ Created on Mon Sep  9 11:16:05 2019
 import csv
 
 # ==========================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/"
-input_name = r"4.23.21 long b conver to fasta.csv"
-output_name = r"4.23.21 long b conver to fasta.fasta"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/6.21.21/"
+input_name = r"Clade C Entropy Inputs.csv"
+output_name = r"C sequence.fasta"
 # ==========================================================================================
 input_file = working_dir + input_name
 input_list = []
@@ -56,7 +56,7 @@ def main():
         current_sequence = ""
         for item in row[1:]:  # exclude accession number
             current_sequence += item
-        output_list.append(f">{current_accession}\n")
+        output_list.append(f"{current_accession}\n")
         output_list.append(f"{current_sequence}\n")
         count_fas_output += 1
 
