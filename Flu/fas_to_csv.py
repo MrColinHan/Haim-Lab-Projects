@@ -22,9 +22,9 @@ import csv
 from re import compile
 
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/6.14.21/"
-fas_input_name = "aligned.fas"
-csv_output_name = "aligned.csv"
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/1.20.21_H3N2_H1N1/H1N1/6.3.21/"
+fas_input_name = "test.fasta"
+csv_output_name = "test-reverse.csv"
 # ========================================================================================================
 fas_input_file = working_dir + fas_input_name
 csv_output_file = working_dir + csv_output_name
