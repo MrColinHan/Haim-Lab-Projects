@@ -42,10 +42,6 @@ def chunks(l, n):  # divide list l into chunks and each chunk size is n
     return result
 
 
-temp = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
-print(chunks(temp, 3))
-
-
 group_children_dict = dict()
 new_group_children_dict = dict()
 
@@ -76,7 +72,7 @@ def main():
             count_new_groups = 0
             for new_group in divided_group:
                 if len(new_group) >= cutoff:
-                    new_group_name = group_name_prefix + f"_{count_new_groups}_" + str(len(new_group)) + "\n"
+                    new_group_name = group_name_prefix + f"_{count_new_groups}_" + str(len(new_group)) + ":\n"
                     new_group_children_dict[new_group_name] = new_group
                     count_new_groups += 1
         # smaller than the ceiling
