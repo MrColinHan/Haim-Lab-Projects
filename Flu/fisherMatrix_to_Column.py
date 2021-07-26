@@ -16,9 +16,9 @@ Created on Wed Sep 18 03:08:21 2019
 
 import csv
 # Inputs ================================================================================================
-working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/2.15.21_hiv_cleaned_seq/Rp_Permutation/"
-csv_name = "sing b fisher ALL.csv"
-out_name = "sing b fisher ALL(pairs)"   # no need to put a suffix
+working_dir = r"/Users/Han/Documents/Haim_Lab(2018_summer)/7.11.21 Figures/"
+csv_name = "Single_C_Co-Vol.csv"
+out_name = "sing C sing coVol (pairs)"   # no need to put a suffix
 p_range = (0, 100)  # cutoff for p value: (0,0.05) means  0 < p < 0.05
 # ========================================================================================================
 

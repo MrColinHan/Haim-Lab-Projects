@@ -33,8 +33,8 @@ This program calculates the historical distribution of different positions' amin
 
 # input format : Country Year Patient Accession 131 132 133 ......
 Input = r"/Users/Han/Documents/Haim_Lab(2018_summer)/raw_data/gp120_pngs/7.12.19_B_GP120_PNGS.xlsx"#r"/Users/Han/Documents/Haim_Lab(2018_summer)/9.27.20_FPPR-FD_Covid-updatedcbElisa/(Combined-AminoAcid)Clade C AFR FPPR.xlsx"
-Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/5.10.21 B gp120 dynaFD/"
-OutputName ="Clade B gp120 Dyna-FD.xlsx"
+Output = r"/Users/Han/Documents/Haim_Lab(2018_summer)/5.10.21 B gp120 gp160dynaFD/"
+OutputName ="testoutput.xlsx"
 TabNumber = 0 # tab number in Excel file, start as index 0
 PositionRange = [[131, 511]]
 #pngs:[[88,88],[156,156],[160,160],[197,197],[230,230],[234,234],[241,141],[262,262],
